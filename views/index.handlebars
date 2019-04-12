@@ -1,0 +1,28 @@
+{{!-- Feed area --}}
+<div class="container">
+    {{!-- Populating Feed Page --}}
+    {{#each image}}
+
+        {{!-- Only Populate Favorited Images --}}
+        {{#if favorited}}
+            {{ > feed-block}}
+            {{!-- Otherwise populate all images sorted by either relevance or create date --}}
+            {{else}}
+
+
+        {{/if}}
+
+        
+    {{/each}}
+
+    {{!-- Joins table to create a new table with only posts that has userID = posterID --}}
+    {{#each posts}}
+        
+        {{#if}}
+
+            
+        {{/if}}
+
+    {{/each}}
+
+</div>
