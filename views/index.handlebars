@@ -2,22 +2,13 @@
 <div class="container">
     
     {{!-- Populate page with all images in database --}}
-    {{inFeed}}
-        {{#each image}}
+    {{#each image}}
+        {{!-- Only Populate Favorited Images --}}
+        {{!-- sort by --}}
+        {{> feed/feed-block }}
 
-            {{!-- Only Populate Favorited Images --}}
-            {{!-- sort by --}}
-            {{#if favorites}}
-                {{> feed/favorites-block }}
-
-                {{!-- Otherwise populate all images sorted by either relevance or create date --}}
-                {{else}}
-                    {{> feed/feed-block }}
-
-            {{/if}}
-
-            
-        {{/each}}
+        
+    {{/each}}
 
     {{!-- Populate page with all user's POSTS --}}
     {{else if inPost}}
