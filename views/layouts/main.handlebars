@@ -23,19 +23,18 @@
                 </li>
                 {{!-- When logged in this should appear with links to all user posts, etc. --}}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="account" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{!-- Username --}}
                     Username
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Account Settings</a>
-                    <a class="dropdown-item" href="#">Your Posts</a>
-                    <a class="dropdown-item" href="#"></a>
+                    <a class="dropdown-item" href="#">Account</a>
+                    <a class="dropdown-item" href="#">Logout</a>
                     </div>
                 </li>
-                {{!-- This should be replaced by the accounts  --}}
+                {{!-- This should be replaced by the accounts when user is logged in --}}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sign Up/Login</a>
+                    <a class="nav-link" id="modal-button" href="#">Sign Up/Login</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -46,6 +45,7 @@
     </nav>
     {{!-- NAVBAR END --}}
 
+    {{!-- Dynamically generated body element --}}
     {{body}}
 
 </body>

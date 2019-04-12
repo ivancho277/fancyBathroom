@@ -1,7 +1,7 @@
 {
   "name": "1-Passport-Example",
   "version": "1.0.0",
-  "description": "",
+  "description": "So you have found a super cool bathroom (or just super shocking). Tell the world!",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,11 +13,21 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
-    "express": "^4.16.3",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
     "express-session": "^1.14.2",
     "mysql2": "^1.6.4",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "sequelize": "^4.41.2"
-  }
+    "sequelize": "^4.43.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivancho277/fancyBathroom.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ivancho277/fancyBathroom/issues"
+  },
+  "homepage": "https://github.com/ivancho277/fancyBathroom#readme"
 }

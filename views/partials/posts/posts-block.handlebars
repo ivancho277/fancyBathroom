@@ -1,0 +1,11 @@
+
+    {{!-- Populate all posts that User posted --}}
+    {{#each images}}
+        
+        {{!-- if posterID = userID --}}
+        {{#if posterID }}
+            {{> posts/posts-block }}
+            
+        {{/if}}
+
+    {{/each}}

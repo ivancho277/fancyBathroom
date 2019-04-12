@@ -1,29 +1,38 @@
 {{!-- Feed area --}}
 <div class="container">
-    {{!-- Populating Feed Page --}}
-    {{#each image}}
+    
+    {{!-- Populate page with all images in database --}}
+    {{inFeed}}
+        {{#each image}}
 
-        {{!-- Only Populate Favorited Images --}}
-        {{!-- sort by --}}
-        {{#if favorited}}
-            {{ > feed/favorites-block }}
-            {{!-- Otherwise populate all images sorted by either relevance or create date --}}
-            {{else}}
-                {{> feed/feed-block }}
+            {{!-- Only Populate Favorited Images --}}
+            {{!-- sort by --}}
+            {{#if favorites}}
+                {{> feed/favorites-block }}
 
-        {{/if}}
+                {{!-- Otherwise populate all images sorted by either relevance or create date --}}
+                {{else}}
+                    {{> feed/feed-block }}
 
-        
-    {{/each}}
+            {{/if}}
 
-    {{!-- Populate all posts that User posted --}}
-    {{#each images}}
-        
-        {{!-- if posterID = userID --}}
-        {{#if posterID }}
-            {{> posts/posts-block }}
-        {{/if}}
+            
+        {{/each}}
 
-    {{/each}}
+    {{!-- Populate page with all user's POSTS --}}
+    {{else if inPost}}
+        {{!-- Iterate through all items in images --}}
+        {{#each image}}
+            {{!-- Get all posts with specified userID --}}
+            {{#if userID === 1}}
+                {{> posts/posts-block}}
+            {{/if}}
+
+        {{/each}}
+
+
+
+
+
 
 </div>
