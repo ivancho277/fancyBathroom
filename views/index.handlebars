@@ -4,23 +4,24 @@
     {{#each image}}
 
         {{!-- Only Populate Favorited Images --}}
+        {{!-- sort by --}}
         {{#if favorited}}
-            {{ > feed-block}}
+            {{ > feed/favorites-block }}
             {{!-- Otherwise populate all images sorted by either relevance or create date --}}
             {{else}}
-
+                {{> feed/feed-block }}
 
         {{/if}}
 
         
     {{/each}}
 
-    {{!-- Joins table to create a new table with only posts that has userID = posterID --}}
-    {{#each posts}}
+    {{!-- Populate all posts that User posted --}}
+    {{#each images}}
         
-        {{#if}}
-
-            
+        {{!-- if posterID = userID --}}
+        {{#if posterID }}
+            {{> posts/posts-block }}
         {{/if}}
 
     {{/each}}
