@@ -23,7 +23,24 @@
 
         var widget = cloudinary.createUploadWidget({
             cloudName: "instapotty", uploadPreset: "wveqgdsr"
-        }, (error, result) => { console.log(result) });
+        },
+            function (error, result) {
+                //Get image info
+                console.log(result);
+                if (result.event === "success") {
+                    let imageInfo = result.event.info;
+                    let publicId = imageInfo.public_id;
+                    let thumbnailUrl = imageInfo.thumbnail_url;
+                    let url = imageInfo.url;
+
+                    //send image info to our database
+                }
+
+
+            });
+
+
+
 
         document.getElementById("upload_widget").addEventListener("click", function () {
             widget.open();
