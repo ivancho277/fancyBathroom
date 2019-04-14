@@ -1,6 +1,5 @@
 class Image {
-    constructor(id, id_cloudinary, url, userId, tag, locationName, description, isPublic ){
-        this.id
+    constructor(id_cloudinary, url, userId, tag, locationName, description, isPublic ){
         this.id_cloudinary
         this.url
         this.user_id
