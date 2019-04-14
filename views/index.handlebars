@@ -1,0 +1,33 @@
+{{!-- Feed area --}}
+<div class="container">
+    
+    {{!-- Populate page with all images in database --}}
+    {{#each image}}
+        {{!-- Only Populate Favorited Images --}}
+        {{!-- sort by --}}
+        {{> feed/feed-block }}
+
+        
+    {{/each}}
+
+    {{!-- Populate page with all user's POSTS --}}
+    {{else if inPost}}
+        {{!-- Iterate through all items in images --}}
+        {{#each image}}
+            {{!-- Get all posts with specified userID --}}
+            {{#if userID === 1}}
+                {{> posts/posts-block}}
+            {{/if}}
+
+        {{/each}}
+
+    <div class="row">
+        <div class="col">
+            {{#if loggedIn}}
+
+            {{/if}}
+        </div>
+    </div>
+    
+
+</div>
