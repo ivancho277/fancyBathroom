@@ -35,10 +35,19 @@ document.getElementById("upload_widget").addEventListener("click", function () {
 
 $("#submit").on("click", function () {
     if (submitAllow) {
-        imageObject.cloudinary_id = imageInfo.cloudinary;
-        imageObject.url = imageInfo.url;
-        imageObject.location = $("#")
+        var public;
+        // cloud-id, url, user-id, tag, location-name, description, public
+
+        // not sure if will work
+        if ($("input[name='public']:checked")) {
+            public = true;
+        } else {
+            public = false;
+        }
+        var imageObj = new Image(imageInfo.cloudinary, imageInfo.url, "user-id", $("#category").val(), $("#location").val().trim(), $("#description").val().trim(), public);
+        console.log("obj added to database", imageObj);
     }
+    submitAllow = false;
 });
 
 
