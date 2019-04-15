@@ -1,3 +1,16 @@
+
+$("#fun").on("click", function() {
+    console.log("button pressed");
+    $.post("/api/users", {userid:"hhww", userName: "sailormoon"}, function(err, result) {
+        console.log("in ajax post call", result);
+       
+    });
+
+});
+// $.get("/api/users", function(err, result) {
+//     console.log(result);
+// });
+
 // Connects to google maps API
 // Search location field - autocomplete
 function initMap() {
@@ -17,17 +30,4 @@ $("#submit").click(function () {
        name: $("input").val().trim(),
     }
     console.log("location name: ", location_name);
-
-$(document).ready(function() {
-function insertTodo(event) {
-    event.preventDefault();
-    var todo = {
-        text: $newItemInput.val().trim(),
-        complete: false
-    };
-
-    $.post("/api/todos", todo, getTodos);
-    $newItemInput.val("");
-    }
-
 });
