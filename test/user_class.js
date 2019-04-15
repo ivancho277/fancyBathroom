@@ -1,8 +1,7 @@
 class User {
-    constructor(id, userName) {
-        this.id;
+    constructor(userid, userName) {
+        this.userid;
         this.userName;
     }
 }
-
 module.exports = User;

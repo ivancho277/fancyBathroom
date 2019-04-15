@@ -28,7 +28,7 @@ module.exports = function (sequelize, DataTypes) {
           allowNull: false
       },
       description :{
-          type: DataTypes.STING,
+          type: DataTypes.STRING,
           validate: {
             len: [0, 140]
           }
