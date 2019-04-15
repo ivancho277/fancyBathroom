@@ -1,3 +1,6 @@
+let location_name;
+let seattle = {lat: 47.608013, lng: -122.335167};
+
 //  const User = require("./user_class");
 //  const Image = require("./image_class");
 class Image {
@@ -31,8 +34,6 @@ let image4 = new Image("Cloud-143-id", "www.funPIC.heynow", "rr04uu", "luxury", 
 let image5 = new Image("Cloud-555-id", "www.funPIC.yolo", "tt05yy", "luxury", "the mall", "a cool mall bathroom", true)
 
 
-
-
 $("#fun").on("click", function() {
     console.log("button pressed");
     console.log(user1);
@@ -63,7 +64,7 @@ function initMap() {
 
 // Event listener - grabs name of location and address from user input
 $("#submit").click(function () {
-    location_name = $("input").val().trim()
+    location_name = $("#userInput").val().trim(),
     
     console.log("location name: ", location_name);
 });
@@ -72,7 +73,7 @@ $("#submit").click(function () {
 $(".location").click(function () {
     console.log("hello!")
     var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 47.608013, lng: -122.335167},
+        center: seattle,
         zoom: 10
       });
 
