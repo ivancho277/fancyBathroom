@@ -1,5 +1,17 @@
 // Page Interactions
 
+class Image {
+    constructor(id_cloudinary, url, userId, tag, locationName, description, isPublic) {
+        this.id_cloudinary = id_cloudinary;
+        this.url = url;
+        this.user_id = userId;
+        this.tag = tag;
+        this.location_name = locationName;
+        this.description = description;
+        this.public = isPublic;
+    }
+}
+
 // New post submit form
 
 //Onclick for cloudinary upload

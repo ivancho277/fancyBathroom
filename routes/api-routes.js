@@ -31,6 +31,13 @@ module.exports = function (app) {
     });
   });
 
+  app.post("/api/images", function (req, res) {
+    db.Image.create(req.body).then(function (err, result) {
+      console.log("create row", result);
+      res.json(result);
+    });
+  });
+
 
   app.get("/api/users", function (req, res) {
     db.User.findaAll().then(function (err, result) {
