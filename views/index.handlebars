@@ -1,29 +1,29 @@
 {{!-- Feed area --}}
 <div class="container">
-    
+
     {{!-- Populate the page with all posts --}}
     {{#if feed}}
 
-        <h1>In Feed</h1>
-        <div class="d-flex justify-content-around flex-wrap" id="feed-container">
-            {{!-- Populate page with all images in database --}}
-            {{#each images}}
-                
-                {{> feed/feed-block }}
-                
-            {{/each}}
-        </div>
+    <h1>In Feed</h1>
+    <div class="d-flex justify-content-around flex-wrap" id="feed-container">
+        {{!-- Populate page with all images in database --}}
+        {{#each images}}
+
+        {{> feed/feed-block }}
+
+        {{/each}}
+    </div>
 
     {{!-- Populate page with all user's posts --}}
     {{else if post}}
 
-        {{!-- Iterate through all items in images --}}
-        {{#each images}}
+    {{!-- Iterate through all items in images --}}
+    {{#each images}}
 
-                {{!-- Get all posts with specified userID --}}
-                {{> posts/posts-block}}
+    {{!-- Get all posts with specified userID --}}
+    {{> posts/posts-block}}
 
-        {{/each}}
+    {{/each}}
 
     {{!-- Populate page with user's favorited posts --}}
     {{else if favorites}}
@@ -33,41 +33,47 @@
 
     {{!-- Submit form for logged in users to upload new posts--}}
     {{#if loggedIn}}
-        <div class="row">
-            <div class="col">
-                <div class="jumbotron">
-                    {{!-- Post method to images db/api
-                    <form action="/api/images" method="POST">
+    <div class="row">
+        <div class="col">
+            <div class="jumbotron">
+                {{!-- Post method to images db/api --}}
 
-                        here's widget from cloudinary
-                        <label>Location</label>
-                        <input type="text" name="location">
-                        <br>
+                <form>
 
-                        <label>Public or Private Location?</label> 
-                        <br>
-                        <input type="radio" name="public" value="public" checked> Public<br>
-                        <input type="radio" name="public" value="private"> Private<br>
+                    <button id="upload_widget" class="cloudinary-button">Upload Image</button>
 
-                        <label>Category</label>
-                        <select name="form-control" id="category">
-                            <option value="Default" selected disabled>Potty Tags</option>
-                            <option value="humor">Humor</option>
-                            <option value="luxurious">Luxurious</option>
-                            <option value="artistic">Artistic</option>
-                            <option value="wisdom">Wisdom</option>
-                        </select>
-                        <br>
+                    <div id="thumbnail">
 
-                        <label>Description</label>
-                        <input type="text" name="description"><br>
+                    </div>
 
-                        <input type="submit" value="Submit">
 
-                    </form> --}}
-                    <button id="fun">HIT ME</button>
-                </div>
+                    <label>Location</label>
+                    <input type="text" name="location" id="" <br>
+
+                    <label>Public or Private Location?</label>
+                    <br>
+                    <input type="radio" name="public" value="public" checked> Public<br>
+                    <input type="radio" name="public" value="private"> Private<br>
+
+                    <label>Category</label>
+                    <select name="form-control" id="category" required>
+                        <option value=" Default" selected disabled>Potty Tags</option>
+                        <option value="humor">Humor</option>
+                        <option value="luxurious">Luxurious</option>
+                        <option value="artistic">Artistic</option>
+                        <option value="wisdom">Wisdom</option>
+                    </select>
+                    <br>
+
+                    <label>Description</label>
+                    <input type="text" name="description" required><br>
+
+                    <input type="submit" value="Submit" id="submit">
+
+                </form>
+
             </div>
         </div>
+    </div>
     {{/if}}
 </div>
