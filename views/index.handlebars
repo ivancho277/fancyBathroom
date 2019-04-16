@@ -2,9 +2,6 @@
 <div class="container">
 
     {{!-- Populate the page with all posts --}}
-    {{#if feed}}
-
-    <h1>In Feed</h1>
     <div class="d-flex justify-content-around flex-wrap" id="feed-container">
         {{!-- Populate page with all images in database --}}
         {{#each images}}
@@ -13,23 +10,6 @@
 
         {{/each}}
     </div>
-
-    {{!-- Populate page with all user's posts --}}
-    {{else if post}}
-
-    {{!-- Iterate through all items in images --}}
-    {{#each images}}
-
-    {{!-- Get all posts with specified userID --}}
-    {{> posts/posts-block}}
-
-    {{/each}}
-
-    {{!-- Populate page with user's favorited posts --}}
-    {{else if favorites}}
-
-
-    {{/if}}
 
     {{!-- Submit form for logged in users to upload new posts--}}
     {{#if loggedIn}}

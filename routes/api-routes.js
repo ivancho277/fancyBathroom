@@ -22,7 +22,7 @@ module.exports = function (app) {
         res.render("index", hbsObject);
       });
   });
-  
+
   // insert user into table
   // POST route for logging a new user into Users table
   app.post("/api/users", function (req, res) {
@@ -42,7 +42,7 @@ module.exports = function (app) {
   });
 
   // search & display by tag
-  app.get("/api/images/:tag", function(req,res){
+  app.get("/:tag", function(req,res){
     db.Image.findAll({ 
       where: 
       { tag: req.params.tag }
@@ -57,7 +57,7 @@ module.exports = function (app) {
   });
 
   // search & display by username
-  app.get("/api/images/:user", function(req,res){
+  app.get("/:user", function(req,res){
     db.Image.findAll({ 
       where: 
       { user_id: req.params.user }
@@ -85,25 +85,25 @@ module.exports = function (app) {
     });
   });
 
-  // grabbing all posts by logged in user
-  app.get("/api/images", function (req, res) {
-    db.User.findaAll({
-      where: 
-        {user_id: 12345}
-      }).then(function (err, result) {
-      res.json(result);
-    });
-  });
+  // // grabbing all posts by logged in user
+  // app.get("/api/images", function (req, res) {
+  //   db.User.findaAll({
+  //     where: 
+  //       {user_id: 12345}
+  //     }).then(function (err, result) {
+  //     res.json(result);
+  //   });
+  // });
 
   // DELETE route for removing posts.
-  app.delete("/api/todos/:id", function (req, res) {
+  app.delete("/:id", function (req, res) {
     db.Image.destroy().then(function(err, result){
 
     });
   });
 
   // PUT route for updating todos. The updated todo will be available in req.body
-  app.put("/api/todos", function (req, res) {
+  app.put("/:id", function (req, res) {
     db.Image.put().then(function (err, result){
 
     });
