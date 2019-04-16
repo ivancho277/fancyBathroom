@@ -11,7 +11,24 @@ class Picture {
         this.public = isPublic;
     }
 }
+class User {
+    constructor(userid, userName) {
+        this.userid = userid;
+        this.userName = userName;
+    }
+}
 
+let user1 = new User("qq01pp", "sailorMoon")
+let user2 = new User("ww02oo", "sailorMercury")
+let user3 = new User("ee03ii", "sailorVenus")
+let user4 = new User("rr04uu", "sailorMars")
+let user5 = new User("tt05yy", "sailorJupiter")
+
+let picture1 = new Picture("could-tst", "www.funPIC.super", "qq01pp", "luxury", "the mall", "a cool mall bathroom", true)
+let picture2 = new Picture("Cloud-444-id", "www.funPIC.duper", "ww02oo", "luxury", "the mall", "a cool mall bathroom", true)
+let picture3 = new Picture("luxury", "the mall", "a cool mall bathroom", true)
+let picture4 = new Picture("Cloud-143-id", "www.funPIC.heynow", "rr04uu", "luxury", "the mall", "a cool mall bathroom", true)
+let picture5 = new Picture("Cloud-555-id", "www.funPIC.yolo", "tt05yy", "luxury", "the mall", "a cool mall bathroom", true)
 // New post submit form
 
 //Onclick for cloudinary upload
@@ -44,42 +61,3 @@ var widget = cloudinary.createUploadWidget({
 document.getElementById("upload_widget").addEventListener("click", function () {
     widget.open();
 }, false);
-
-// $("#submit").on("click", function () {
-//     if (submitAllow) {
-//         var public;
-//         // cloud-id, url, user-id, tag, location-name, description, public
-
-//         // not sure if will work
-//         if ($("input[name='public']:checked")) {
-//             public = true;
-//         } else {
-//             public = false;
-//         }
-//         var imageObj = new Picture(imageInfo.cloudinary, imageInfo.url, "user-id", $("#category").val(), $("#location").val().trim(), $("#description").val().trim(), public);
-//         console.log("obj added to database", imageObj);
-//     }
-//     submitAllow = false;
-// });
-
-
-// Connects to google maps API
-// Search location field - autocomplete
-// function initMap() {
-//     var input = document.getElementById("userInput");
-
-//     var autocomplete = new google.maps.places.Autocomplete(input);
-//     console.log("autocomplete: ", autocomplete);
-
-//     // Set the data fields to return when the user selects a place.
-//     autocomplete.setFields(
-//         ["address_components", "geometry", "icon", "name"]);
-// }
-
-// Event listener - grabs name of location and address from user input
-// $("#submit").click(function () {
-//     var location_name = {
-//         name: $("input").val().trim(),
-//     }
-//     console.log("location name: ", location_name);
-// });
