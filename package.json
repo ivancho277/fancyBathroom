@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
     "express-session": "^1.16.1",
@@ -29,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/ivancho277/fancyBathroom/issues"
   },
-  "homepage": "https://github.com/ivancho277/fancyBathroom#readme"
+  "homepage": "https://github.com/ivancho277/fancyBathroom#readme",
+  "directories": {
+    "test": "test"
+  }
 }

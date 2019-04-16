@@ -25,7 +25,7 @@ module.exports = function (sequelize, DataTypes) {
     userid: {
       type: DataTypes.STRING,
       allowNull: false,
-      // unique: true     
+      unique: true
     },
     userName: {
       type: DataTypes.STRING,
@@ -34,5 +34,5 @@ module.exports = function (sequelize, DataTypes) {
   });
   return User;
 
-  
+
 };
