@@ -5,7 +5,7 @@ let lng;
 
 //  const User = require("./user_class");
 //  const Image = require("./image_class");
-class Image {
+class Picture {
     constructor(id_cloudinary, url, userId, tag, locationName, description, isPublic) {
         this.id_cloudinary = id_cloudinary;
         this.url = url;

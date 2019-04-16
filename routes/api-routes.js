@@ -5,58 +5,71 @@ var db = require("../models");
 module.exports = function (app) {
   // Create all our routes and set up logic within those routes where required.
 
-  // This will run on page load to generate the feed
-  app.get("/", function (req, res) {
-    // db.Images.findAll()
-    //   .then(function (data) {
-    //     // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
-    //     // data is the entire images table
-    //     var hbsObject = {
-    //       images: data,
-    //       feed: true,
-    //       post: false,
-    //       favorites: false,
-    //       loggedIn: true
-    //     };
-    //     // since feed is true page renders feed.
-    //     res.render("index", hbsObject);
-    //   });
-    var hbsObject = {
-      images: [],
-      feed: true,
-      post: false,
-      favorites: false,
-      loggedIn: true
-    };
-    console.log("BOOM!")
-    res.render("index", hbsObject);
-  });
 
-  // insert user into table
+  // CREATE/INSERT DATA TO DATABASE
+  // ==============================
   // POST route for logging a new user into Users table
   app.post("/api/users", function (req, res) {
-     // check if they're already user (not sure how...)
-    db.User.create(req.body).then(function (err, result) {
-      console.log("create row", result);
-      res.json(result);
-    });
-  });
- 
-  // insert into images when they submit a new post
-  app.post("/api/images",function (req,res){
-    db.Image.create(req.body).then(function (err, result) {
-      console.log("create new image row", result);
-      res.json(result);
-    });
+    // check if they're already user, if exists get the user, if not add new row
+   db.User.findOrCreate({
+     where: 
+       { userName: req.body.userName },
+   }).then(function (err, result) {
+     console.log("create row", result);
+     res.json(result);
+   });
+ });
+
+ // insert into images when they submit a new post
+ app.post("/api/images",function (req,res){
+   db.Image.create(req.body).then(function (err, result) {
+     console.log("create new image row", result);
+     res.json(result);
+   });
+ });
+
+  // READING DATABASE AND RENDERING PAGE
+  // ===================================
+  // This will run on page load to generate the feed
+  app.get("/feed/orderbymostrecent/", function (req, res) {
+    db.Image.findAll({
+      order: sequelize.literal('max(id) DESC')
+    })
+      .then(function (data) {
+        // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
+        // data is the entire images table
+        var hbsObject = {
+          images: data,
+          loggedIn: true
+        };
+        // since feed is true page renders feed.
+        res.render("index", hbsObject);
+      });
   });
 
-  // search & display by tag
-  app.get("/:tag", function(req,res){
+  app.get("/feed/orderbymostfavorited/", function (req, res) {
+    db.Image.findAll({
+      order: sequelize.literal('max(id) DESC')
+    })
+      .then(function (data) {
+        // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
+        // data is the entire images table
+        var hbsObject = {
+          images: data,
+          loggedIn: true
+        };
+        // since feed is true page renders feed.
+        res.render("index", hbsObject);
+      });
+  });
+
+  // search & display by tag/username
+  app.get("search/:term", function(req,res){
     db.Image.findAll({ 
       where: 
-      { tag: req.params.tag }
+      { tag: req.params.term }
     }).then(function (err, result) {
-      // render page with only posts with specifed tags
+      // render page with only posts with specifed tags or by specified user
       var hbsObject = {
         images: result,
         loggedIn: true
@@ -64,29 +77,6 @@ module.exports = function (app) {
       res.render("index", hbsObject);
     });
   });
-
-  // search & display by username
-  app.get("/:user", function(req,res){
-    db.Image.findAll({ 
-      where: 
-      { user_id: req.params.user }
-    }).then(function (err, result) {
-      var hbsObject = {
-        images: result,
-        loggedIn: true
-      };
-      // render page with only posts by the specified user
-      res.render("index", hbsObject);
-    });
-  });
-
-  app.post("/api/images", function (req, res) {
-    db.Image.create(req.body).then(function (err, result) {
-      console.log("create row", result);
-      res.json(result);
-    });
-  });
-
 
   app.get("/api/users", function (req, res) {
     db.User.findaAll().then(function (err, result) {
@@ -94,14 +84,18 @@ module.exports = function (app) {
     });
   });
   
-  // DELETE route for removing posts.
+  // DELETE DATA FROM DATABASE
+  // =========================
+  // DELETE route for removing previous posts
   app.delete("/:id", function (req, res) {
     db.Image.destroy().then(function(err, result){
 
     });
   });
 
-  // PUT route for updating todos. The updated todo will be available in req.body
+  // UPDATE DATA FROM DATABASE
+  // =========================
+  // PUT route for updating post's tags and descriptions
   app.put("/:id", function (req, res) {
     db.Image.put().then(function (err, result){
 

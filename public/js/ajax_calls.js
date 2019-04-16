@@ -15,13 +15,35 @@ let image4 = new Picture("Cloud-143-id", "www.funPIC.heynow", "rr04uu", "luxury"
 let image5 = new Picture("Cloud-555-id", "www.funPIC.yolo", "tt05yy", "luxury", "the mall", "a cool mall bathroom", true)
 
 // CRUD Operations
-// Find One Sequelize Method
 
-// Display images
+// Create
+// ======
+// adding new user
+$.post("/api/users", { userid: "hhww", userName: "sailormoon" }, function (err, result) {
+    console.log("in ajax post call", result);
+});
+
+// creating new posts and adding the posts to database
+$.post("/api/images", function (err, result) {
+    console.log(result);
+});
+
+// Read/Display images
 // ==============
 // display all images in feed default order by most recent
+$.get("/feed/orderbymostrecent", function(err, result) {
+    console.log(result);
+});
 
 // display all images in feed ordered by most favorited
+$.get("/feed/orderbymostfavorited", function(err, result) {
+    console.log(result);
+});
+
+
+
+
+
 
 // display all favorited images by logged-in user
 
@@ -57,10 +79,7 @@ $.post("/api/images", function (err, result) {
 //     console.log(result);
 // });
 
-// adding new user
-$.post("/api/users", { userid: "hhww", userName: "sailormoon" }, function (err, result) {
-    console.log("in ajax post call", result);
-});
+
 
 // getting all images from Images table
 // $.get("/api/images", function (err, result) {
@@ -69,9 +88,6 @@ $.post("/api/users", { userid: "hhww", userName: "sailormoon" }, function (err, 
 
 // 
 
-$.post("/api/images", function (err, result) {
-    console.log(result);
-});
 
 
 

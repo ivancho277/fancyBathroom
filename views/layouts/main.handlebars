@@ -27,7 +27,7 @@
 <body>
     {{!-- NAVBAR START --}}
     <nav class="justify-content-between navbar navbar-expand-lg navbar-dark bg-dark ">
-        <a class="navbar-brand" href="#">Instapotty</a>
+        <a class="navbar-brand" href="/feed/">Instapotty</a>
         <div>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -42,14 +42,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    {{!-- HOMEPAGE/FEED --}}
                     <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
                 </li>
-                {{!-- When logged in this should appear with links to all user posts, etc. --}}
+                {{!-- Hidden until User is logged in this should appear with links to all user posts, etc. --}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="account" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        {{!-- Username --}}
                         Username
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -100,6 +98,9 @@ var widget = cloudinary.createUploadWidget({
     {{!-- Static files --}}
     <script src="js/interactions.js" type="text/javascript"></script>
     {{!-- <script src="js/ajax_calls.js" type="text/javascript"></script> --}}
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     {{!-- Google MAPS Javascript API --}}
     <script 
