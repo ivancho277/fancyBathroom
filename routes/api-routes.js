@@ -1,7 +1,7 @@
 var db = require("../models");
 
 // Routes
-// =============================================================
+//============
 module.exports = function (app) {
   // Create all our routes and set up logic within those routes where required.
 
@@ -13,9 +13,6 @@ module.exports = function (app) {
         // data is the entire images table
         var hbsObject = {
           images: data,
-          feed: true,
-          post: false,
-          favorites: false,
           loggedIn: true
         };
         // since feed is true page renders feed.
@@ -50,7 +47,7 @@ module.exports = function (app) {
       // render page with only posts with specifed tags
       var hbsObject = {
         images: result,
-        feed: true
+        loggedIn: true
       };
       res.render("index", hbsObject);
     });
@@ -64,7 +61,7 @@ module.exports = function (app) {
     }).then(function (err, result) {
       var hbsObject = {
         images: result,
-        feed:true
+        loggedIn: true
       };
       // render page with only posts by the specified user
       res.render("index", hbsObject);
@@ -84,17 +81,7 @@ module.exports = function (app) {
       res.json(result);
     });
   });
-
-  // // grabbing all posts by logged in user
-  // app.get("/api/images", function (req, res) {
-  //   db.User.findaAll({
-  //     where: 
-  //       {user_id: 12345}
-  //     }).then(function (err, result) {
-  //     res.json(result);
-  //   });
-  // });
-
+  
   // DELETE route for removing posts.
   app.delete("/:id", function (req, res) {
     db.Image.destroy().then(function(err, result){
