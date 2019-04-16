@@ -31,9 +31,9 @@ module.exports = function (app) {
   // READING DATABASE AND RENDERING PAGE
   // ===================================
   // This will run on page load to generate the feed
-  app.get("/feed/orderbymostrecent/", function (req, res) {
+  app.get("/", function (req, res) {
     db.Image.findAll({
-      order: sequelize.literal('max(id) DESC')
+      // order: sequelize.literal('max(id) DESC')
     })
       .then(function (data) {
         // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
@@ -49,7 +49,43 @@ module.exports = function (app) {
 
   app.get("/feed/orderbymostfavorited/", function (req, res) {
     db.Image.findAll({
-      order: sequelize.literal('max(id) DESC')
+      // order: sequelize.literal('max(id) DESC')
+    })
+      .then(function (data) {
+        // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
+        // data is the entire images table
+        var hbsObject = {
+          images: data,
+          loggedIn: true
+        };
+        // since feed is true page renders feed.
+        res.render("index", hbsObject);
+      });
+  });
+
+  // display all user's posted images
+  app.get("/:username/posts", function (req, res) {
+    db.Image.findAll({
+      where: {
+        user_id: req.params.username
+      }
+    })
+      .then(function (data) {
+        // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
+        // data is the entire images table
+        var hbsObject = {
+          images: data,
+          loggedIn: true
+        };
+        // since feed is true page renders feed.
+        res.render("index", hbsObject);
+      });
+  });
+
+  // display all user's favorited images
+  app.get("/:username/favorited", function (req, res) {
+    db.Image.findAll({
+      // using association of two tables to grab all images where userId = user_id, includes all images in the likes association table
     })
       .then(function (data) {
         // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
@@ -64,7 +100,7 @@ module.exports = function (app) {
   });
 
   // search & display by tag/username
-  app.get("search/:term", function(req,res){
+  app.get("/search/:term", function(req,res){
     db.Image.findAll({ 
       where: 
       { tag: req.params.term }
@@ -84,6 +120,15 @@ module.exports = function (app) {
     });
   });
   
+  // UPDATE DATA FROM DATABASE
+  // =========================
+  // PUT route for updating post's tags and descriptions
+  app.put("/:id", function (req, res) {
+    db.Image.put().then(function (err, result){
+
+    });
+  });
+
   // DELETE DATA FROM DATABASE
   // =========================
   // DELETE route for removing previous posts
@@ -93,12 +138,4 @@ module.exports = function (app) {
     });
   });
 
-  // UPDATE DATA FROM DATABASE
-  // =========================
-  // PUT route for updating post's tags and descriptions
-  app.put("/:id", function (req, res) {
-    db.Image.put().then(function (err, result){
-
-    });
-  });
 }
