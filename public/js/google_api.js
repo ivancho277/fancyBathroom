@@ -18,7 +18,6 @@ class Image {
 }
 class User {
     constructor(userid, userName) {
-        this.userid = userid;
         this.userName = userName;
     }
 }
