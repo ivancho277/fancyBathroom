@@ -7,17 +7,29 @@ module.exports = function (app) {
 
   // This will run on page load to generate the feed
   app.get("/", function (req, res) {
-    db.Image.findAll()
-      .then(function (data) {
-        // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
-        // data is the entire images table
-        var hbsObject = {
-          images: data,
-          loggedIn: true
-        };
-        // since feed is true page renders feed.
-        res.render("index", hbsObject);
-      });
+    // db.Images.findAll()
+    //   .then(function (data) {
+    //     // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
+    //     // data is the entire images table
+    //     var hbsObject = {
+    //       images: data,
+    //       feed: true,
+    //       post: false,
+    //       favorites: false,
+    //       loggedIn: true
+    //     };
+    //     // since feed is true page renders feed.
+    //     res.render("index", hbsObject);
+    //   });
+    var hbsObject = {
+      images: [],
+      feed: true,
+      post: false,
+      favorites: false,
+      loggedIn: true
+    };
+    console.log("BOOM!")
+    res.render("index", hbsObject);
   });
 
   // insert user into table
