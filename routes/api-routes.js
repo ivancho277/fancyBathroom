@@ -7,7 +7,7 @@ module.exports = function (app) {
 
   // This will run on page load to generate the feed
   app.get("/", function (req, res) {
-    db.Images.findAll()
+    db.Image.findAll()
       .then(function (data) {
         // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
         // data is the entire images table
@@ -44,7 +44,12 @@ module.exports = function (app) {
       res.json(result);
     });
   });
-
+  // grabbing all posts by logged in user
+  app.get("/api/images", function (req, res) {
+    db.User.findaAll({where: {userid: 12345}}).then(function (err, result) {
+      res.json(result);
+    });
+  });
   // DELETE route for deleting todos. You can access the todo's id in req.params.id
   app.delete("/api/todos/:id", function (req, res) {
 

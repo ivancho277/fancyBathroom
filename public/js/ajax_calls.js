@@ -1,6 +1,11 @@
-//TESTING OBJECTS
-const User = require("../test/user_class");
-const Image = require("../test/image_class");
+// TESTING OBJECTS
+
+class User {
+    constructor(userid, userName) {
+        this.userid;
+        this.userName;
+    }
+}
 
 let user1 = new User("qq01pp", "sailorMoon")
 let user2 = new User("ww02oo", "sailorMercury")
@@ -8,7 +13,7 @@ let user3 = new User("ee03ii", "sailorVenus")
 let user4 = new User("rr04uu", "sailorMars")
 let user5 = new User("tt05yy", "sailorJupiter")
 
-let image1 = new Image("www.funPIC.super", "qq01pp", "luxury", "the mall", "a cool mall bathroom", true)
+// let image1 = new Image("www.funPIC.super", "qq01pp", "luxury", "the mall", "a cool mall bathroom", true)
 let image2 = new Image("Cloud-444-id", "www.funPIC.duper", "ww02oo", "luxury", "the mall", "a cool mall bathroom", true)
 let image3 = new Image("luxury", "the mall", "a cool mall bathroom", true)
 let image4 = new Image("Cloud-143-id", "www.funPIC.heynow", "rr04uu", "luxury", "the mall", "a cool mall bathroom", true)
@@ -53,9 +58,9 @@ $.post("/api/images", function (err, result) {
 
 
 // viewing all users
-$.get("/api/users", function (err, result) {
-    console.log(result);
-});
+// $.get("/api/users", function (err, result) {
+//     console.log(result);
+// });
 
 // adding new user
 $.post("/api/users", { userid: "hhww", userName: "sailormoon" }, function (err, result) {
@@ -63,9 +68,9 @@ $.post("/api/users", { userid: "hhww", userName: "sailormoon" }, function (err, 
 });
 
 // getting all images from Images table
-$.get("/api/images", function (err, result) {
-    console.log(result);
-});
+// $.get("/api/images", function (err, result) {
+//     console.log(result);
+// });
 
 // 
 
