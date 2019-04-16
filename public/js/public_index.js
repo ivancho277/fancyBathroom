@@ -48,11 +48,12 @@ $("#fun").on("click", function() {
 
 });
 
-// GOOGLE MAPS STARTS HERE!
+// GOOGLE MAPS STARTS HERE
 let location_name;
 let seattle = { lat: 47.608013, lng: -122.335167 };
 let lat;
 let lng;
+
 
 function initMap() {
     var input = document.getElementById("userInput");
