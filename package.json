@@ -30,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/ivancho277/fancyBathroom/issues"
   },
-  "homepage": "https://github.com/ivancho277/fancyBathroom#readme"
+  "homepage": "https://github.com/ivancho277/fancyBathroom#readme",
+  "directories": {
+    "test": "test"
+  }
 }
