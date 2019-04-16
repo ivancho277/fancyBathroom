@@ -1,6 +1,6 @@
 // Page Interactions
 
-class Image {
+class Picture {
     constructor(id_cloudinary, url, userId, tag, locationName, description, isPublic) {
         this.id_cloudinary = id_cloudinary;
         this.url = url;
@@ -18,6 +18,7 @@ class Image {
 let submitAllow = false;
 let imageInfo = {};
 let imageObject = {};
+
 var widget = cloudinary.createUploadWidget({
     cloudName: "instapotty", uploadPreset: "wveqgdsr"
 },
@@ -56,7 +57,7 @@ $("#submit").on("click", function () {
         } else {
             public = false;
         }
-        var imageObj = new Image(imageInfo.cloudinary, imageInfo.url, "user-id", $("#category").val(), $("#location").val().trim(), $("#description").val().trim(), public);
+        var imageObj = new Picture(imageInfo.cloudinary, imageInfo.url, "user-id", $("#category").val(), $("#location").val().trim(), $("#description").val().trim(), public);
         console.log("obj added to database", imageObj);
     }
     submitAllow = false;
