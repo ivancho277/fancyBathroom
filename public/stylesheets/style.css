@@ -5,4 +5,17 @@
 body {
   background-image: url(../images/brick-background.png);
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#upload_widget {
+  background-color: #e24e42;
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 24px;
+  margin: 5px;
+}
+
+form {
+  background-color: transparent;
 }
