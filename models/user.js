@@ -22,17 +22,24 @@
 module.exports = function (sequelize, DataTypes) {
   var User = sequelize.define("User", {
     // The email cannot be null, and must be a proper email before creation
-    userid: {
-      type: DataTypes.STRING,
+    id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true
+      primaryKey: true,
+      unique: true,
+      autoIncrement: true
     },
     userName: {
       type: DataTypes.STRING,
       allowNull: false
     }
   });
-  return User;
 
+  User.associate = function(models) {
+    User.hasMany(models.Image);
+  };
+
+
+  return User;
 
 };

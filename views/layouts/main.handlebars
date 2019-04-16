@@ -19,9 +19,17 @@
     {{!-- CSS Stylesheet --}}
     <link rel="stylesheet" href="stylesheets/style.css">
 
+    {{!-- Cloudinary JS --}}
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript">
+    </script>
     
+    {{!-- googleAuth --}}
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="89500782855-dpq49kjrgujojvi8ffjf4o3ccchkh9oc.apps.googleusercontent.com">
+
     <title>Instapotty</title>
 
+    
 </head>
 
 <body>
@@ -57,7 +65,7 @@
                 </li>
                 {{!-- This should be replaced by the accounts when user is logged in --}}
                 <li class="nav-item">
-                    <a class="nav-link" id="modal-button" href="#">Sign Up/Login</a>
+                    <li><div class="g-signin2" data-onsuccess="onSignIn"></div></li>
                 </li>
             </ul>
 
@@ -109,4 +117,3 @@ var widget = cloudinary.createUploadWidget({
 
 </body>
 </html>
-
