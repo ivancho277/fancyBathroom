@@ -37,26 +37,26 @@ body {
 }
 
 label {
-  font-family: 'Special Elite', cursive;
-  font-size: 30px;
+  font-family: 'Neucha', cursive;
+  font-size: 20px;
   color: #e6ac00;
   }
 
   input, select {
     border-radius: 10px;
-    font-family: 'Special Elite', cursive; 
+    font-family: 'Neucha', cursive;
      
   }
 
   option {
-    font-family: 'Special Elite', cursive;
+    font-family: 'Neucha', cursive;
     padding: 10px;
   }
 
   select {
     width: 100px;
     height: 40px;
-    font-size: 20px;
+    font-size: 15px;
     
   }
 
@@ -108,6 +108,49 @@ label {
     #infowindow-content {
       display: none;
     }
+
+    .description-box {
+      border: 1px solid black;
+      background-color: white;
+      padding: 10px;
+      margin-top: 10px;
+      
+    }
+
+    .potties {
+      border-radius: 20px;
+      background-color:  rgba(0, 143, 149, 0.8);
+      padding: 8px;
+    }
+
+    #logged-in-potties {
+      background-color: transparent;
+
+    }
+
+    .card-img-top {
+      border-radius: 10px;      
+    }
+
+    .card-body {
+      padding: 10px;
+    }
+
+    .location-link {
+      font-family: 'Neucha', cursive;
+      color: white;
+    }
+
+    span {
+      font-family: 'Neucha', cursive;
+    }
+
+    a:link {
+      text-decoration: underline;
+    }
+
+    
+    
 
 
     
