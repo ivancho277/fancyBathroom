@@ -6,7 +6,8 @@ let imageObj = {};
 var widget = cloudinary.createUploadWidget({
         cloudName: "instapotty", uploadPreset: "wveqgdsr"
     },
-    function (error, result) {
+    function (err, result) {
+        if(err) throw err;
         //Get image info
         console.log(result);
         if (result.event === "success") {
@@ -33,6 +34,7 @@ document.getElementById("upload_widget").addEventListener("click", function () {
 // Create new row for new users when they sign in
 // userInfo is the User class Object constructed when logged in via Google
 $.post("/api/users", "userInfo", function (err, result) {
+    if(err) throw err;
     console.log("in ajax post call", result);
 });
 
@@ -52,6 +54,7 @@ $("#uploadSubmit").on("click", function(event) {
     )
     console.log(postInfo);
     $.post("/api/images", postInfo, function (err, result) {
+        if(err) throw err;
         console.log(result);
     });
 })  
@@ -61,23 +64,16 @@ $("#uploadSubmit").on("click", function(event) {
 // ===================
 // display all images in feed default order by most recent
 $.get("/", function(err, result) {
+    if(err) throw err;
     console.log(result);
 });
 
 // display all images in feed ordered by most favorited
 $.get("/feed/orderbymostfavorited", function(err, result) {
+    if(err) throw err;
     console.log(result);
 });
 
-// display all favorited images by logged-in user
-$.get("/" + "username" + "/favorited", function (err, result) {
-
-});
-
-// display all user's posted images
-$.get("/" + "username" + "/posts", function (err, result) {
-    
-});
 
 // display images with certain tags or by certain users by certain users (specified in search)
 

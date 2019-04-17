@@ -9,6 +9,7 @@ module.exports = function (app) {
   // CREATE/INSERT DATA TO DATABASE
   // ==============================
   // POST route for logging a new user into Users table
+  // server side check
   app.post("/api/users", function (req, res) {
     // check if they're already user, if exists get the user, if not add new row
    db.User.findOrCreate({
