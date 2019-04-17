@@ -1,5 +1,7 @@
 {{!-- Populates all posts from all users (Ordered by most recent by default)--}}
 
+{{#if myPost}}
+
 
 {{!-- Create divs for each image --}}
 <div class="card m-2" style="width: 18rem;">
@@ -14,6 +16,11 @@
     <button class="btn btn-primary location">Go somewhere</button>
   </div>
 
-</div>
+{{else}}
 
+  {{!-- image --}}
+  {{#if logged}}
+    
+{{/if}}
+</div>
 {{!--  --}}

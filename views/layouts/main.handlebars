@@ -9,32 +9,41 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    {{!-- Cloudinary JS --}}
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+    
+    
     {{!-- jQuery --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     {{!-- CSS Stylesheet --}}
     <link rel="stylesheet" href="stylesheets/style.css">
-
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Shadows+Into+Light" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
     {{!-- Cloudinary JS --}}
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript">
     </script>
     {{!-- googleAuth --}}
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="89500782855-dpq49kjrgujojvi8ffjf4o3ccchkh9oc.apps.googleusercontent.com">
+    <meta name="google-signin-client_id"
+        content="484870132317-gq2fckv518bsnd8ckojmdfua82fas0ba.apps.googleusercontent.com">
 
+ 
     <title>Instapotty</title>
 
-    
 </head>
 
 <body>
     {{!-- NAVBAR START --}}
-    <nav class="justify-content-between navbar navbar-expand-lg navbar-dark bg-dark ">
+    <nav class="justify-content-between navbar navbar-expand-lg">
         <a class="navbar-brand" href="#">Instapotty</a>
         <div>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
 
@@ -45,43 +54,71 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
+
                     {{!-- HOMEPAGE/FEED --}}
-                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#" id="home">Home<span class="sr-only">(current)</span></a>
                 </li>
                 {{!-- When logged in this should appear with links to all user posts, etc. --}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="account" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         {{!-- Username --}}
-                        Username
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Account</a>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" href="#" id="my-posts">My Posts</a>
+                        <a class="dropdown-item" href="#" id="my-favs">My Favorited Posts</a>
+                        <a class="dropdown-item" href="#" onclick="signOut();">Sign out</a>
                     </div>
                 </li>
                 {{!-- This should be replaced by the accounts when user is logged in --}}
                 <li class="nav-item">
-                    <li><div class="g-signin2" data-onsuccess="onSignIn"></div></li>
+                <li>
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                </li>
                 </li>
             </ul>
 
         </div>
     </nav>
     {{!-- NAVBAR END --}}
+    
+    {{!-- Feed area --}}
+    <div class="container">
 
     {{!-- Dynamically generated body element --}}
     {{{body}}}
 
+    </div>
+
+    {{!-- GOOGLE MAP AND INFO-WINDOW PIN THAT WILL GO INSIDE MODAL  --}}
+    <!-- Map div -->
+    <div id="map"></div>
+    <!-- Place info content -->
+    <div id="infowindow-content">
+        <img src="" width="16" height="16" id="place-icon">
+        <div id="place-name" class="title"></div><br>
+        <div id="place-url"></div>
+    </div>
 
     {{!-- Static files --}}
     <script src="js/interactions.js" type="text/javascript"></script>
-    {{!-- <script src="js/ajax_calls.js" type="text/javascript"></script> --}}
+    <script src="js/ajax_calls.js" type="text/javascript"></script>
+    <script src="js/google_api.js" type="text/javascript"></script>
+    <script src="js/google_auth.js" type="text/javascript"></script>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
 
     {{!-- Google MAPS Javascript API --}}
-    <script 
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_PUNv54yTvxfJAtR3M9J1WrfD2xHsYs8&libraries=places&callback=initMap" async defer
-    ></script>
+   <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_PUNv54yTvxfJAtR3M9J1WrfD2xHsYs8&libraries=places&callback=initMap"
+        async defer></script>
 
 </body>
+
 </html>
