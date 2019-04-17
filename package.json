@@ -1,5 +1,4 @@
 {
-  "name": "1-Passport-Example",
   "version": "1.0.0",
   "description": "So you have found a super cool bathroom (or just super shocking). Tell the world!",
   "main": "server.js",
