@@ -57,8 +57,8 @@ var widget = cloudinary.createUploadWidget({
         },
         fonts: {
             default: null,
-            "'Poppins', sans-serif": {
-                url: "https://fonts.googleapis.com/css?family=Poppins",
+            "'Yanone Kaffeesatz', sans-serif": {
+                url: "https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz",
                 active: true
             }
         }
