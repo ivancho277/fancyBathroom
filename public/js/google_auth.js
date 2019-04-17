@@ -10,10 +10,12 @@ function onSignIn(googleUser) {
     // Changing href for My Posts page and My Favorites page
     $("#my-favs").attr("href", "/" + username + "/favorited");
     $("#my-posts").attr("href", "/" + username + "/posts");
+    // Changing text in account dropdown for posts and favorites
+    $("#account").text(username);
 
-    //check if in DB already
-    //then 
-    //ajax call to store user info.
+    // check if in DB already
+    // then 
+    // ajax call to store user info.
     $.post("/api/users", new User(parseEmail(profile.getEmail()), (err, result) => {
         if(err) throw err;
         console.log(result);
@@ -31,10 +33,18 @@ function onSignIn(googleUser) {
         console.log("user posts", result);
     });
 
-  }
+}
 
-  //parse email function
-  function parseEmail(email){
-      var endOfString = email.indexOf('@');
-      return email.substring(0, endOfString);
-  }
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+    });
+}
+
+
+// parse email function to grab the unique bit before @ to use as username
+function parseEmail(email){
+    var endOfString = email.indexOf('@');
+    return email.substring(0, endOfString);
+}
