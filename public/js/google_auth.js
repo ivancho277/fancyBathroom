@@ -1,25 +1,19 @@
 function onSignIn(googleUser) {
-
-    var username = Bill// profile.getName();
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + username);
+    console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-
+    var username = parseEmail(profile.getEmail());
 
     // Changing href for My Posts page and My Favorites page
     $("#my-favs").attr("href", "/" + username + "/favorited/true");
     $("#my-posts").attr("href", "/" + username + "/posts/true");
     $("#home").attr("href", "/true");
-
     // Changing text in account dropdown for posts and favorites
-    console.log(username);
     $("#account").text(username);
 
-    
-    var userObj = new User(mjblee20); // replace parseEmail(profile.getEmail()) with mjblee20
-    console.log(userObj);
+    var userObj = new User(username);
     // Create new row for new users when they sign in
     // userObj is the User class Object constructed when logged in via Google
     $.get("/true", function(err, result) {
@@ -40,7 +34,6 @@ function onSignIn(googleUser) {
     $.get("/" + username + "/posts/true", function (err, result) {
         console.log("user posts", result);
     });
-
 }
 
 function signOut() {
