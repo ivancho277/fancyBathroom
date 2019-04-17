@@ -3,7 +3,7 @@
 } */
 
 body {
-  background-image: url(../images/brick-background.png);
+  background-image: url(../images/background2.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -16,6 +16,9 @@ body {
   margin: 5px;
 }
 
-form {
-  background-color: transparent;
+.flex-container {
+  background-color: rgba(0, 143, 149, 0.5);
+  border-radius: 20px;
+  padding: 20px;
+
 }

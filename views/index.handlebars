@@ -34,8 +34,8 @@
     {{!-- Submit form for logged in users to upload new posts--}}
     {{#if loggedIn}}
     <div class="row">
-        <div class="col">
-            <div class="jumbotron">
+        <div class="col-md-6">
+            <div class="flex-container">
                 {{!-- Post method to images db/api --}}
 
                 <form>
@@ -44,7 +44,6 @@
                     <div id="thumbnail">
 
                     </div>
-
 
                     <label>Location</label>
                     <input type="text" name="location" id="location"> <br>
