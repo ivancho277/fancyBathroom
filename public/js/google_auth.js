@@ -4,39 +4,51 @@ function onSignIn(googleUser) {
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    // //check if in DB already
-    // //then 
-    // //ajax call to store user info.
+    var username = parseEmail(profile.getEmail());
 
-    // // server side check
-    // app.post("/api/users", function (req, res) {
-    //     // check if they're already user (not sure how...)
-    //    db.User.findOrCreate({
-    //      where: 
-    //        { userName: req.body.userName },
-    //    }).then(function (err, result) {
-    //      console.log("create row", result);
-    //      res.json(result);
-    //    });
-    //  });
-    $.post("/api/users", new User(parseEmail(profile.getEmail()), (err, result) => {
-        if(err) throw err
+    // Changing href for My Posts page and My Favorites page
+    $("#my-favs").attr("href", "/" + username + "/favorited/true");
+    $("#my-posts").attr("href", "/" + username + "/posts/true");
+    $("#home").attr("href", "/true");
+    // Changing text in account dropdown for posts and favorites
+    $("#account").text(username);
+
+    var userObj = new User(username);
+    // Create new row for new users when they sign in
+    // userObj is the User class Object constructed when logged in via Google
+    $.get("/true", function(err, result) {
         console.log(result);
-    })) 
-  }
+    });
 
- // <a href="#" onclick="signOut();">Sign out</a>
+    // ajax call to store user info.
+    $.post("/api/users", userObj, (err, result) => {
+        console.log(result);
+    }); 
 
-  function signOut() {
+    // display all favorited images by logged-in user
+    $.get("/" + username + "/favorited/true", function (err, result) {
+        console.log("favorited images", result);
+    });
+
+    // display all user's posted images
+    $.get("/" + username + "/posts/true", function (err, result) {
+        console.log("user posts", result);
+    });
+}
+
+function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-      console.log('User signed out.');
+        console.log('User signed out.');
     });
-  }
+    $("#my-favs").attr("href", "/" + username + "/favorited/");
+    $("#my-posts").attr("href", "/" + username + "/posts/");
+    $("#home").attr("href", "/");
+}
 
 
-  //parse email function
-  function parseEmail(email){
-      var endOfString = email.indexOf('@');
-      return email.substring(0, endOfString);
-  }
+// parse email function to grab the unique bit before @ to use as username
+function parseEmail(email){
+    var endOfString = email.indexOf('@');
+    return email.substring(0, endOfString);
+}

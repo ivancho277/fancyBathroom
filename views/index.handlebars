@@ -1,53 +1,44 @@
-{{!-- Feed area --}}
-<div class="container">
-
-    {{!-- Populate the page with all posts --}}
-    {{#if feed}}
-
-    <h1>Feed</h1>
-    <div class="d-flex justify-content-around flex-wrap" id="feed-container">
-        {{!-- Populate page with all images in database --}}
-        {{#each images}}
-
-        {{> feed/feed-block }}
-
-        {{/each}}
-    </div>
-
-    {{!-- Populate page with all user's posts --}}
-    {{else if post}}
-
-    {{!-- Iterate through all items in images --}}
+{{!-- Populate the page with all posts --}}
+<div class="d-flex justify-content-between flex-wrap" id="feed-container">
+    <button id="sort-by-fav">Order By Most Favorited</button>
+    {{!-- Populate page with all images in database --}}
     {{#each images}}
 
-    {{!-- Get all posts with specified userID --}}
-    {{> posts/posts-block}}
+    {{> feed/feed-block }}
 
     {{/each}}
+</div>
 
-    {{!-- Populate page with user's favorited posts --}}
-    {{else if favorites}}
+{{!-- Submit form for logged in users to upload new posts--}}
+{{#if loggedIn}}
+<div class="row">
+    <div class="col">
+        <div class="jumbotron">
+
+            {{!-- Post method to images db/api --}}
+            <form>
+
+                <button id="upload_widget" type="button" class="cloudinary-button">Upload Image</button>
+
+                <div id="thumbnail">
+
+                </div>
 
 
-    {{/if}}
+                <label>Location</label>
+                <input type="text" id="location"> <br>
 
-    {{!-- Submit form for logged in users to upload new posts--}}
-    {{#if loggedIn}}
-    <div class="row">
-        <div class="col-md-6">
-            <div class="flex-container">
-                {{!-- Post method to images db/api --}}
-
-                <form>
-                    <button id="upload_widget" type="button" class="btn cloudinary-button">Upload Image</button>
-
-                    <div id="thumbnail">
-
+                <label>Public</label>
+                <input type="checkbox" id="public">Public<br>
+                
                     </div>
                     <hr>
                     <label>Location:</label>
 
-                    <input type="text" name="location" id="location"> <br>
+
+                    <label>Location:</label>
+                    <input type="text" name="location" id="userInput"> <br>
+                    <button type="button" id="autoComplete">Search Location</button>
 
                     <label>Public or Private Location?</label>
                     <br>
@@ -66,13 +57,23 @@
 
                     <label>Description:</label>
                     <input type="text" name="description" id="description"><br>
+                    
+                <label>Category</label>
+                <select id="category" required>
+                    <option value=" Default" selected disabled>Potty Tags</option>
+                    <option value="humor">Humor</option>
+                    <option value="luxurious">Luxurious</option>
+                    <option value="artistic">Artistic</option>
+                    <option value="wisdom">Wisdom</option>
+                </select>
+                <br>
 
-                    <input type="submit" value="Submit" id="submit">
+                <label>Description</label>
+                <input type="text" id="description"><br>
 
-                </form>
-
-            </div>
+            </form>
+            <button id="uploadSubmit">Upload Post</button>
         </div>
     </div>
-    {{/if}}
 </div>
+{{/if}}

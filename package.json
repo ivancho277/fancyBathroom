@@ -1,5 +1,4 @@
 {
-  "name": "1-Passport-Example",
   "version": "1.0.0",
   "description": "So you have found a super cool bathroom (or just super shocking). Tell the world!",
   "main": "server.js",
@@ -12,14 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
-    "express-session": "^1.16.1",
     "mysql2": "^1.6.4",
-    "passport": "^0.3.2",
-    "passport-local": "^1.0.0",
+    "nodemon": "^1.18.11",
     "sequelize": "^4.43.1"
   },
   "devDependencies": {},
