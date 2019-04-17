@@ -5,7 +5,6 @@ var db = require("../models");
 module.exports = function (app) {
   // Create all our routes and set up logic within those routes where required.
 
-
   // CREATE/INSERT DATA TO DATABASE
   // ==============================
   // POST route for logging a new user into Users table
@@ -34,24 +33,42 @@ module.exports = function (app) {
   // ===================================
   // This will run on page load to generate the feed
   app.get("/", function (req, res) {
-    db.Image.findAll({
-      // order: sequelize.literal('max(id) DESC')
-    })
+    db.Image.findAll()
       .then(function (data) {
         // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
         // data is the entire images table
         var hbsObject = {
           images: data,
-          loggedIn: true
         };
         // since feed is true page renders feed.
         res.render("index", hbsObject);
       });
   });
 
+  // when logged in make the add new post form available for user
+  app.get("/:login", function (req, res) {
+    db.Image.findAll()
+      .then(function (data) {
+        // 
+        // data is the entire images table
+        var hbsObject = {
+          images: data,
+          login: req.params.login
+        };
+        $("#favBtn").show();
+        // since feed is true page renders feed.
+        res.render("index", hbsObject);
+      });
+  });
+
+  // grab data from image data ordered by most favorited
   app.get("/feed/orderbymostfavorited/", function (req, res) {
     db.Image.findAll({
-      // order: sequelize.literal('max(id) DESC')
+      include: [User],
+      // joins Image and User table
+      // SELECT COUNT(Image.id) as Count
+      attributes: ['User.*', 'Image.*', [sequelize.fn('COUNT', sequelize.col('Image.id')), 'Count']],
+      order: ['Count', 'DESC']
     })
       .then(function (data) {
         // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
@@ -60,52 +77,78 @@ module.exports = function (app) {
           images: data,
           loggedIn: true
         };
+        $("#favBtn").show();
         // since feed is true page renders feed.
         res.render("index", hbsObject);
       });
   });
 
   // display all user's posted images
-  app.get("/:username/posts", function (req, res) {
-    db.Image.findAll({
+  app.get("/:username/posts/:login", function (req, res) {
+    db.User.findOne({
       where: {
-        user_id: req.params.username
+        userName: req.params.username
       }
     })
-      .then(function (data) {
-        // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
-        // data is the entire images table
+    // userData = {user_id, userName}
+    .then(function (userData) {
+      console.log(userData);
+      db.Image.findAll({
+        where: {
+          user_id: userData[0].id
+        }
+      }).then(function(imgData) {
         var hbsObject = {
-          images: data,
-          loggedIn: true
+          images: imgData,
+          loggedIn: req.params.login,
+          myPosts: true
         };
         // since feed is true page renders feed.
         res.render("index", hbsObject);
       });
+    });
   });
 
   // display all user's favorited images
-  app.get("/:username/favorited", function (req, res) {
-    db.Image.findAll({
+  app.get("/:username/favorited/:login", function (req, res) {
+    db.User.findOne({
       // using association of two tables to grab all images where userId = user_id, includes all images in the likes association table
+      where: {
+        userName: req.params.username,
+      }
     })
-      .then(function (data) {
-        // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
-        // data is the entire images table
+    .then(function (data) {
+      console.log(data);
+      db.Likes.findAll({
+        include: [Image],
+        where: {
+          user_id: data[0].id
+        }
+      })
+      // data below will be filtered join table between Likes and Image by user_id
+      .then(function(data){
         var hbsObject = {
           images: data,
-          loggedIn: true
+          loggedIn: req.params.login,
         };
         // since feed is true page renders feed.
         res.render("index", hbsObject);
       });
+    });
   });
 
+  // NEED HELP
   // search & display by tag/username
   app.get("/search/:term", function(req,res){
     db.Image.findAll({ 
-      where: 
-      { tag: req.params.term }
+      include: [User],
+      where: { 
+        $or: [{
+          tag: req.params.term
+        }, {
+          username: req.params.term
+        }]
+      }
     }).then(function (err, result) {
       // render page with only posts with specifed tags or by specified user
       var hbsObject = {
@@ -125,19 +168,19 @@ module.exports = function (app) {
   // UPDATE DATA FROM DATABASE
   // =========================
   // PUT route for updating post's tags and descriptions
-  app.put("/:id", function (req, res) {
-    db.Image.put().then(function (err, result){
+  // app.put("/:id", function (req, res) {
+  //   db.Image.put().then(function (err, result){
 
-    });
-  });
+  //   });
+  // });
 
   // DELETE DATA FROM DATABASE
   // =========================
   // DELETE route for removing previous posts
-  app.delete("/:id", function (req, res) {
-    db.Image.destroy().then(function(err, result){
+  // app.delete("/:id", function (req, res) {
+  //   db.Image.destroy().then(function(err, result){
 
-    });
-  });
+  //   });
+  // });
 
 }

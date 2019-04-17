@@ -22,7 +22,7 @@ var widget = cloudinary.createUploadWidget({
 
     });
 
-document.getElementById("upload_widget").addEventListener("click", function () {
+$(document).on("click", "#upload_widget", function() {
     widget.open();
 }, false);
 
@@ -31,16 +31,9 @@ document.getElementById("upload_widget").addEventListener("click", function () {
 
 // Create/Insert Values to DB
 // ==========================
-// Create new row for new users when they sign in
-// userInfo is the User class Object constructed when logged in via Google
-$.post("/api/users", "userInfo", function (err, result) {
-    if(err) throw err;
-    console.log("in ajax post call", result);
-});
-
 // Creating new posts for logged in users (cloudinary API update) and adding the posts to database
 // postInfo is the Picture class Object contructed from user's input
-$("#uploadSubmit").on("click", function(event) {
+$(document).on("click","#uploadSubmit", function(event) {
     var public = !!$('#public:checked').length;
 
     var postInfo = new Picture(
@@ -64,14 +57,15 @@ $("#uploadSubmit").on("click", function(event) {
 // ===================
 // display all images in feed default order by most recent
 $.get("/", function(err, result) {
-    if(err) throw err;
     console.log(result);
 });
 
 // display all images in feed ordered by most favorited
-$.get("/feed/orderbymostfavorited", function(err, result) {
-    if(err) throw err;
-    console.log(result);
+$("#sort-by-fav").on("click", function(event) {
+    event.preventDefault();
+    $.get("/feed/orderbymostfavorited", function(err, result) {
+        console.log(result);
+    });
 });
 
 
@@ -90,12 +84,9 @@ $("#searchBtn").on("click", function(event) {
 // Create new row for new users when they sign in
 
 // Creating new posts for logged in users (cloudinary API update)
-
 $.post("/api/images", function (err, result) {
-
+    console.log(result);
 });
-
-
 
 // Update values
 // ====================

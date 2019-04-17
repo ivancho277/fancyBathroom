@@ -1,5 +1,6 @@
 function onSignIn(googleUser) {
-    var username = profile.getName();
+
+    var username = Bill// profile.getName();
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
     console.log('Name: ' + username);
@@ -8,28 +9,35 @@ function onSignIn(googleUser) {
 
 
     // Changing href for My Posts page and My Favorites page
-    $("#my-favs").attr("href", "/" + username + "/favorited");
-    $("#my-posts").attr("href", "/" + username + "/posts");
+    $("#my-favs").attr("href", "/" + username + "/favorited/true");
+    $("#my-posts").attr("href", "/" + username + "/posts/true");
+    $("#home").attr("href", "/true");
+
     // Changing text in account dropdown for posts and favorites
+    console.log(username);
     $("#account").text(username);
 
-    // check if in DB already
-    // then 
-    // ajax call to store user info.
-    $.post("/api/users", new User(parseEmail(profile.getEmail()), (err, result) => {
-        if(err) throw err;
+    
+    var userObj = new User(mjblee20); // replace parseEmail(profile.getEmail()) with mjblee20
+    console.log(userObj);
+    // Create new row for new users when they sign in
+    // userObj is the User class Object constructed when logged in via Google
+    $.get("/true", function(err, result) {
         console.log(result);
-    })) 
+    });
+
+    // ajax call to store user info.
+    $.post("/api/users", userObj, (err, result) => {
+        console.log(result);
+    }); 
 
     // display all favorited images by logged-in user
-    $.get("/" + username + "/favorited", function (err, result) {
-        if(err) throw err;
+    $.get("/" + username + "/favorited/true", function (err, result) {
         console.log("favorited images", result);
     });
 
     // display all user's posted images
-    $.get("/" + username + "/posts", function (err, result) {
-        if(err) throw err;
+    $.get("/" + username + "/posts/true", function (err, result) {
         console.log("user posts", result);
     });
 
@@ -40,6 +48,9 @@ function signOut() {
     auth2.signOut().then(function () {
         console.log('User signed out.');
     });
+    $("#my-favs").attr("href", "/" + username + "/favorited/");
+    $("#my-posts").attr("href", "/" + username + "/posts/");
+    $("#home").attr("href", "/");
 }
 
 
