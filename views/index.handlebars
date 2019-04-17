@@ -28,15 +28,15 @@
 
 
                     <label>Location</label>
-                    <input type="text" name="location" id="location"> <br>
+                    <input type="text" id="location"> <br>
 
-                    <label>Public or Private Location?</label>
+                    <label>Public</label>
                     <br>
-                    <input type="radio" name="public" value="public"> Public<br>
-                    {{!-- <input type="radio" name="public" value="private"> Private<br> --}}
-
+                    <input type="checkbox" id="public">Public<br>
+                    {{!-- <input type="radio" 
+                    value="false" name="public"> Private<br> --}}
                     <label>Category</label>
-                    <select name="form-control" id="category" required>
+                    <select id="category" required>
                         <option value=" Default" selected disabled>Potty Tags</option>
                         <option value="humor">Humor</option>
                         <option value="luxurious">Luxurious</option>
@@ -46,12 +46,10 @@
                     <br>
 
                     <label>Description</label>
-                    <input type="text" name="description" id="description"><br>
-
-                    <input type="submit" value="Submit" id="uploadSubmit">
+                    <input type="text" id="description"><br>
 
                 </form>
-
+                <button id="uploadSubmit">Upload Post</button>
             </div>
         </div>
     </div>

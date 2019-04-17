@@ -1,3 +1,30 @@
+//Onclick for cloudinary upload
+let submitAllow = false;
+let imageInfo = {};
+let imageObj = {};
+
+var widget = cloudinary.createUploadWidget({
+        cloudName: "instapotty", uploadPreset: "wveqgdsr"
+    },
+    function (error, result) {
+        //Get image info
+        console.log(result);
+        if (result.event === "success") {
+            submitAllow = true;
+            console.log("allow", submitAllow);
+            
+            // save imageInfo into object
+            imageInfo.cloudinary = result.info.public_id;
+            imageInfo.thumbnailUrl = result.info.thumbnail_url;
+            imageInfo.url = result.info.url;
+        }
+
+    });
+
+document.getElementById("upload_widget").addEventListener("click", function () {
+    widget.open();
+}, false);
+
 // CRUD OPERATIONS
 // ===============
 
@@ -11,9 +38,24 @@ $.post("/api/users", "userInfo", function (err, result) {
 
 // Creating new posts for logged in users (cloudinary API update) and adding the posts to database
 // postInfo is the Picture class Object contructed from user's input
-$.post("/api/images", "postInfo", function (err, result) {
-    console.log(result);
-});
+$("#uploadSubmit").on("click", function(event) {
+    var public = !!$('#public:checked').length;
+
+    var postInfo = new Picture(
+        imageInfo.cloudinary,
+        imageInfo.url,
+        "userid",
+        $("#category").val(),
+        $("#location").val().trim(),
+        $("#description").val().trim(),
+        public
+    )
+    console.log(postInfo);
+    $.post("/api/images", postInfo, function (err, result) {
+        console.log(result);
+    });
+})  
+
 
 // Read/Display images
 // ===================
@@ -28,12 +70,12 @@ $.get("/feed/orderbymostfavorited", function(err, result) {
 });
 
 // display all favorited images by logged-in user
-$.get("/" + "userName" + "/favorited", function (err, result) {
+$.get("/" + "username" + "/favorited", function (err, result) {
 
 });
 
 // display all user's posted images
-$.get("/" + "userName" + "/posts", function (err, result) {
+$.get("/" + "username" + "/posts", function (err, result) {
     
 });
 

@@ -35,7 +35,7 @@
 <body>
     {{!-- NAVBAR START --}}
     <nav class="justify-content-between navbar navbar-expand-lg navbar-dark bg-dark ">
-        <a class="navbar-brand" href="/feed/">Instapotty</a>
+        <a class="navbar-brand" href="/">Instapotty</a>
         <div>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchTerm">
@@ -50,7 +50,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
                 </li>
                 {{!-- Hidden until User is logged in this should appear with links to all user posts, etc. --}}
                 <li class="nav-item dropdown">
@@ -59,7 +59,8 @@
                         Username
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Account</a>
+                        <a class="dropdown-item" href="/username/favorited">My Favorites</a>
+                        <a class="dropdown-item" href="/username/posts">My Posts</a>
                         <a class="dropdown-item" href="#">Logout</a>
                     </div>
                 </li>

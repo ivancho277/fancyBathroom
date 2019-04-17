@@ -22,6 +22,7 @@ module.exports = function (app) {
 
  // insert into images when they submit a new post
  app.post("/api/images",function (req,res){
+   console.log(req.body);
    db.Image.create(req.body).then(function (err, result) {
      console.log("create new image row", result);
      res.json(result);

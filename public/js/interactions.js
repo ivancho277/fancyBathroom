@@ -31,29 +31,29 @@ let picture4 = new Picture("Cloud-143-id", "www.funPIC.heynow", "rr04uu", "luxur
 let picture5 = new Picture("Cloud-555-id", "www.funPIC.yolo", "tt05yy", "luxury", "the mall", "a cool mall bathroom", true)
 // New post submit form
 
-//Onclick for cloudinary upload
-let submitAllow = false;
-let imageInfo = {};
-let imageObj = {};
+// //Onclick for cloudinary upload
+// let submitAllow = false;
+// let imageInfo = {};
+// let imageObj = {};
 
-var widget = cloudinary.createUploadWidget({
-        cloudName: "instapotty", uploadPreset: "wveqgdsr"
-    },
-    function (error, result) {
-        //Get image info
-        console.log(result);
-        if (result.event === "success") {
-            submitAllow = true;
-            console.log("allow", submitAllow);
+// var widget = cloudinary.createUploadWidget({
+//         cloudName: "instapotty", uploadPreset: "wveqgdsr"
+//     },
+//     function (error, result) {
+//         //Get image info
+//         console.log(result);
+//         if (result.event === "success") {
+//             submitAllow = true;
+//             console.log("allow", submitAllow);
 
-            // save imageInfo into object
-            imageInfo.cloudinary = result.info.public_id;
-            imageInfo.thumbnailUrl = result.info.thumbnail_url;
-            imageInfo.url = result.info.url;
-        }
+//             // save imageInfo into object
+//             imageInfo.cloudinary = result.info.public_id;
+//             imageInfo.thumbnailUrl = result.info.thumbnail_url;
+//             imageInfo.url = result.info.url;
+//         }
 
-    });
+//     });
 
-document.getElementById("upload_widget").addEventListener("click", function () {
-    widget.open();
-}, false);
+// document.getElementById("upload_widget").addEventListener("click", function () {
+//     widget.open();
+// }, false);
