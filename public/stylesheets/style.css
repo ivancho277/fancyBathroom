@@ -37,19 +37,19 @@ body {
 }
 
 label {
-  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-family: 'Special Elite', cursive;
   font-size: 30px;
   color: #e6ac00;
   }
 
   input, select {
     border-radius: 10px;
-    font-family: 'Yanone Kaffeesatz', sans-serif; 
+    font-family: 'Special Elite', cursive; 
      
   }
 
   option {
-    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-family: 'Special Elite', cursive;
     padding: 10px;
   }
 
