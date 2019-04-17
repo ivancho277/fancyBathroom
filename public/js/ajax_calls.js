@@ -1,6 +1,5 @@
 //TESTING OBJECTS
-const User = require("../test/user_class");
-const Picture = require("../test/image_class");
+
 
 let user1 = new User("sailorMoon")
 let user2 = new User("sailorMercury")
