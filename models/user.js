@@ -36,7 +36,7 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   User.associate = function(models) {
-    User.hasMany(models.Image);
+    User.belongsToMany(models.Image, { through: "Likes", foreignKey: "user_id"});
   };
 
 

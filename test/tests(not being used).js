@@ -22,17 +22,16 @@ class Image {
     }
 }
 class User {
-    constructor(userid, userName) {
-        this.userid = userid;
+    constructor(userName) {
         this.userName = userName;
     }
 }
 
-let user1 = new User("qq01pp", "sailorMoon")
-let user2 = new User("ww02oo", "sailorMercury")
-let user3 = new User("ee03ii", "sailorVenus")
-let user4 = new User("rr04uu", "sailorMars")
-let user5 = new User("tt05yy", "sailorJupiter")
+let user1 = new User("sailorMoon")
+let user2 = new User("sailorMercury")
+let user3 = new User("sailorVenus")
+let user4 = new User("sailorMars")
+let user5 = new User("sailorJupiter")
 
 let image1 = new Image("could-tst", "www.funPIC.super", "qq01pp", "luxury", "the mall", "a cool mall bathroom", true)
 let image2 = new Image("Cloud-444-id", "www.funPIC.duper", "ww02oo", "luxury", "the mall", "a cool mall bathroom", true)
