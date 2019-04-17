@@ -1,57 +1,53 @@
-{{!-- Feed area --}}
-<div class="container">
+{{!-- Populate the page with all posts --}}
+<div class="d-flex justify-content-between flex-wrap" id="feed-container">
+    {{!-- Populate page with all images in database --}}
+    {{#each images}}
 
-    {{!-- Populate the page with all posts --}}
-    <div class="d-flex justify-content-between flex-wrap" id="feed-container">
-        {{!-- Populate page with all images in database --}}
-        {{#each images}}
+    {{> feed/feed-block }}
 
-        {{> feed/feed-block }}
+    {{/each}}
+</div>
 
-        {{/each}}
-    </div>
+{{!-- Submit form for logged in users to upload new posts--}}
+{{#if loggedIn}}
+<div class="row">
+    <div class="col">
+        <div class="jumbotron">
+            {{!-- Post method to images db/api --}}
 
-    {{!-- Submit form for logged in users to upload new posts--}}
-    {{#if loggedIn}}
-    <div class="row">
-        <div class="col">
-            <div class="jumbotron">
-                {{!-- Post method to images db/api --}}
+            <form>
 
-                <form>
+                <button id="upload_widget" type="button" class="cloudinary-button">Upload Image</button>
 
-                    <button id="upload_widget" type="button" class="cloudinary-button">Upload Image</button>
+                <div id="thumbnail">
 
-                    <div id="thumbnail">
-
-                    </div>
+                </div>
 
 
-                    <label>Location</label>
-                    <input type="text" id="location"> <br>
+                <label>Location</label>
+                <input type="text" id="location"> <br>
 
-                    <label>Public</label>
-                    <br>
-                    <input type="checkbox" id="public">Public<br>
-                    {{!-- <input type="radio" 
-                    value="false" name="public"> Private<br> --}}
-                    <label>Category</label>
-                    <select id="category" required>
-                        <option value=" Default" selected disabled>Potty Tags</option>
-                        <option value="humor">Humor</option>
-                        <option value="luxurious">Luxurious</option>
-                        <option value="artistic">Artistic</option>
-                        <option value="wisdom">Wisdom</option>
-                    </select>
-                    <br>
+                <label>Public</label>
+                <br>
+                <input type="checkbox" id="public">Public<br>
+                {{!-- <input type="radio" 
+                value="false" name="public"> Private<br> --}}
+                <label>Category</label>
+                <select id="category" required>
+                    <option value=" Default" selected disabled>Potty Tags</option>
+                    <option value="humor">Humor</option>
+                    <option value="luxurious">Luxurious</option>
+                    <option value="artistic">Artistic</option>
+                    <option value="wisdom">Wisdom</option>
+                </select>
+                <br>
 
-                    <label>Description</label>
-                    <input type="text" id="description"><br>
+                <label>Description</label>
+                <input type="text" id="description"><br>
 
-                </form>
-                <button id="uploadSubmit">Upload Post</button>
-            </div>
+            </form>
+            <button id="uploadSubmit">Upload Post</button>
         </div>
     </div>
-    {{/if}}
 </div>
+{{/if}}
