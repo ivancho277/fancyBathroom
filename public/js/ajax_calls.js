@@ -1,36 +1,83 @@
-//TESTING OBJECTS
+//Onclick for cloudinary upload
+let submitAllow = false;
+let imageInfo = {};
+let imageObj = {};
+
+var widget = cloudinary.createUploadWidget({
+        cloudName: "instapotty", uploadPreset: "wveqgdsr"
+    },
+    function (err, result) {
+        if(err) throw err;
+        //Get image info
+        console.log(result);
+        if (result.event === "success") {
+            submitAllow = true;
+            console.log("allow", submitAllow);
+            
+            // save imageInfo into object
+            imageInfo.cloudinary = result.info.public_id;
+            imageInfo.thumbnailUrl = result.info.thumbnail_url;
+            imageInfo.url = result.info.url;
+        }
+
+    });
+
+$(document).on("click", "#upload_widget", function() {
+    widget.open();
+}, false);
+
+// CRUD OPERATIONS
+// ===============
+
+// Create/Insert Values to DB
+// ==========================
+// Creating new posts for logged in users (cloudinary API update) and adding the posts to database
+// postInfo is the Picture class Object contructed from user's input
+$(document).on("click","#uploadSubmit", function(event) {
+    var public = !!$('#public:checked').length;
+
+    var postInfo = new Picture(
+        imageInfo.cloudinary,
+        imageInfo.url,
+        "userid",
+        $("#category").val(),
+        $("#location").val().trim(),
+        $("#description").val().trim(),
+        public
+    )
+    console.log(postInfo);
+    $.post("/api/images", postInfo, function (err, result) {
+        if(err) throw err;
+        console.log(result);
+    });
+})  
 
 
-let user1 = new User("sailorMoon")
-let user2 = new User("sailorMercury")
-let user3 = new User("sailorVenus")
-let user4 = new User("sailorMars")
-let user5 = new User("sailorJupiter")
-
-let image1 = new Picture("www.funPIC.super", "qq01pp", "luxury", "the mall", "a cool mall bathroom", true)
-let image2 = new Picture("Cloud-444-id", "www.funPIC.duper", "ww02oo", "luxury", "the mall", "a cool mall bathroom", true)
-let image3 = new Picture("luxury", "the mall", "a cool mall bathroom", true)
-let image4 = new Picture("Cloud-143-id", "www.funPIC.heynow", "rr04uu", "luxury", "the mall", "a cool mall bathroom", true)
-let image5 = new Picture("Cloud-555-id", "www.funPIC.yolo", "tt05yy", "luxury", "the mall", "a cool mall bathroom", true)
-
-
-
-// CRUD Operations
-// Find One Sequelize Method
-
-// Display images
-// ==============
+// Read/Display images
+// ===================
 // display all images in feed default order by most recent
+$.get("/", function(err, result) {
+    console.log(result);
+});
 
 // display all images in feed ordered by most favorited
+$("#sort-by-fav").on("click", function(event) {
+    event.preventDefault();
+    $.get("/feed/orderbymostfavorited", function(err, result) {
+        console.log(result);
+    });
+});
 
-// display all favorited images by logged-in user
 
-// display all user's posted images
+// display images with certain tags or by certain users by certain users (specified in search)
 
-// display images by certain tags (specified in search)
+$("#searchBtn").on("click", function(event) {
+    event.preventDefault();
+    $.get("/search/" + $("#searchTerm").val(), function (err, result) {
+        console.log("clicked Search Button", $("#searchTerm").val())
+    });
+})
 
-// display images by certain users (specified in search)
 
 // Insert Values to DB
 // ===================
@@ -38,41 +85,46 @@ let image5 = new Picture("Cloud-555-id", "www.funPIC.yolo", "tt05yy", "luxury", 
 
 // Creating new posts for logged in users (cloudinary API update)
 $.post("/api/images", function (err, result) {
-
+    console.log(result);
 });
-
-
 
 // Update values
 // ====================
 // Make changes to description and tags
+// $.ajax({
+//     url: '/',
+//     type: 'PUT',
+//     success: function(response) {
+//         console.log(response);
+//     }
+// });
 
 // Delete values
 // ====================
 // Delete uploaded image
-
+// $.ajax({
+//     url: '/',
+//     type: 'DELETE',
+//     success: function(response) {
+//         console.log(response);
+//     }
+// });
 
 
 // viewing all users
-$.get("/api/users", function (err, result) {
-    console.log(result);
-});
+// $.get("/api/users", function (err, result) {
+//     console.log(result);
+// });
 
-// adding new user
-$.post("/api/users", { userid: "hhww", userName: "sailormoon" }, function (err, result) {
-    console.log("in ajax post call", result);
-});
+
 
 // getting all images from Images table
-$.get("/api/images", function (err, result) {
-    console.log(result);
-});
+// $.get("/api/images", function (err, result) {
+//     console.log(result);
+// });
 
 // 
 
-$.post("/api/images", function (err, result) {
-    console.log(result);
-});
 
 
 

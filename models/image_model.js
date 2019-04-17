@@ -16,7 +16,7 @@ module.exports = function (sequelize, DataTypes) {
           allowNull: false
       },
       user_id: {
-          type: DataTypes.STRING,
+          type: DataTypes.INTEGER,
           allowNull: false
       },
       tag:{
@@ -38,5 +38,8 @@ module.exports = function (sequelize, DataTypes) {
           allowNull: false
       }
     });
+    Image.associate = function(models) {
+      Image.belongsToMany(models.User, { through: "Likes", foreignKey: "image_id" });
+    };
     return Image;
   };

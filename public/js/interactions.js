@@ -12,7 +12,7 @@ class Picture {
     }
 }
 class User {
-    constructor(userid, userName) {
+    constructor(userName) {
         this.userName = userName;
     }
 }
