@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    {{!-- Cloudinary JS --}}
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+    
+    
     {{!-- jQuery --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -22,7 +26,6 @@
     {{!-- Cloudinary JS --}}
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript">
     </script>
-
     {{!-- googleAuth --}}
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id"
@@ -52,17 +55,17 @@
                 <li class="nav-item">
 
                     {{!-- HOMEPAGE/FEED --}}
-                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#" id="home">Home<span class="sr-only">(current)</span></a>
                 </li>
                 {{!-- When logged in this should appear with links to all user posts, etc. --}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="account" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         {{!-- Username --}}
-                        Username
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Account</a>
+                        <a class="dropdown-item" href="#" id="my-posts">My Posts</a>
+                        <a class="dropdown-item" href="#" id="my-favs">My Favorited Posts</a>
                         <a class="dropdown-item" href="#" onclick="signOut();">Sign out</a>
                     </div>
                 </li>
@@ -77,9 +80,14 @@
         </div>
     </nav>
     {{!-- NAVBAR END --}}
+    
+    {{!-- Feed area --}}
+    <div class="container">
 
     {{!-- Dynamically generated body element --}}
     {{{body}}}
+
+    </div>
 
     {{!-- GOOGLE MAP AND INFO-WINDOW PIN THAT WILL GO INSIDE MODAL  --}}
     <!-- Map div -->
@@ -93,9 +101,10 @@
 
     {{!-- Static files --}}
     <script src="js/interactions.js" type="text/javascript"></script>
+    <script src="js/ajax_calls.js" type="text/javascript"></script>
     <script src="js/google_api.js" type="text/javascript"></script>
-    {{!-- <script src="js/google_auth.js" type="text/javascript"></script> --}}
-    {{!-- <script src="js/ajax_calls.js" type="text/javascript"></script> --}}
+    <script src="js/google_auth.js" type="text/javascript"></script>
+    
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
