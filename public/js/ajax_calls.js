@@ -2,17 +2,19 @@
 const User = require("../test/user_class");
 const Picture = require("../test/image_class");
 
-let user1 = new User("qq01pp", "sailorMoon")
-let user2 = new User("ww02oo", "sailorMercury")
-let user3 = new User("ee03ii", "sailorVenus")
-let user4 = new User("rr04uu", "sailorMars")
-let user5 = new User("tt05yy", "sailorJupiter")
+let user1 = new User("sailorMoon")
+let user2 = new User("sailorMercury")
+let user3 = new User("sailorVenus")
+let user4 = new User("sailorMars")
+let user5 = new User("sailorJupiter")
 
 let image1 = new Picture("www.funPIC.super", "qq01pp", "luxury", "the mall", "a cool mall bathroom", true)
 let image2 = new Picture("Cloud-444-id", "www.funPIC.duper", "ww02oo", "luxury", "the mall", "a cool mall bathroom", true)
 let image3 = new Picture("luxury", "the mall", "a cool mall bathroom", true)
 let image4 = new Picture("Cloud-143-id", "www.funPIC.heynow", "rr04uu", "luxury", "the mall", "a cool mall bathroom", true)
 let image5 = new Picture("Cloud-555-id", "www.funPIC.yolo", "tt05yy", "luxury", "the mall", "a cool mall bathroom", true)
+
+
 
 // CRUD Operations
 // Find One Sequelize Method
