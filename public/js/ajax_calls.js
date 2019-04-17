@@ -86,9 +86,9 @@ var widget = cloudinary.createUploadWidget({
         }
     });
 
-document.getElementById("upload_widget").addEventListener("click", function () {
-    widget.open();
-}, false);
+// document.getElementById("upload_widget").addEventListener("click", function () {
+//     widget.open();
+// }, false);
 // =================================
 
 // CRUD OPERATIONS
@@ -99,6 +99,7 @@ document.getElementById("upload_widget").addEventListener("click", function () {
 // Creating new posts for logged in users (cloudinary API update) and adding the posts to database
 // postInfo is the Picture class Object contructed from user's input
 $(document).on("click","#uploadSubmit", function(event) {
+    // converts falsy/truthy values to be false or true
     var public = !!$('#public:checked').length;
 
     var postInfo = new Picture(
@@ -117,8 +118,29 @@ $(document).on("click","#uploadSubmit", function(event) {
     });
 })  
 
+$(".add-favs").on("click", function() {
+    $.get("/api/users", function() {
+        db.User.findOne({
+            where: {
+                userName: "sailorMoon"
+            }
+        }).then(function (err, result) {
+            var likesObj = {
+                // grab from ajax call
+                user_id: result.id,
+                image_id: $(this).data("id")
+            }
+            $.post("/api/users", likesObj, (err, result) => {
+                console.log(result);
+            });
+        });
+    });
+});
+
+
 // ajax call to store user info.
-$.post("/api/users", userObj, (err, result) => {
+// user1 should be userObj but this is in google_auth
+$.post("/api/users", user1, (err, result) => {
     console.log(result);
 }); 
 
@@ -147,12 +169,13 @@ $("#searchBtn").on("click", function(event) {
 })
 
 // display all favorited images by logged-in user
-$.get("/" + username + "/favorited/true", function (err, result) {
+// route: "/" + username + "/favorited/true"
+$.get("/sailorMoon/favorited/true", function (err, result) {
     console.log("favorited images", result);
 });
 
 // display all user's posted images
-$.get("/" + username + "/posts/true", function (err, result) {
+$.get("/sailorMoon/posts/true", function (err, result) {
     console.log("user posts", result);
 });
 
@@ -178,23 +201,15 @@ $.get("/" + username + "/posts/true", function (err, result) {
 //     }
 // });
 
-
 // viewing all users
 // $.get("/api/users", function (err, result) {
 //     console.log(result);
 // });
 
-
-
 // getting all images from Images table
 // $.get("/api/images", function (err, result) {
 //     console.log(result);
 // });
-
-
-
-
-
 
 // Connects to google maps API
 // Search location field - autocomplete

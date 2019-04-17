@@ -11,23 +11,31 @@ module.exports = function (app) {
   // server side check
   app.post("/api/users", function (req, res) {
     // check if they're already user, if exists get the user, if not add new row
-   db.User.findOrCreate({
-     where: 
-       { userName: req.body.userName },
-   }).then(function (err, result) {
-     console.log("create row", result);
-     res.json(result);
-   });
- });
+  db.User.findOrCreate({
+    where: 
+      { userName: req.body.userName },
+  }).then(function (err, result) {
+    console.log("create row", result);
+    res.json(result);
+  });
+});
 
- // insert into images when they submit a new post
- app.post("/api/images",function (req,res){
-   console.log(req.body);
-   db.Image.create(req.body).then(function (err, result) {
-     console.log("create new image row", result);
-     res.json(result);
-   });
- });
+app.post("/api/likes", function (req, res) {
+  // req.body should be in form { user_id: something, image_id: something }
+  db.Likes.create(req.body)
+  .then(function(data) {
+    res.render(data);
+  })
+});
+
+// insert into images when they submit a new post
+app.post("/api/images",function (req,res){
+  console.log(req.body);
+  db.Image.create(req.body).then(function (err, result) {
+    console.log("create new image row", result);
+    res.json(result);
+  });
+});
 
   // READING DATABASE AND RENDERING PAGE
   // ===================================
@@ -35,13 +43,7 @@ module.exports = function (app) {
   app.get("/", function (req, res) {
     db.Image.findAll()
       .then(function (data) {
-        // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
-        // data is the entire images table
-        var hbsObject = {
-          images: data,
-        };
-        // since feed is true page renders feed.
-        res.render("index", hbsObject);
+        res.render("index", data);
       });
   });
 
@@ -64,10 +66,10 @@ module.exports = function (app) {
   // grab data from image data ordered by most favorited
   app.get("/feed/orderbymostfavorited/", function (req, res) {
     db.Image.findAll({
-      include: [User],
-      // joins Image and User table
-      // SELECT COUNT(Image.id) as Count
-      attributes: ['User.*', 'Image.*', [sequelize.fn('COUNT', sequelize.col('Image.id')), 'Count']],
+      include: [Likes],
+      // joins Image and Likes table
+      // SELECT COUNT(Image.id) as Count and Image.*
+      attributes: ['Image.*', [sequelize.fn('COUNT', sequelize.col('Image.id')), 'Count']],
       order: ['Count', 'DESC']
     })
       .then(function (data) {

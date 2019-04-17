@@ -31,7 +31,6 @@
     <meta name="google-signin-client_id"
         content="484870132317-gq2fckv518bsnd8ckojmdfua82fas0ba.apps.googleusercontent.com">
 
- 
     <title>Instapotty</title>
 
 </head>
@@ -61,7 +60,7 @@
                 {{!-- When logged in this should appear with links to all user posts, etc. --}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="account" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                        aria-haspopup="true" aria-expanded="false" data-id="">
                         {{!-- Username --}}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -90,6 +89,9 @@
 
     </div>
 
+    {{!-- test add-favs Button --}}
+    <button class=".add-favs">Add To Fav</button>
+
     {{!-- GOOGLE MAP AND INFO-WINDOW PIN THAT WILL GO INSIDE MODAL  --}}
     <!-- Map div -->
     <div id="map"></div>
@@ -115,9 +117,7 @@
 
 
     {{!-- Google MAPS Javascript API --}}
-   <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_PUNv54yTvxfJAtR3M9J1WrfD2xHsYs8&libraries=places&callback=initMap"
-        async defer></script>
+    {{!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_PUNv54yTvxfJAtR3M9J1WrfD2xHsYs8&libraries=places&callback=initMap" async defer></script> --}}
 
 </body>
 

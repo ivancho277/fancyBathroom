@@ -5,7 +5,7 @@ function onSignIn(googleUser) {
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
     var username = parseEmail(profile.getEmail());
-
+    
     // Changing href for My Posts page and My Favorites page
     $("#my-favs").attr("href", "/" + username + "/favorited/true");
     $("#my-posts").attr("href", "/" + username + "/posts/true");
