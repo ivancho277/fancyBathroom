@@ -1,3 +1,114 @@
 /* form.signup, form.login {
   margin-top: 50px;
 } */
+
+body {
+  background-image: url(../images/background2.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#upload_widget {
+  background-color: #e24e42;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 20px;
+  margin: 5px;
+}
+
+.flex-container {
+  background-color: rgba(0, 143, 149, 0.8);
+  border-radius: 20px;
+  padding: 20px;
+
+}
+
+#thumbnail {
+  display: none;
+  margin: 10px;
+  border: 2px solid #eb6e80;
+  border-radius: 20px;
+  width: 200px;
+  background-color: rgba(255, 92, 116, 0.3);
+}
+
+#thumbnail-image {
+  text-align: center;
+}
+
+label {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 30px;
+  color: #e6ac00;
+  }
+
+  input, select {
+    border-radius: 10px;
+    font-family: 'Yanone Kaffeesatz', sans-serif; 
+     
+  }
+
+  option {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    padding: 10px;
+  }
+
+  select {
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+    
+  }
+
+  nav {
+    background-color: rgba(233, 176, 0, 0.6);
+    }
+
+    .navbar-brand {
+      font-family: 'Gloria Hallelujah', cursive;
+      font-size: 40px;
+      color: #4d0032;
+    }
+
+    .form-control {
+      font-family: 'Gloria Hallelujah', cursive;
+      font-size: 20px;      
+    }
+
+    .justify-content-between{
+      font-family: 'Yanone Kaffeesatz', sans-serif;
+      font-size: 25px;
+    }
+
+    .nav-link{
+      color: #4d0032;
+    }
+
+    .btn-outline {
+      color: #4d0032;
+      border-color: #4d0032;
+      font-size: 25px;
+    }
+
+    .abcRioButton.abcRioButtonLightBlue {
+      color: white;
+      border-radius: 20px;
+      background-color: #4d0032;         
+    }
+
+    h1 {
+      color: #4d0032;
+      font-family: 'Gloria Hallelujah', cursive;
+      background-color: rgba(0, 143, 149, 0.8);
+      border-radius: 20px;
+      margin: 10px auto;
+      padding: 10px;
+    }
+
+    #infowindow-content {
+      display: none;
+    }
+
+
+    
+      
