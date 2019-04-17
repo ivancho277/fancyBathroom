@@ -4,7 +4,7 @@
     {{!-- Populate the page with all posts --}}
     {{#if feed}}
 
-    <h1>In Feed</h1>
+    <h1>Feed</h1>
     <div class="d-flex justify-content-around flex-wrap" id="feed-container">
         {{!-- Populate page with all images in database --}}
         {{#each images}}
@@ -44,16 +44,17 @@
                     <div id="thumbnail">
 
                     </div>
+                    <hr>
+                    <label>Location:</label>
 
-                    <label>Location</label>
                     <input type="text" name="location" id="location"> <br>
 
                     <label>Public or Private Location?</label>
                     <br>
-                    <input type="radio" name="public" value="public"> Public<br>
+                    <input id="public" type="radio" name="public" value="public"> Public<br>
                     {{!-- <input type="radio" name="public" value="private"> Private<br> --}}
 
-                    <label>Category</label>
+                    <label>Category:</label>
                     <select name="form-control" id="category" required>
                         <option value=" Default" selected disabled>Potty Tags</option>
                         <option value="humor">Humor</option>
@@ -63,7 +64,7 @@
                     </select>
                     <br>
 
-                    <label>Description</label>
+                    <label>Description:</label>
                     <input type="text" name="description" id="description"><br>
 
                     <input type="submit" value="Submit" id="submit">

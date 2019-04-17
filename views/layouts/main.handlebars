@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="stylesheets/style.css">
     <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Shadows+Into+Light" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
     {{!-- Cloudinary JS --}}
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript">
     </script>
@@ -32,12 +33,12 @@
 
 <body>
     {{!-- NAVBAR START --}}
-    <nav class="justify-content-between navbar navbar-expand-lg navbar-dark bg-dark ">
+    <nav class="justify-content-between navbar navbar-expand-lg">
         <a class="navbar-brand" href="#">Instapotty</a>
         <div>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
 
@@ -48,6 +49,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
+
                     {{!-- HOMEPAGE/FEED --}}
                     <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
                 </li>
@@ -79,7 +81,7 @@
     {{{body}}}
 
     {{!-- GOOGLE MAP AND INFO-WINDOW PIN THAT WILL GO INSIDE MODAL  --}}
-     <!-- Map div -->
+    <!-- Map div -->
     <div id="map"></div>
     <!-- Place info content -->
     <div id="infowindow-content">

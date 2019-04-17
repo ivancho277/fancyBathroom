@@ -37,7 +37,32 @@ let imageInfo = {};
 let imageObj = {};
 
 var widget = cloudinary.createUploadWidget({
-    cloudName: "instapotty", uploadPreset: "wveqgdsr"
+    cloudName: "instapotty", uploadPreset: "wveqgdsr",
+    thumbnailTransformation: { width: 200, height: 200, crop: 'fit' },
+    styles: {
+        palette: {
+            window: "#17A7AD",
+            windowBorder: "#E9B000",
+            tabIcon: "#AB3A4B",
+            menuIcons: "#6195D8",
+            textDark: "#2F0342",
+            textLight: "#FFFFFF",
+            link: "#0C6D71",
+            action: "#FF620C",
+            inactiveTabIcon: "#0E2F5A",
+            error: "#E24E42",
+            inProgress: "#EB6E80",
+            complete: "#0993A9",
+            sourceBg: "#E4EBF1"
+        },
+        fonts: {
+            default: null,
+            "'Poppins', sans-serif": {
+                url: "https://fonts.googleapis.com/css?family=Poppins",
+                active: true
+            }
+        }
+    }
 },
     function (error, result) {
         //Get image info
@@ -55,9 +80,14 @@ var widget = cloudinary.createUploadWidget({
             $("#upload_widget").text("Change Image");
 
             // append thumbnail to $("#thumbnail")
+            $("#thumbnail").append(`<img  id="thumbnail-image" src="${imageInfo.thumbnailUrl}"/>`)
+            $("#thumbnail").show();
         }
     });
 
 document.getElementById("upload_widget").addEventListener("click", function () {
     widget.open();
 }, false);
+
+
+
