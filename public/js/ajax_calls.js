@@ -98,8 +98,12 @@ var widget = cloudinary.createUploadWidget({
 // ==========================
 // Creating new posts for logged in users (cloudinary API update) and adding the posts to database
 // postInfo is the Picture class Object contructed from user's input
+<<<<<<< HEAD
 $(document).on("click","#uploadSubmit", function(event) {
     // converts falsy/truthy values to be false or true
+=======
+$(document).on("click", "#uploadSubmit", function (event) {
+>>>>>>> 3b8bfcc340e3be5a6b31c1471e949420a27f56fd
     var public = !!$('#public:checked').length;
 
     var postInfo = new Picture(
@@ -116,7 +120,7 @@ $(document).on("click","#uploadSubmit", function(event) {
         if(err) throw err;
         console.log(result);
     });
-})  
+})
 
 // creating post instances
 // console.log(picture1);
@@ -169,21 +173,21 @@ $(".add-favs").on("click", function() {
 // Read/Display images
 // ===================
 // display all images in feed default order by most recent
-$.get("/", function(err, result) {
+$.get("/", function (err, result) {
     console.log(result);
 });
 
 // display all images in feed ordered by most favorited
-$("#sort-by-fav").on("click", function(event) {
+$("#sort-by-fav").on("click", function (event) {
     event.preventDefault();
-    $.get("/feed/orderbymostfavorited", function(err, result) {
+    $.get("/feed/orderbymostfavorited", function (err, result) {
         console.log(result);
     });
 });
 
 
 // display images with certain tags or by certain users by certain users (specified in search)
-$("#searchBtn").on("click", function(event) {
+$("#searchBtn").on("click", function (event) {
     event.preventDefault();
     $.get("/search/" + $("#searchTerm").val(), function (err, result) {
         console.log("clicked Search Button", $("#searchTerm").val())
@@ -248,21 +252,21 @@ function getPosts() {
 
 // Connects to google maps API
 // Search location field - autocomplete
-function initMap() {
-    var input = document.getElementById("userInput");
+// function initMap() {
+//     var input = document.getElementById("userInput");
 
-    var autocomplete = new google.maps.places.Autocomplete(input);
-    console.log("autocomplete: ", autocomplete);
+//     var autocomplete = new google.maps.places.Autocomplete(input);
+//     console.log("autocomplete: ", autocomplete);
 
-    // Set the data fields to return when the user selects a place.
-    autocomplete.setFields(
-        ["address_components", "geometry", "icon", "name"]);
-}
+//     // Set the data fields to return when the user selects a place.
+//     autocomplete.setFields(
+//         ["address_components", "geometry", "icon", "name"]);
+// }
 
-// Event listener - grabs name of location and address from user input
-$("#submit").click(function () {
-    var location_name = {
-        name: $("input").val().trim(),
-    }
-    console.log("location name: ", location_name);
-});
+// // Event listener - grabs name of location and address from user input
+// $("#submit").click(function () {
+//     var location_name = {
+//         name: $("input").val().trim(),
+//     }
+//     console.log("location name: ", location_name);
+// });

@@ -1,55 +1,26 @@
 {{!-- Populate the page with all posts --}}
-<div class="d-flex justify-content-between flex-wrap" id="feed-container">
-    <button id="sort-by-fav">Order By Most Favorited</button>
-    {{!-- Populate page with all images in database --}}
-    {{#each images}}
 
-    {{> feed/feed-block }}
+<div class="container-fluid">
+    <div class="fav-icon float-left" title="Order by Favorites">
 
-    {{/each}}
-</div>
+        <img id="sort-by-fav" src="/images/favIcon.png" style="width:90px;">
 
-{{!-- Submit form for logged in users to upload new posts--}}
-{{#if loggedIn}}
-<div class="row">
-    <div class="col">
-        <div class="jumbotron">
-
-            {{!-- Post method to images db/api --}}
-            <form>
-
-                <button id="upload_widget" type="button" class="cloudinary-button">Upload Image</button>
-
-                <div id="thumbnail">
-
-                </div>
-            
-                <hr>
-
-                <label>Location:</label>
-                <input type="text" name="location" id="userInput"> <br>
-                <button type="button" id="autoComplete">Search Location</button>
-
-                <label>Public Location?</label>
-                <br>
-                <input id="public" type="radio" name="public" value="public"> Public<br>
-                {{!-- <input type="radio" name="public" value="private"> Private<br> --}}
-
-                <label>Category:</label>
-                <select name="form-control" id="category" required>
-                    <option value=" Default" selected disabled>Potty Tags</option>
-                    <option value="humor">Humor</option>
-                    <option value="luxurious">Luxurious</option>
-                    <option value="artistic">Artistic</option>
-                    <option value="wisdom">Wisdom</option>
-                </select>
-                <br>
-
-                <label>Description:</label>
-                <input type="text" name="description" id="description"><br>
-            </form>
-            <button id="uploadSubmit">Upload Post</button>
-        </div>
     </div>
 </div>
-{{/if}}
+
+{{!-- Populate page with all images in database --}} {{!-- if myPosts === true  --}}
+<div class="container" id="feed-container">
+    <div class="card-columns ">
+        {{#each images}}
+
+        {{> feed/feed-block url=this.url}}
+
+        {{/each}}
+    </div>
+</div>
+
+
+
+
+{{!-- Submit form for logged in users to upload new posts--}}
+{{!-- Hide this form unless they are logged in --}}

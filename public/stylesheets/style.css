@@ -9,17 +9,22 @@ body {
   background-attachment: fixed;
 }
 
-#upload_widget {
+#upload_widget, #uploadSubmit {
   background-color: #e24e42;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 20px;
   margin: 5px;
+  color: white;
 }
+
 
 .flex-container {
   background-color: rgba(0, 143, 149, 0.8);
   border-radius: 20px;
   padding: 20px;
+  width: 50%;
+  margin: 0 auto !important;
+  position: relative;
 
 }
 
@@ -37,77 +42,171 @@ body {
 }
 
 label {
-  font-family: 'Yanone Kaffeesatz', sans-serif;
-  font-size: 30px;
+  font-family: 'Neucha', cursive;
+  font-size: 20px;
   color: #e6ac00;
   }
 
-  input, select {
-    border-radius: 10px;
-    font-family: 'Yanone Kaffeesatz', sans-serif; 
+input, select {
+  border-radius: 10px;
+  font-family: 'Neucha', cursive;
      
   }
 
-  option {
-    font-family: 'Yanone Kaffeesatz', sans-serif;
-    padding: 10px;
+option {
+  font-family: 'Neucha', cursive;
+  padding: 10px;
   }
 
-  select {
-    width: 100px;
-    height: 40px;
-    font-size: 20px;
+select {
+  width: 100px;
+  height: 40px;
+  font-size: 15px;
     
   }
-
-  nav {
-    background-color: rgba(233, 176, 0, 0.6);
+nav {
+  background-color: rgba(233, 176, 0, 0.6);
     }
 
-    .navbar-brand {
-      font-family: 'Gloria Hallelujah', cursive;
-      font-size: 40px;
-      color: #4d0032;
+.navbar-brand {
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 40px;
+  color: #4d0032;
     }
 
-    .form-control {
-      font-family: 'Gloria Hallelujah', cursive;
-      font-size: 20px;      
+.form-control {
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 20px;      
     }
 
-    .justify-content-between{
-      font-family: 'Yanone Kaffeesatz', sans-serif;
-      font-size: 25px;
+.justify-content-between{
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 25px;
     }
 
-    .nav-link{
-      color: #4d0032;
+.nav-link{
+  color: #4d0032;
     }
 
-    .btn-outline {
-      color: #4d0032;
-      border-color: #4d0032;
-      font-size: 25px;
+.btn-outline {
+  color: #4d0032;
+  border-color: #4d0032;
+  font-size: 25px;
     }
 
-    .abcRioButton.abcRioButtonLightBlue {
-      color: white;
-      border-radius: 20px;
-      background-color: #4d0032;         
+.abcRioButton.abcRioButtonLightBlue {
+  color: white;
+  border-radius: 20px;
+  background-color: #4d0032;         
     }
 
-    h1 {
-      color: #4d0032;
-      font-family: 'Gloria Hallelujah', cursive;
-      background-color: rgba(0, 143, 149, 0.8);
-      border-radius: 20px;
-      margin: 10px auto;
-      padding: 10px;
+h1 {
+  color: #4d0032;
+  font-family: 'Gloria Hallelujah', cursive;
+  background-color: rgba(0, 143, 149, 0.8);
+  border-radius: 20px;
+  margin: 10px auto;
+  padding: 10px;
     }
 
-    #infowindow-content {
-      display: none;
+#infowindow-content {
+  display: none;
     }
+
+.description-box {
+  border: 1px solid black;
+  background-color: white;
+  padding: 10px;
+  margin-top: 10px;
+      
+    }
+
+.potties {
+  border-radius: 20px;
+  background-color:  rgba(0, 143, 149, 0.8);
+  padding: 8px;
+    }
+
+.all-potties {
+  background-color: transparent;
+    }
+
+#logged-in-potties {
+  background-color: transparent;
+
+    }
+
+.card-img-top {
+  border-radius: 10px;      
+    }
+
+.card-body {
+  padding: 10px;
+    }
+
+#location-link, #tags-link {
+  font-family: 'Neucha', cursive;
+  color: white;
+    }
+
+span {
+  font-family: 'Neucha', cursive;
+    }    
+    
+
+.location{
+  text-decoration: underline;
+  cursor: pointer; 
+    }
+
+#feed-container {
+  margin: 20px;
+    }
+
+#autoComplete {
+  background-color: #e24e42;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 10px;
+  margin: 5px;  
+  color: white;
+    }
+
+.fav-icon {
+  margin: 20px;
+  border: 3px solid pink;
+  border-radius: 20px;
+  background-color: rgba(0, 143, 149, 0.8);
+  position: fixed;
+  top: 20;
+  left: 0;
+  cursor: pointer;
+    }
+    
+#upload-form {
+  display: none;
+    }
+
+
+.add-favs {
+  position: absolute;  
+  z-index: 3;
+  border: 1px solid pink;
+  border-radius: 25px;
+  background-color: rgba(0, 143, 149, 0.4);
+   
+}        
+
+.add-favs:hover {
+  opacity: 0.5;
+  filter: alpha(opacity=50); 
+  cursor: pointer;
+}
+
+/* margin: 5px 0;
+  right: 100px;
+  bottom: 40px; */
+
+
 
 
     

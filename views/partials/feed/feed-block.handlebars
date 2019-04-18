@@ -1,26 +1,10 @@
 {{!-- Populates all posts from all users (Ordered by most recent by default)--}}
 
-{{#if myPost}}
 
+<div class="card potties" style=" width: 18rem;">
 
-{{!-- Create divs for each image --}}
-<div class="card m-2" style="width: 18rem;">
-  <img src="#" class="card-img-top" alt="#">
+  <img src="{{url}}" class="card-img-top" alt="#">
+
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <form>
-      <label for="locationInput">Search Location</label>
-      <input type="text" id="userInput">
-    </form>
-    <p class="card-text">This is where images will be!</p>
-    <button class="btn btn-primary location">Go somewhere</button>
   </div>
 </div>
-  {{else}}
-
-{{/if}}
-
-  {{!-- image --}}
-  {{#if logged}}
-    
-{{/if}}

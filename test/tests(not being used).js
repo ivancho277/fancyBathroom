@@ -41,7 +41,22 @@ let image5 = new Image("Cloud-555-id", "www.funPIC.yolo", "tt05yy", "luxury", "t
 
 
 var hbsObject = {
-    images: [],
+    images: [{
+        id: "12345",
+        url: "https://res.cloudinary.com/instapotty/image/upload/v1555094268/samples/sheep.jpg"
+    },
+    {
+        id: "54667",
+        url: "https://res.cloudinary.com/instapotty/video/upload/v1555094286/samples/elephants.mp4"
+    },
+    {
+        id: "99816",
+        url: "https://res.cloudinary.com/instapotty/video/upload/v1555094283/samples/sea-turtle.mp4"
+    },
+    {
+        id: "441",
+        url: "https://res.cloudinary.com/instapotty/image/upload/v1555094277/samples/animals/kitten-playing.gif"
+    }],
     feed: true,
     post: false,
     favorites: false,
