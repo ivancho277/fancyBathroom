@@ -15,7 +15,7 @@ function onSignIn(googleUser) {
     $("#account").text(username);
 
     var userObj = new User(username);
-    
+    addUser();
 
     // Change the homepage to /true to show components only logged in users can see
     $.get("/true", function(err, result) {

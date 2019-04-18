@@ -3,10 +3,9 @@
 // below section is copied from interactions.js and the code in interactions is commented out
 // =================================
 class Picture {
-    constructor(id_cloudinary, url, userId, tag, locationName, description, isPublic) {
+    constructor(id_cloudinary, url, tag, locationName, description, isPublic) {
         this.id_cloudinary = id_cloudinary;
         this.url = url;
-        this.user_id = userId;
         this.tag = tag;
         this.location_name = locationName;
         this.description = description;
@@ -105,7 +104,6 @@ $(document).on("click", "#uploadSubmit", function (event) {
     var postInfo = new Picture(
         imageInfo.cloudinary,
         imageInfo.url,
-        "1",
         $("#category").val(),
         $("#userInput").val().trim(),
         $("#description").val().trim(),
@@ -120,26 +118,26 @@ $(document).on("click", "#uploadSubmit", function (event) {
 
 // creating post instances
 // console.log(picture1);
-$.post("/api/images", picture1, function (err, result) {
-    console.log(result);
-});
-$.post("/api/images", picture2, function (err, result) {
-    console.log(result);
-});
-$.post("/api/images", picture3, function (err, result) {
-    console.log(result);
-});
-$.post("/api/images", picture4, function (err, result) {
-    console.log(result);
-});
-$.post("/api/images", picture5, function (err, result) {
-    console.log(result);
-});
+// $.post("/api/images", picture1, function (err, result) {
+//     console.log(result);
+// });
+// $.post("/api/images", picture2, function (err, result) {
+//     console.log(result);
+// });
+// $.post("/api/images", picture3, function (err, result) {
+//     console.log(result);
+// });
+// $.post("/api/images", picture4, function (err, result) {
+//     console.log(result);
+// });
+// $.post("/api/images", picture5, function (err, result) {
+//     console.log(result);
+// });
 
 // creating user instances
-$.post("/api/users", user1, (err, result) => {
-    console.log(result);
-}); 
+// $.post("/api/users", user1, (err, result) => {
+//     console.log(result);
+// }); 
 
 // button on image that allows user to add an image to their favorites collection
 $(".add-favs").on("click", function() {
