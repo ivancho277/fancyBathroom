@@ -120,14 +120,14 @@ $(document).on("click", "#uploadSubmit", function (event) {
 // ajax call to store user info.
 // $.post("/api/users", userObj, (err, result) => {
 //     console.log(result);
-// }); 
+// });
 
 // Read/Display images
 // ===================
 // display all images in feed default order by most recent
-// $.get("/", function (err, result) {
-//     console.log(result);
-// });
+$.get("/", function (err, result) {
+    console.log(result);
+});
 
 // display all images in feed ordered by most favorited
 $("#sort-by-fav").on("click", function (event) {

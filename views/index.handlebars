@@ -1,10 +1,13 @@
 {{!-- Populate the page with all posts --}}
 
-<div class="fav-icon float-left" title="Order by Favorites">
+<div class="container-fluid">
+    <div class="fav-icon float-left" title="Order by Favorites">
 
-    <img id="sort-by-fav" src="/images/favIcon.png" style="width:90px;">
+        <img id="sort-by-fav" src="/images/favIcon.png" style="width:90px;">
 
+    </div>
 </div>
+
 {{!-- Populate page with all images in database --}} {{!-- if myPosts === true  --}}
 <div class="container" id="feed-container">
     <div class="card-columns ">
@@ -15,6 +18,7 @@
         {{/each}}
     </div>
 </div>
+
 
 
 
