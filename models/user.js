@@ -33,10 +33,13 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     }
+  }, {
+      timestamps: false
   });
 
   User.associate = function(models) {
-    User.belongsToMany(models.Image, { through: "Likes", foreignKey: "user_id"});
+    User.belongsToMany(models.Image, {as:'likedImages', through: "Likes",foreignKey: "user_id"});
+    User.hasMany(models.Image)
   };
 
 

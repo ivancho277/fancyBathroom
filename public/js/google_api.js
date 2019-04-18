@@ -1,8 +1,3 @@
-// let location_name;
-// let seattle = { lat: 47.608013, lng: -122.335167 };
-// let lat;
-// let lng;
-
 // //  const User = require("./user_class");
 // //  const Image = require("./image_class");
 // class Picture {
@@ -63,10 +58,14 @@ function initMap() {
         ["address_components", "geometry", "icon", "name"]);
 
 
-    // Event listener - grabs name of location and address from user input
-    $("#autoComplete").click(function () {
-        location_name = $("input").val().trim(),
-            console.log("location name: ", location_name);
+    // Event listener - grabs name of location and address from user input when user presses enter
+    $("#userInput").keydown(function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            location_name = $("input").val().trim();
+            console.log("location name: ", location_name)
+        };
+        
     });
 
     $(".location").click(function () {
