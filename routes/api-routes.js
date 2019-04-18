@@ -9,33 +9,41 @@ module.exports = function (app) {
   // ==============================
   // POST route for logging a new user into Users table
   // server side check
+  app.get('/testers',(req,res)=>{
+    db.User.findOne({where:{id:1},include:[db.Image]}).then(joe=>{
+      joe.getLikedImages().then(assocLikes=>{
+        res.json({joe, assocLikes});
+      })
+    })
+  })
   app.post("/api/users", function (req, res) {
     // check if they're already user, if exists get the user, if not add new row
-  db.User.findOrCreate({
-    where: 
-      { userName: req.body.userName },
-  }).then(function (err, result) {
-    console.log("create row", result);
-    res.json(result);
+    db.User.findOrCreate({
+      where: 
+        { userName: req.body.userName },
+    }).then(function (result) {
+      console.log("create row", result);
+      res.json(result);
+    });
   });
-});
 
-app.post("/api/likes", function (req, res) {
-  // req.body should be in form { user_id: something, image_id: something }
-  db.Likes.create(req.body)
-  .then(function(data) {
-    res.render(data);
-  })
-});
-
-// insert into images when they submit a new post
-app.post("/api/images",function (req,res){
-  console.log(req.body);
-  db.Image.create(req.body).then(function (err, result) {
-    console.log("create new image row", result);
-    res.json(result);
+  app.post("/api/likes", function (req, res) {
+    // req.body should be in form { user_id: something, image_id: something }
+    db.User.findOne({where:{id:req.body.user_id}}).then(user=>{
+      user.addLikedImage(req.body.image_id);
+      res.json(user);
+    })
   });
-});
+
+  // insert into images when they submit a new post
+  app.post("/api/images",function (req,res){
+    console.log("new image post", req.body);
+    db.Image.create(req.body).then(function (result) {
+      // result.addUser(1);
+      console.log("create new image row", result);
+      res.json(result);
+    });
+  });
 
   // READING DATABASE AND RENDERING PAGE
   // ===================================
@@ -48,7 +56,7 @@ app.post("/api/images",function (req,res){
   });
 
   // when logged in make the add new post form available for user
-  app.get("/:login", function (req, res) {
+  app.get("/login", function (req, res) {
     db.Image.findAll()
       .then(function (data) {
         // 
@@ -57,36 +65,41 @@ app.post("/api/images",function (req,res){
           images: data,
           login: req.params.login
         };
-        $("#favBtn").show();
+        // $("#favBtn").show();
         // since feed is true page renders feed.
         res.render("index", hbsObject);
       });
   });
 
   // grab data from image data ordered by most favorited
-  app.get("/feed/orderbymostfavorited/", function (req, res) {
-    db.Image.findAll({
-      include: [Likes],
-      // joins Image and Likes table
-      // SELECT COUNT(Image.id) as Count and Image.*
-      attributes: ['Image.*', [sequelize.fn('COUNT', sequelize.col('Image.id')), 'Count']],
-      order: ['Count', 'DESC']
+  app.get("/feed/orderbymostfavorited", function (req, res) {
+    db.User.findAll({where:{id:1},
+      include: [{
+        model: db.Image
+      }],
+      // // joins Image and Likes table
+      // // SELECT COUNT(Image.id) as Count and Image.*
+      // attributes: ['Image.*', [sequelize.fn('COUNT', sequelize.col('Image.id')), 'Count']],
+      // order: ['Count', 'DESC']
     })
       .then(function (data) {
         // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
         // data is the entire images table
-        var hbsObject = {
-          images: data,
-          loggedIn: true
-        };
-        $("#favBtn").show();
+        // var hbsObject = {
+        //   images: data,
+        //   loggedIn: true
+        // };
+        // $("#favBtn").show();
+        // data.getImages();
+        res.json(data)
         // since feed is true page renders feed.
-        res.render("index", hbsObject);
+        // res.render("index", hbsObject);
       });
   });
 
   // display all user's posted images
-  app.get("/:username/posts/:login", function (req, res) {
+  app.get("/:username/posts", function (req, res) {
+    console.log("getting my posts");
     db.User.findOne({
       where: {
         userName: req.params.username
@@ -94,12 +107,13 @@ app.post("/api/images",function (req,res){
     })
     // userData = {user_id, userName}
     .then(function (userData) {
-      console.log(userData);
-      db.Image.findAll({
+      // console.log("sailorMoon user", userData);
+      db.User.findAll({
         where: {
-          user_id: userData[0].id
+          user_id: userData.id
         }
       }).then(function(imgData) {
+        // console.log("all images posted by sailorMoon", imgData);
         var hbsObject = {
           images: imgData,
           loggedIn: req.params.login,
@@ -112,7 +126,8 @@ app.post("/api/images",function (req,res){
   });
 
   // display all user's favorited images
-  app.get("/:username/favorited/:login", function (req, res) {
+  app.get("/:username/favorited", function (req, res) {
+    console.log("Server Post");
     db.User.findOne({
       // using association of two tables to grab all images where userId = user_id, includes all images in the likes association table
       where: {
@@ -120,11 +135,12 @@ app.post("/api/images",function (req,res){
       }
     })
     .then(function (data) {
-      console.log(data);
-      db.Likes.findAll({
-        include: [Image],
+      db.User.findAll({
+        include: [{
+          model: db.Image
+        }],
         where: {
-          user_id: data[0].id
+          user_id: data.id
         }
       })
       // data below will be filtered join table between Likes and Image by user_id
@@ -139,11 +155,12 @@ app.post("/api/images",function (req,res){
     });
   });
 
-  // NEED HELP
   // search & display by tag/username
   app.get("/search/:term", function(req,res){
     db.Image.findAll({ 
-      include: [User],
+      include: [{
+        model: db.User
+      }],
       where: { 
         $or: [{
           tag: req.params.term
@@ -151,7 +168,7 @@ app.post("/api/images",function (req,res){
           username: req.params.term
         }]
       }
-    }).then(function (err, result) {
+    }).then(function (result) {
       // render page with only posts with specifed tags or by specified user
       var hbsObject = {
         images: result,
@@ -162,10 +179,12 @@ app.post("/api/images",function (req,res){
   });
 
   app.get("/api/users", function (req, res) {
-    db.User.findaAll().then(function (err, result) {
+    db.User.findaAll().then(function (result) {
       res.json(result);
     });
   });
+  
+
   
   // UPDATE DATA FROM DATABASE
   // =========================
