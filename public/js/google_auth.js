@@ -17,11 +17,6 @@ function onSignIn(googleUser) {
     var userObj = new User(username);
     addUser();
 
-    // Change the homepage to /true to show components only logged in users can see
-    $.get("/true", function(err, result) {
-        console.log(result);
-    });
-
     // Create new row for new users when they sign in
     // userObj is the User class Object constructed when logged in via Google
     // ajax call to store user info.
