@@ -15,10 +15,10 @@ module.exports = function (sequelize, DataTypes) {
           type:DataTypes.STRING,
           allowNull: false
       },
-      // user_id: {
-      //     type: DataTypes.INTEGER,
-      //     allowNull: false
-      // },
+      user_id: {
+          type: DataTypes.INTEGER,
+          allowNull: false
+      },
       tag:{
           type: DataTypes.STRING,
           allowNull: false
@@ -37,14 +37,9 @@ module.exports = function (sequelize, DataTypes) {
           type: DataTypes.BOOLEAN,
           allowNull: false
       }
-    }, {
-      timestamps: false
     });
-
     Image.associate = function(models) {
-      Image.belongsToMany(models.User, {as:'likedUsers', through: "Likes", foreignKey: "image_id"});
-      Image.belongsTo(models.User)
-      // Image.hasMany(models.User);
+      Image.belongsToMany(models.User, { through: "Likes", foreignKey: "image_id" });
     };
     return Image;
   };
