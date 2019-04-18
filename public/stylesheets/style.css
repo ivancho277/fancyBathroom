@@ -9,17 +9,20 @@ body {
   background-attachment: fixed;
 }
 
-#upload_widget {
+#upload_widget, #uploadSubmit {
   background-color: #e24e42;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 20px;
   margin: 5px;
+  color: white;
 }
 
 .flex-container {
   background-color: rgba(0, 143, 149, 0.8);
   border-radius: 20px;
   padding: 20px;
+  width: 50%;
+  margin: 0 auto !important;
 
 }
 
@@ -123,6 +126,10 @@ label {
       padding: 8px;
     }
 
+    .all-potties {
+      background-color: transparent;
+    }
+
     #logged-in-potties {
       background-color: transparent;
 
@@ -149,8 +156,31 @@ label {
       text-decoration: underline;
     }
 
+    #feed-container {
+      margin: 20px;
+    }
+
+  #autoComplete {
+  background-color: #e24e42;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 10px;
+  margin: 5px;  
+  color: white;
+    }
+
+    .fav-icon {
+      margin: 20px;
+      border: 3px solid pink;
+      border-radius: 20px;
+      background-color: rgba(0, 143, 149, 0.8);
+      position: fixed;
+      top: 20;
+      left: 0;
+    }
     
-    
+    #upload-form {
+      display: none;
+    }
 
 
     

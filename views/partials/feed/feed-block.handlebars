@@ -1,29 +1,16 @@
 {{!-- Populates all posts from all users (Ordered by most recent by default)--}}
 
-{{#if myPost}}
 
-<div class="container">
-  <div class="card-columns ">
-    <div class="card potties" style=" width: 18rem;">
+<div class="card potties" style=" width: 18rem;">
 
-      <img src="../public/images/21577fac71c1839.jpg" class="card-img-top" alt="#">
-      <div class="card-body">
-        <a href="http://locolseattle.com/" target="_blank" class="location-link">Location Link</a>
-        <br>
+  <img src="{{url}}" class="card-img-top" alt="#">
+  <div class="card-body">
+    <a href="http://locolseattle.com/" target="_blank" class="location-link">Location Link</a>
+    <br>
 
-        <div class="description-box">
-          <span>This is where description goes</span>
-        </div>
-
-      </div>
+    <div class="description-box">
+      <span>This is where description goes</span>
     </div>
 
   </div>
 </div>
-
-{{!-- image --}}
-{{#if logged}}
-
-{{/if}}
-</div>
-{{!--  --}}
