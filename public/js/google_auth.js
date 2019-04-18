@@ -64,3 +64,4 @@ function parseEmail(email){
     var endOfString = email.indexOf('@');
     return email.substring(0, endOfString);
 }
+
