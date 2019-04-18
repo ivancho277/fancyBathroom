@@ -5,35 +5,46 @@ function onSignIn(googleUser) {
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
     var username = parseEmail(profile.getEmail());
-
+    
     // Changing href for My Posts page and My Favorites page
     $("#my-favs").attr("href", "/" + username + "/favorited/true");
     $("#my-posts").attr("href", "/" + username + "/posts/true");
     $("#home").attr("href", "/true");
+    $("#brand").attr("href", "/true");
     // Changing text in account dropdown for posts and favorites
     $("#account").text(username);
 
     var userObj = new User(username);
-    // Create new row for new users when they sign in
-    // userObj is the User class Object constructed when logged in via Google
+    
+
+    // Change the homepage to /true to show components only logged in users can see
     $.get("/true", function(err, result) {
         console.log(result);
     });
 
+    // Create new row for new users when they sign in
+    // userObj is the User class Object constructed when logged in via Google
     // ajax call to store user info.
+    function addUser() {
     $.post("/api/users", userObj, (err, result) => {
         console.log(result);
     }); 
+}
 
     // display all favorited images by logged-in user
-    $.get("/" + username + "/favorited/true", function (err, result) {
-        console.log("favorited images", result);
-    });
+    function viewFav() {
+        $.get("/" + username + "/favorited/true", function (err, result) {
+            console.log("favorited images", result);
+        });
+    }
+    
 
     // display all user's posted images
-    $.get("/" + username + "/posts/true", function (err, result) {
-        console.log("user posts", result);
-    });
+    function viewPost() {
+        $.get("/" + username + "/posts/true", function (err, result) {
+            console.log("user posts", result);
+        });
+    }
 }
 
 function signOut() {
@@ -44,6 +55,7 @@ function signOut() {
     $("#my-favs").attr("href", "/" + username + "/favorited/");
     $("#my-posts").attr("href", "/" + username + "/posts/");
     $("#home").attr("href", "/");
+    $("#brand").attr("href", "/");
 }
 
 
