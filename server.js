@@ -29,8 +29,4 @@ require("./routes/api-routes.js")(app);
   app.listen(PORT, function() {
     console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
   });
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> b94bbe77b74d558b0d75152ecbb72d59297f7dec
