@@ -9,6 +9,9 @@ module.exports = function (app) {
   // ==============================
   // POST route for logging a new user into Users table
   // server side check
+
+
+  // JOE's HELP CODE TEST
   app.get('/testers', (req, res) => {
     db.User.findOne({ where: { id: 1 }, include: [db.Image] }).then(joe => {
       joe.getLikedImages().then(assocLikes => {
@@ -16,6 +19,8 @@ module.exports = function (app) {
       })
     })
   })
+
+  
   app.post("/api/users", function (req, res) {
     // check if they're already user, if exists get the user, if not add new row
     db.User.findOrCreate({
@@ -27,6 +32,8 @@ module.exports = function (app) {
     });
   });
 
+
+  // JOE's HELP CODE
   app.post("/api/likes", function (req, res) {
     // req.body should be in form { user_id: something, image_id: something }
     db.User.findOne({ where: { id: req.body.user_id } }).then(user => {
@@ -116,6 +123,8 @@ module.exports = function (app) {
       });
   });
 
+
+  // JOE's HELP CODE
   // grab data from image data ordered by most favorited
   app.get("/feed/orderbymostfavorited", function (req, res) {
     db.User.findAll({

@@ -98,12 +98,8 @@ var widget = cloudinary.createUploadWidget({
 // ==========================
 // Creating new posts for logged in users (cloudinary API update) and adding the posts to database
 // postInfo is the Picture class Object contructed from user's input
-<<<<<<< HEAD
-$(document).on("click","#uploadSubmit", function(event) {
-    // converts falsy/truthy values to be false or true
-=======
 $(document).on("click", "#uploadSubmit", function (event) {
->>>>>>> 3b8bfcc340e3be5a6b31c1471e949420a27f56fd
+    // This turns falsy values to Boolean False, and vice versa
     var public = !!$('#public:checked').length;
 
     var postInfo = new Picture(
