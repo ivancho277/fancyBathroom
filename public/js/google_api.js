@@ -1,8 +1,3 @@
-// let location_name;
-// let seattle = { lat: 47.608013, lng: -122.335167 };
-// let lat;
-// let lng;
-
 // //  const User = require("./user_class");
 // //  const Image = require("./image_class");
 // class Picture {
@@ -63,10 +58,13 @@ function initMap() {
         ["address_components", "geometry", "icon", "name"]);
 
 
-    // Event listener - grabs name of location and address from user input
-    $("#autoComplete").click(function () {
-        location_name = $("input").val().trim(),
-            console.log("location name: ", location_name);
+    // At "enter" key hit event listener - grabs name of location and address from user input
+    $("#userInput").keydown(function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            location_name = $("input").val().trim();
+            console.log("location name: ", location_name)
+        }; 
     });
 
     $(".location").click(function () {
@@ -129,12 +127,12 @@ function initMap() {
             map.setCenter(place.geometry.location);
             map.setZoom(17);
         }
-
+// Populates the info window - the little box with place information and link above the icon on the map
         infowindowContent.children['place-icon'].src = place.icon;
         infowindowContent.children['place-name'].textContent = place.name;
         infowindowContent.children['place-url'].innerHTML = `<a href=${placeLink}>Find me!</a>`;
-
         infowindow.open(map, marker);
+        
         return marker;
     };
 }  
