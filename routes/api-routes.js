@@ -11,23 +11,23 @@ module.exports = function (app) {
   // server side check
   app.post("/api/users", function (req, res) {
     // check if they're already user, if exists get the user, if not add new row
-   db.User.findOrCreate({
-     where: 
-       { userName: req.body.userName },
-   }).then(function (err, result) {
-     console.log("create row", result);
-     res.json(result);
-   });
- });
+    db.User.findOrCreate({
+      where:
+        { userName: req.body.userName },
+    }).then(function (err, result) {
+      console.log("create row", result);
+      res.json(result);
+    });
+  });
 
- // insert into images when they submit a new post
- app.post("/api/images",function (req,res){
-   console.log(req.body);
-   db.Image.create(req.body).then(function (err, result) {
-     console.log("create new image row", result);
-     res.json(result);
-   });
- });
+  // insert into images when they submit a new post
+  app.post("/api/images", function (req, res) {
+    console.log(req.body);
+    db.Image.create(req.body).then(function (err, result) {
+      console.log("create new image row", result);
+      res.json(result);
+    });
+  });
 
   // READING DATABASE AND RENDERING PAGE
   // ===================================
@@ -37,8 +37,46 @@ module.exports = function (app) {
       .then(function (data) {
         // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
         // data is the entire images table
+
+        // var hbsObject = {
+        //   images: data,
+        // };
+
         var hbsObject = {
-          images: data,
+          images: [{
+            id: "12345",
+            url: "https://res.cloudinary.com/instapotty/image/upload/v1555606210/tinHat.jpg"
+          },
+          {
+            id: "54667",
+            url: "https://res.cloudinary.com/instapotty/image/upload/v1555604048/hulaHula.jpg"
+          },
+          {
+            id: "99816",
+            url: "https://res.cloudinary.com/instapotty/image/upload/v1555604040/columbiaTower.png"
+          },
+          {
+            id: "441",
+            url: "https://res.cloudinary.com/instapotty/image/upload/v1555604029/bizarro2.jpg"
+          },
+          {
+            id: "998",
+            url: "https://res.cloudinary.com/instapotty/image/upload/v1555604003/2bitSaloon.jpg"
+          },
+          {
+            id: "234",
+            url: "https://res.cloudinary.com/instapotty/image/upload/v1555606215/seattleGlassBlowing.jpg"
+          },
+          {
+            id: "42",
+            url: "https://res.cloudinary.com/instapotty/image/upload/v1555606198/hollowEarthRadio.jpg"
+          },
+          {
+            id: "11113",
+            url: "https://res.cloudinary.com/instapotty/image/upload/v1555606143/lindas.jpg"
+          }],
+          post: false,
+          favorites: false
         };
         // since feed is true page renders feed.
         res.render("index", hbsObject);
@@ -90,23 +128,23 @@ module.exports = function (app) {
         userName: req.params.username
       }
     })
-    // userData = {user_id, userName}
-    .then(function (userData) {
-      console.log(userData);
-      db.Image.findAll({
-        where: {
-          user_id: userData[0].id
-        }
-      }).then(function(imgData) {
-        var hbsObject = {
-          images: imgData,
-          loggedIn: req.params.login,
-          myPosts: true
-        };
-        // since feed is true page renders feed.
-        res.render("index", hbsObject);
+      // userData = {user_id, userName}
+      .then(function (userData) {
+        console.log(userData);
+        db.Image.findAll({
+          where: {
+            user_id: userData[0].id
+          }
+        }).then(function (imgData) {
+          var hbsObject = {
+            images: imgData,
+            loggedIn: req.params.login,
+            myPosts: true
+          };
+          // since feed is true page renders feed.
+          res.render("index", hbsObject);
+        });
       });
-    });
   });
 
   // display all user's favorited images
@@ -117,32 +155,32 @@ module.exports = function (app) {
         userName: req.params.username,
       }
     })
-    .then(function (data) {
-      console.log(data);
-      db.Likes.findAll({
-        include: [Image],
-        where: {
-          user_id: data[0].id
-        }
-      })
-      // data below will be filtered join table between Likes and Image by user_id
-      .then(function(data){
-        var hbsObject = {
-          images: data,
-          loggedIn: req.params.login,
-        };
-        // since feed is true page renders feed.
-        res.render("index", hbsObject);
+      .then(function (data) {
+        console.log(data);
+        db.Likes.findAll({
+          include: [Image],
+          where: {
+            user_id: data[0].id
+          }
+        })
+          // data below will be filtered join table between Likes and Image by user_id
+          .then(function (data) {
+            var hbsObject = {
+              images: data,
+              loggedIn: req.params.login,
+            };
+            // since feed is true page renders feed.
+            res.render("index", hbsObject);
+          });
       });
-    });
   });
 
   // NEED HELP
   // search & display by tag/username
-  app.get("/search/:term", function(req,res){
-    db.Image.findAll({ 
+  app.get("/search/:term", function (req, res) {
+    db.Image.findAll({
       include: [User],
-      where: { 
+      where: {
         $or: [{
           tag: req.params.term
         }, {
@@ -164,7 +202,7 @@ module.exports = function (app) {
       res.json(result);
     });
   });
-  
+
   // UPDATE DATA FROM DATABASE
   // =========================
   // PUT route for updating post's tags and descriptions

@@ -98,7 +98,7 @@ document.getElementById("upload_widget").addEventListener("click", function () {
 // ==========================
 // Creating new posts for logged in users (cloudinary API update) and adding the posts to database
 // postInfo is the Picture class Object contructed from user's input
-$(document).on("click","#uploadSubmit", function(event) {
+$(document).on("click", "#uploadSubmit", function (event) {
     var public = !!$('#public:checked').length;
 
     var postInfo = new Picture(
@@ -112,34 +112,34 @@ $(document).on("click","#uploadSubmit", function(event) {
     )
     console.log(postInfo);
     $.post("/api/images", postInfo, function (err, result) {
-        if(err) throw err;
+        if (err) throw err;
         console.log(result);
     });
-})  
+})
 
 // ajax call to store user info.
-$.post("/api/users", userObj, (err, result) => {
-    console.log(result);
-}); 
+// $.post("/api/users", userObj, (err, result) => {
+//     console.log(result);
+// });
 
 // Read/Display images
 // ===================
 // display all images in feed default order by most recent
-$.get("/", function(err, result) {
+$.get("/", function (err, result) {
     console.log(result);
 });
 
 // display all images in feed ordered by most favorited
-$("#sort-by-fav").on("click", function(event) {
+$("#sort-by-fav").on("click", function (event) {
     event.preventDefault();
-    $.get("/feed/orderbymostfavorited", function(err, result) {
+    $.get("/feed/orderbymostfavorited", function (err, result) {
         console.log(result);
     });
 });
 
 
 // display images with certain tags or by certain users by certain users (specified in search)
-$("#searchBtn").on("click", function(event) {
+$("#searchBtn").on("click", function (event) {
     event.preventDefault();
     $.get("/search/" + $("#searchTerm").val(), function (err, result) {
         console.log("clicked Search Button", $("#searchTerm").val())
@@ -147,14 +147,14 @@ $("#searchBtn").on("click", function(event) {
 })
 
 // display all favorited images by logged-in user
-$.get("/" + username + "/favorited/true", function (err, result) {
-    console.log("favorited images", result);
-});
+// $.get("/" + username + "/favorited/true", function (err, result) {
+//     console.log("favorited images", result);
+// });
 
 // display all user's posted images
-$.get("/" + username + "/posts/true", function (err, result) {
-    console.log("user posts", result);
-});
+// $.get("/" + username + "/posts/true", function (err, result) {
+//     console.log("user posts", result);
+// });
 
 // Update values
 // ====================
@@ -198,21 +198,21 @@ $.get("/" + username + "/posts/true", function (err, result) {
 
 // Connects to google maps API
 // Search location field - autocomplete
-function initMap() {
-    var input = document.getElementById("userInput");
+// function initMap() {
+//     var input = document.getElementById("userInput");
 
-    var autocomplete = new google.maps.places.Autocomplete(input);
-    console.log("autocomplete: ", autocomplete);
+//     var autocomplete = new google.maps.places.Autocomplete(input);
+//     console.log("autocomplete: ", autocomplete);
 
-    // Set the data fields to return when the user selects a place.
-    autocomplete.setFields(
-        ["address_components", "geometry", "icon", "name"]);
-}
+//     // Set the data fields to return when the user selects a place.
+//     autocomplete.setFields(
+//         ["address_components", "geometry", "icon", "name"]);
+// }
 
-// Event listener - grabs name of location and address from user input
-$("#submit").click(function () {
-    var location_name = {
-        name: $("input").val().trim(),
-    }
-    console.log("location name: ", location_name);
-});
+// // Event listener - grabs name of location and address from user input
+// $("#submit").click(function () {
+//     var location_name = {
+//         name: $("input").val().trim(),
+//     }
+//     console.log("location name: ", location_name);
+// });
