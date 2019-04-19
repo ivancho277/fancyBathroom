@@ -34,7 +34,7 @@ body {
   border: 2px solid #eb6e80;
   border-radius: 20px;
   width: 200px;
-  background-color: rgba(255, 92, 116, 0.3);
+  
 }
 
 #thumbnail-image {
@@ -43,19 +43,23 @@ body {
 
 label {
   font-family: 'Neucha', cursive;
-  font-size: 20px;
+  font-size: 24px;
   color: #e6ac00;
   }
 
-input, select {
+#userInput, select {
   border-radius: 10px;
   font-family: 'Neucha', cursive;
-     
+  width: 200px;     
   }
 
-option {
-  font-family: 'Neucha', cursive;
-  padding: 10px;
+  #public {
+    transform: scale(1.5);
+  }
+
+  #category {
+    width: 150px;
+    height: 30px;
   }
 
 select {
@@ -74,6 +78,10 @@ nav {
   color: #4d0032;
     }
 
+.dropdown-toggle {
+display: none;
+}
+
 .form-control {
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 20px;      
@@ -88,6 +96,8 @@ nav {
   color: #4d0032;
     }
 
+
+
 .btn-outline {
   color: #4d0032;
   border-color: #4d0032;
@@ -97,8 +107,11 @@ nav {
 .abcRioButton.abcRioButtonLightBlue {
   color: white;
   border-radius: 20px;
-  background-color: #4d0032;         
+  background-color: #4d0032; 
+  margin: 10px;
+          
     }
+
 
 h1 {
   color: #4d0032;
@@ -154,7 +167,7 @@ span {
     }    
     
 
-.location{
+#location-link{
   text-decoration: underline;
   cursor: pointer; 
     }
@@ -186,13 +199,13 @@ span {
   display: none;
     }
 
-
 .add-favs {
   position: absolute;  
   z-index: 3;
   border: 1px solid pink;
   border-radius: 25px;
   background-color: rgba(0, 143, 149, 0.4);
+  bottom: 10px;
    
 }        
 
