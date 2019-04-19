@@ -23,6 +23,14 @@ module.exports = function (app) {
     });
   });
 
+  // query call to get username and user.id
+  app.get("/signed/:user", function (req, res) {
+    db.User.findOne({
+      where: {userName: req.params.user}
+    }).then(function (result) {
+      res.json(result);
+    });
+  });
 
   // Adding new Users
   app.post("/api/users", function (req, res) {
@@ -35,26 +43,18 @@ module.exports = function (app) {
     });
   });
 
-
-
-
   // insert into images when they submit a new post
-  app.post("/api/images", function (req, res) {
+  app.post("signed/:id/api/images", function (req, res) {
     db.Image.create(req.body).then(function (result) {
+      Image.addUser(req.params.id);
       res.json(result);
     });
   });
 
-  // READING DATABASE AND RENDERING PAGE
-  // ===================================
   // This will run on page load to generate the feed
   app.get("/", function (req, res) {
     db.Image.findAll().then(function (data) {
-      var hbsObject = {
-        images: data
-      }
-      res.render("index", hbsObject);
-
+        res.render("index", { images: data });
     });
   });
 
@@ -65,9 +65,10 @@ module.exports = function (app) {
     db.Image.findAll({
       include: { model: db.User },
     }).then(data => {
-      // data.getLikedUsers().then(mostFav => {
-      res.json(data);
-      // });
+      console.log(data);
+      data.getLikedUser().then(mostFav => {
+        res.json(mostFav);
+      });
     });
   });
 
@@ -77,16 +78,34 @@ module.exports = function (app) {
       where: { userName: req.params.name },
       include: [{ model: db.Image }]
     }).then(user => {
-      res.json(user.Images);
+      res.render("index", { images: user.Images, loggedIn: true });
+      // res.json(user);
     });
   });
 
-  // query call to get username and user.id
-  app.get("/signed/:user", function (req, res) {
+  // JOE's HELP CODE
+  // LIKING AN ADD IMAGE AND ADDING RELATIONSHIP TO LIKES TABLE
+  app.post("/api/likes", function (req, res) {
+    // req.body should be in form { user_id: something, image_id: something }
     db.User.findOne({
-      where: { userName: req.params.user }
+      where: {
+        id: req.body.user_id
+      }
+    }).then(user => {
+      user.addLikedImage(req.body.image_id);
+      res.json(user);
+    });
+  });
+
+  // search & display by tag/username
+  app.get("/search/:term", function (req, res) {
+    db.Image.findAll({
+      where: { tag: req.params.term}, 
+          // { userName: req.params.term }
     }).then(function (result) {
-      return res.json(result);
+      // render page with only posts with specifed tags or by specified user
+      res.render("index", {images: result});
+      // res.render("index", result);
     });
   });
 
@@ -117,34 +136,4 @@ module.exports = function (app) {
   //   });
   // });
 
-
-  // JOE's HELP CODE
-  // LIKING AN ADD IMAGE AND ADDING RELATIONSHIP TO LIKES TABLE
-  app.post("/api/likes", function (req, res) {
-    // req.body should be in form { user_id: something, image_id: something }
-    db.User.findOne({
-      where: {
-        id: req.body.user_id
-      }
-    }).then(user => {
-      user.addLikedImage(req.body.image_id);
-      res.json(user);
-    });
-  });
-
-  // search & display by tag/username
-  app.get("/search/:term", function (req, res) {
-    db.Image.findAll({
-      include: { model: db.User },
-      where: {
-        $or: [
-          { tag: req.params.term },
-          { userName: req.params.term }
-        ]
-      }
-    }).then(function (result) {
-      // render page with only posts with specifed tags or by specified user
-      res.render("index", result);
-    });
-  });
 } // end of export module bracket
