@@ -1,3 +1,9 @@
+class User {
+    constructor(userName) {
+        this.userName = userName;
+    }
+}
+
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -12,24 +18,17 @@ function onSignIn(googleUser) {
     $("#home").attr("href", "/true");
     $("#brand").attr("href", "/true");
     // Changing text in account dropdown for posts and favorites
-    $("#account").text(username);
 
     var userObj = new User(username);
-    
-
-    // Change the homepage to /true to show components only logged in users can see
-    $.get("/true", function(err, result) {
-        console.log(result);
-    });
 
     // Create new row for new users when they sign in
     // userObj is the User class Object constructed when logged in via Google
     // ajax call to store user info.
     function addUser() {
-    $.post("/api/users", userObj, (err, result) => {
-        console.log(result);
-    }); 
-}
+        $.post("/api/users", userObj, (err, result) => {
+            console.log(result);
+        }); 
+    }
 
     // display all favorited images by logged-in user
     function viewFav() {

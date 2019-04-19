@@ -3,19 +3,13 @@
 // below section is copied from interactions.js and the code in interactions is commented out
 // =================================
 class Picture {
-    constructor(id_cloudinary, url, userId, tag, locationName, description, isPublic) {
+    constructor(id_cloudinary, url, tag, locationName, description, isPublic) {
         this.id_cloudinary = id_cloudinary;
         this.url = url;
-        this.user_id = userId;
         this.tag = tag;
         this.location_name = locationName;
         this.description = description;
         this.public = isPublic;
-    }
-}
-class User {
-    constructor(userName) {
-        this.userName = userName;
     }
 }
 
@@ -86,16 +80,11 @@ var widget = cloudinary.createUploadWidget({
         }
     });
 
-// document.getElementById("upload_widget").addEventListener("click", function () {
-//     widget.open();
-// }, false);
-// =================================
+document.getElementById("upload_widget").addEventListener("click", function () {
+    widget.open();
+}, false);
 
-// CRUD OPERATIONS
-// ===============
-
-// Create/Insert Values to DB
-// ==========================
+// ====================================
 // Creating new posts for logged in users (cloudinary API update) and adding the posts to database
 // postInfo is the Picture class Object contructed from user's input
 $(document).on("click", "#uploadSubmit", function (event) {
@@ -105,69 +94,32 @@ $(document).on("click", "#uploadSubmit", function (event) {
     var postInfo = new Picture(
         imageInfo.cloudinary,
         imageInfo.url,
-        "1",
         $("#category").val(),
         $("#userInput").val().trim(),
         $("#description").val().trim(),
         public
     )
     console.log(postInfo);
-    $.post("/api/images", picture1, function (err, result) {
-        if(err) throw err;
+    $.post("/api/images", postInfo, function (result) {
         console.log(result);
     });
 })
 
-// creating post instances
-// console.log(picture1);
-$.post("/api/images", picture1, function (err, result) {
-    console.log(result);
-});
-$.post("/api/images", picture2, function (err, result) {
-    console.log(result);
-});
-$.post("/api/images", picture3, function (err, result) {
-    console.log(result);
-});
-$.post("/api/images", picture4, function (err, result) {
-    console.log(result);
-});
-$.post("/api/images", picture5, function (err, result) {
-    console.log(result);
-});
-
-// creating user instances
-$.post("/api/users", user1, (err, result) => {
-    console.log(result);
-}); 
-
 // button on image that allows user to add an image to their favorites collection
 $(".add-favs").on("click", function() {
-    console.log("addfav");
-    $.get("/api/likes", function() {
-        console.log("getting userId")
-        // grabs the user_id using userName
-        db.User.findOne({
-            where: {
-                userName: "sailorMoon"
-            }
-        }).then(function (result) {
-            // construct obj to add to db.Likes
-            var likesObj = {
-                // grab from ajax call
-                user_id: 1,
-                image_id: 1
-            }
-            // adds the user fav img relationship to the likes table
-            $.post("/api/likes", likesObj, (result) => {
-                console.log(result);
-            });
-        });
+    // construct obj to add to db.Likes
+    var likesObj = {
+        // grab from ajax call
+        user_id: 1,
+        image_id: $(this).data("id")
+    }
+    // adds the user fav img relationship to the likes table
+    $.post("/api/likes", likesObj, (result) => {
+        console.log(result);
     });
 });
 
-// Read/Display images
-// ===================
+// Load Feed Page on start
 // display all images in feed default order by most recent
 $.get("/", function (err, result) {
     console.log(result);
