@@ -6,12 +6,15 @@
   <img src="{{url}}" class="card-img-top" alt="#">
 
   <div class="card-body">
-
-    <span class="float-left" id="location-link">{{location_name}}</span>
-
-    <span id="tags-link" class="tags float-right">{{tag}}</span>
-
-    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <span class="float-left" id="location-link">{{location_name}}</span>
+      </div>
+      <div class="col-md-6">
+        <span id="tags-link" class="tags float-right">{{tag}}</span>
+      </div>
+      <br>
+    </div>
 
     <div class="description-box">
       <span>{{description}}</span>
