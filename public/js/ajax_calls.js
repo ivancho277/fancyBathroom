@@ -92,9 +92,9 @@ var widget = cloudinary.createUploadWidget({
         }
     });
 
-// document.getElementById("upload_widget").addEventListener("click", function () {
-//     widget.open();
-// }, false);
+document.getElementById("upload_widget").addEventListener("click", function () {
+    widget.open();
+}, false);
 // =================================
 
 // CRUD OPERATIONS
@@ -104,7 +104,8 @@ var widget = cloudinary.createUploadWidget({
 // ==========================
 // Creating new posts for logged in users (cloudinary API update) and adding the posts to database
 // postInfo is the Picture class Object contructed from user's input
-$(document).on("click", "#uploadSubmit", function (event) {
+$("#uploadSubmit").on("click", function (event) {
+
     // This turns falsy values to Boolean False, and vice versa
     var public = !!$('#public:checked').length;
 
@@ -122,6 +123,7 @@ $(document).on("click", "#uploadSubmit", function (event) {
         console.log(result);
     });
 })
+
 
 // creating post instances
 // console.log(picture1);
@@ -200,7 +202,7 @@ $("#searchBtn").on("click", function (event) {
 // route: "/" + username + "/favorited/true"
 console.log("beforeFavorited");
 function getFavs() {
-    $.get("/sailorMoon/favorited", function (err, result) {
+    $.get("/:username/favorited", function (err, result) {
         if (err) throw err;
         console.log("favorited images");
     });
@@ -210,7 +212,7 @@ function getFavs() {
 // display all user's posted images
 console.log("before posts");
 function getPosts() {
-    $.get("/sailorMoon/posts", function (result) {
+    $.get("/:username/posts", function (result) {
         // if (err) throw err;
         console.log("GOTMYPOST!");
     });
