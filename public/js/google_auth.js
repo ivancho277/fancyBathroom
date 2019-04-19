@@ -28,8 +28,6 @@ function onSignIn(googleUser) {
     $.post("/api/users", userObj, (err, result) => {
         console.log(result);
     }); 
-    $("#my-posts").attr("href", "/signed/" + username + "/posts");
-    $("#my-favs").attr("href", "/signed/" + username + "/favorites");   
 }
 
     // display all favorited images by logged-in user
