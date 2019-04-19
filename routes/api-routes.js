@@ -135,15 +135,17 @@ module.exports = function (app) {
   // search & display by tag/username
   app.get("/search/:term", function (req, res) {
     db.Image.findAll({
-      include: { model: db.User },
-      where: {
-        $or: [
+      
+     // include: { model: db.User },
+      where: //{
+      // $or: [
           { tag: req.params.term },
-          { userName: req.params.term }
-        ]
-      }
+        //  { userName: req.params.term }
+        //]
+     // }
     }).then(function (result) {
       // render page with only posts with specifed tags or by specified user
+      console.log(result)
       res.render("index", result);
     });
   });

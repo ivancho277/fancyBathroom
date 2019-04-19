@@ -155,6 +155,7 @@ $("#sort-by-fav").on("click", function (event) {
 $("#searchBtn").on("click", function (event) {
     event.preventDefault();
     $.get("/search/" + $("#searchTerm").val(), function (err, result) {
+        console.log(result)
         console.log("clicked Search Button", $("#searchTerm").val())
     });
 })
