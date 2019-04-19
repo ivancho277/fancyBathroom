@@ -28,7 +28,6 @@ module.exports = function (app) {
     db.User.findOne({
       where: {userName: req.params.user}
     }).then(function (result) {
-      console.log("Bill", result);
       res.json(result);
     });
   });
@@ -80,6 +79,7 @@ module.exports = function (app) {
       include: [{ model: db.Image }]
     }).then(user => {
       res.render("index", { images: user.Images, loggedIn: true });
+      // res.json(user);
     });
   });
 
