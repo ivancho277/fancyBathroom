@@ -1,3 +1,9 @@
+class User {
+    constructor(userName) {
+        this.userName = userName;
+    }
+}
+
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -7,11 +13,12 @@ function onSignIn(googleUser) {
     var username = parseEmail(profile.getEmail());
 
     // Changing href for My Posts page and My Favorites page
-    $("#my-favs").attr("href", "/" + username + "/favorited/true");
-    $("#my-posts").attr("href", "/" + username + "/posts/true");
-    $("#home").attr("href", "/true");
-    $("#brand").attr("href", "/true");
+    // $("#my-favs").attr("href", "/" + username + "/favorited/true");
+    // $("#my-posts").attr("href", "/" + username + "/posts/true");
+    // $("#home").attr("href", "/true");
+    // $("#brand").attr("href", "/true");
     // Changing text in account dropdown for posts and favorites
+    $("#account").attr("data-name", username);
     $("#account").text(username);
     //Hiding the sign in button and showing the submit form
     $(".g-signin2").hide();
@@ -27,23 +34,10 @@ function onSignIn(googleUser) {
     function addUser() {
         $.post("/api/users", userObj, (err, result) => {
             console.log(result);
-        });
+        }); 
     }
-
-    // display all favorited images by logged-in user
-    function viewFav() {
-        $.get("/" + username + "/favorited/true", function (err, result) {
-            console.log("favorited images", result);
-        });
-    }
-
-
-    // display all user's posted images
-    function viewPost() {
-        $.get("/" + username + "/posts/true", function (err, result) {
-            console.log("user posts", result);
-        });
-    }
+    $("#my-posts").attr("href", "/signed/" + username + "/posts");
+    $("#my-favs").attr("href", "/signed/" + username + "/favorited");
 }
 
 function signOut() {
@@ -55,10 +49,6 @@ function signOut() {
         $("#upload-form").hide();
         $(".dropdown-toggle").hide();
     });
-    $("#my-favs").attr("href", "/" + username + "/favorited/");
-    $("#my-posts").attr("href", "/" + username + "/posts/");
-    $("#home").attr("href", "/");
-    $("#brand").attr("href", "/");
 }
 
 
