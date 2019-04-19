@@ -18,7 +18,7 @@ module.exports = function (app) {
       include: { model: db.Image }
     }).then(joe => {
       joe.getLikedImages().then(assocLikes => {
-        res.json(assocLikes);
+        res.render("index", { images: assocLikes });
       });
     });
   });
