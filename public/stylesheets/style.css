@@ -31,14 +31,12 @@ body {
 #thumbnail {
   display: none;
   margin: 10px;
-  border: 2px solid #eb6e80;
-  border-radius: 20px;
-  width: 200px;
-  
+    
 }
 
 #thumbnail-image {
   text-align: center;
+  border-radius: 20px;
 }
 
 label {
