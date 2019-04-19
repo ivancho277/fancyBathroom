@@ -50,9 +50,14 @@ module.exports = function (app) {
   // This will run on page load to generate the feed
   app.get("/", function (req, res) {
     db.Image.findAll().then(function (data) {
-      res.render("index", data);
+      var hbsObject = {
+        images: data
+      }
+      res.render("index", hbsObject);
+
     });
   });
+
 
   // JOE's HELP CODE
   // grab data from image data ordered by most favorited
@@ -61,7 +66,7 @@ module.exports = function (app) {
       include: { model: db.User },
     }).then(data => {
       // data.getLikedUsers().then(mostFav => {
-        res.json(data);
+      res.json(data);
       // });
     });
   });
@@ -79,7 +84,7 @@ module.exports = function (app) {
   // query call to get username and user.id
   app.get("/signed/:user", function (req, res) {
     db.User.findOne({
-      where: {userName: req.params.user}
+      where: { userName: req.params.user }
     }).then(function (result) {
       return res.json(result);
     });
@@ -133,8 +138,8 @@ module.exports = function (app) {
       include: { model: db.User },
       where: {
         $or: [
-          { tag: req.params.term}, 
-          {userName: req.params.term}
+          { tag: req.params.term },
+          { userName: req.params.term }
         ]
       }
     }).then(function (result) {
