@@ -94,6 +94,7 @@ document.getElementById("upload_widget").addEventListener("click", function () {
 // ====================================
 // Creating new posts for logged in users (cloudinary API update) and adding the posts to database
 // postInfo is the Picture class Object contructed from user's input
+$("#upload-form").show();
 $("#uploadSubmit").on("click", function (event) {
 
     // This turns falsy values to Boolean False, and vice versa
@@ -116,7 +117,8 @@ $("#uploadSubmit").on("click", function (event) {
 let userObject = {};
 getUserId();
 function getUserId() {
-    $.get("/signed/" + $("#account").data("name"), function(result){
+    // $("#account").data("name
+    $.get("/signed/mjblee20", function(result){
         userObject.id = result.id;
         userObject.userName = result.userName;
     });
@@ -210,3 +212,9 @@ $("#searchBtn").on("click", function (event) {
 //     }
 //     console.log("location name: ", location_name);
 // });
+
+$("#test").on("click", function() {
+    $.post("signed/" + userObject.id + "/api/images", function(result) {
+        console.log(result);
+    });
+});

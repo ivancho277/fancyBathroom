@@ -43,9 +43,9 @@
         <a class="navbar-brand" href="/" id="brand">Instapotty</a>
         <div>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" id="searchBtn" type="search" placeholder="Search bathrooms"
+                <input class="form-control mr-sm-2"  id="searchTerm" type="search" placeholder="Search bathrooms"
                     aria-label="Search">
-                <button class="btn btn-outline my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline my-2 my-sm-0" id="searchBtn" type="submit">Search</button>
             </form>
         </div>
 
@@ -61,7 +61,7 @@
                 {{!-- When logged in this should appear with links to all user posts, etc. --}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="account" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" data-id="">Gotta Go
+                        aria-haspopup="true" aria-expanded="false" data-id="">
                         {{!-- Username --}}
                         joe
                     </a>
@@ -137,6 +137,8 @@
         <div id="place-url"></div>
     </div>
 
+
+    <button type="button" class="btn" id="test">Test</button>
     {{!-- Static files --}}
     {{!-- <script src="/js/interactions.js" type="text/javascript"></script> --}}
     <script src="/js/ajax_calls.js" type="text/javascript"></script>
