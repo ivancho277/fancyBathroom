@@ -58,13 +58,14 @@ module.exports = function (app) {
   app.get("/", function (req, res) {
     db.Image.findAll()
       .then(function (data) {
-        res.render("index", data);
+        var hbsObject = {
+          images: data
+        }
+        res.render("index", hbsObject);
         // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
         // data is the entire images table
 
-        // var hbsObject = {
-        //   images: data,
-        // };
+
 
         // var hbsObject = {
         //   images: [{
