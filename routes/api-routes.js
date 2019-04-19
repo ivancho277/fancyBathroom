@@ -59,6 +59,7 @@ module.exports = function (app) {
     });
   });
 
+
   // JOE's HELP CODE
   // grab data from image data ordered by most favorited
   app.get("/feed/orderbymostfavorited", function (req, res) {
@@ -77,8 +78,8 @@ module.exports = function (app) {
     db.User.findOne({
       where: { userName: req.params.name },
       include: [{ model: db.Image }]
-    }).then(result => {
-      res.json(result);
+    }).then(user => {
+      res.render("index", { images: user.Images, loggedIn: true });
     });
   });
 

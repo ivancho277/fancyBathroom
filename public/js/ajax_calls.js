@@ -117,15 +117,14 @@ $("#uploadSubmit").on("click", function (event) {
 let userObject = {};
 getUserId();
 function getUserId() {
-    // $("#account").data("name
-    $.get("/signed/mjblee20", function(result){
+    $.get("/signed/" + $("#account").data("name"), function (result) {
         userObject.id = result.id;
         userObject.userName = result.userName;
     });
 }
 
 // button on image that allows user to add an image to their favorites collection
-$(".add-favs").on("click", function() {
+$(".add-favs").on("click", function () {
     // construct obj to add to db.Likes
     var likesObj = {
         // grab from ajax call

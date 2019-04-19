@@ -64,8 +64,7 @@ function initMap() {
             event.preventDefault();
             location_name = $("input").val().trim();
             console.log("location name: ", location_name)
-        };
-        
+        };  
     });
 
     $(".location").click(function () {
@@ -132,8 +131,8 @@ function initMap() {
         infowindowContent.children['place-icon'].src = place.icon;
         infowindowContent.children['place-name'].textContent = place.name;
         infowindowContent.children['place-url'].innerHTML = `<a href=${placeLink}>Find me!</a>`;
-
+    };
         infowindow.open(map, marker);
         return marker;
-    };
+    
 }  
