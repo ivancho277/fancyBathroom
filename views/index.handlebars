@@ -11,11 +11,19 @@
 {{!-- Populate page with all images in database --}} {{!-- if myPosts === true  --}}
 <div class="container" id="feed-container">
     <div class="card-columns ">
+        {{#if loggedIn}}
+
         {{#each images}}
 
+        {{> feed/posts-block this}}
+        {{/each}}
+
+        {{else}}
+        {{#each images}}
         {{> feed/feed-block this}}
 
         {{/each}}
+        {{/if}}
     </div>
 </div>
 

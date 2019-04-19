@@ -31,14 +31,12 @@ body {
 #thumbnail {
   display: none;
   margin: 10px;
-  border: 2px solid #eb6e80;
-  border-radius: 20px;
-  width: 200px;
-  
+    
 }
 
 #thumbnail-image {
   text-align: center;
+  border-radius: 20px;
 }
 
 label {
@@ -144,11 +142,6 @@ h1 {
   background-color: transparent;
     }
 
-#logged-in-potties {
-  background-color: transparent;
-
-    }
-
 .card-img-top {
   border-radius: 10px;      
     }
@@ -161,6 +154,10 @@ h1 {
   font-family: 'Neucha', cursive;
   color: white;
     }
+
+#tags-link {
+  font-size: 20px;
+}    
 
 span {
   font-family: 'Neucha', cursive;
@@ -200,6 +197,7 @@ span {
     }
 
 .add-favs {
+  display: none;
   position: absolute;  
   z-index: 3;
   border: 1px solid pink;

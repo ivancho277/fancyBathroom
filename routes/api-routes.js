@@ -51,7 +51,7 @@ module.exports = function (app) {
   app.get("/", function (req, res) {
     db.Image.findAll().then(function (data) {
       var hbsObject = {
-        images: data
+        images: data,
       }
       res.render("index", hbsObject);
 
@@ -77,7 +77,7 @@ module.exports = function (app) {
       where: { userName: req.params.name },
       include: [{ model: db.Image }]
     }).then(user => {
-      res.json(user.Images);
+      res.render("index", { images: user.Images, loggedIn: true });
     });
   });
 

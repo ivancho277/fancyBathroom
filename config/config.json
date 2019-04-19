@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "password",
-    "database": "Instapotty",
+    "password": "PassWord",
+    "database": "instapotty",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
