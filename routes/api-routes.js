@@ -35,9 +35,6 @@ module.exports = function (app) {
     });
   });
 
-
-
-
   // insert into images when they submit a new post
   app.post("/api/images", function (req, res) {
     db.Image.create(req.body).then(function (result) {
@@ -45,8 +42,6 @@ module.exports = function (app) {
     });
   });
 
-  // READING DATABASE AND RENDERING PAGE
-  // ===================================
   // This will run on page load to generate the feed
   app.get("/", function (req, res) {
     db.Image.findAll().then(function (data) {
@@ -59,6 +54,8 @@ module.exports = function (app) {
   app.get("/feed/orderbymostfavorited", function (req, res) {
     db.Image.findAll({
       include: { model: db.User },
+      attributes: ['User.*', 'Image.*', [db.sequelize.fn('COUNT', 'Image.UserId'), 'LikeCount']],
+      order: ["LikeCount"]
     }).then(data => {
       // data.getLikedUsers().then(mostFav => {
         res.json(data);
