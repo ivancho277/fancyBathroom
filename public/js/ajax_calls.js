@@ -13,11 +13,11 @@ class Picture {
     }
 }
 
-let user1 = new User("sailorMoon")
-let user2 = new User("sailorMercury")
-let user3 = new User("sailorVenus")
-let user4 = new User("sailorMars")
-let user5 = new User("sailorJupiter")
+// let user1 = new User("sailorMoon")
+// let user2 = new User("sailorMercury")
+// let user3 = new User("sailorVenus")
+// let user4 = new User("sailorMars")
+// let user5 = new User("sailorJupiter")
 
 let picture1 = new Picture("could-tst", "www.funPIC.super", "luxury", "the mall", "a cool mall bathroom", true)
 let picture2 = new Picture("Cloud-444-id", "www.funPIC.duper", "luxury", "the mall", "a cool mall bathroom", true)
@@ -105,12 +105,21 @@ $(document).on("click", "#uploadSubmit", function (event) {
     });
 })
 
+let userObject = {};
+getUserId();
+function getUserId() {
+    $.get("/signed/" + $("#account").data("name"), function(result){
+        userObject.id = result.id;
+        userObject.userName = result.userName;
+    });
+}
+
 // button on image that allows user to add an image to their favorites collection
 $(".add-favs").on("click", function() {
     // construct obj to add to db.Likes
     var likesObj = {
         // grab from ajax call
-        user_id: 1,
+        user_id: userObject.id,
         image_id: $(this).data("id")
     }
     // adds the user fav img relationship to the likes table
@@ -121,7 +130,7 @@ $(".add-favs").on("click", function() {
 
 // Load Feed Page on start
 // display all images in feed default order by most recent
-$.get("/", function (err, result) {
+$.get("/", function (result) {
     console.log(result);
 });
 
@@ -147,7 +156,7 @@ $("#searchBtn").on("click", function (event) {
 // route: "/" + username + "/favorited/true"
 console.log("beforeFavorited");
 function getFavs() {
-    $.get("/sailorMoon/favorited", function (err, result) {
+    $.get("/" + userObject.userName + "/favorited", function ( result) {
         if (err) throw err;
         console.log("favorited images");
     });
@@ -157,7 +166,7 @@ function getFavs() {
 // display all user's posted images
 console.log("before posts");
 function getPosts() {
-    $.get("/sailorMoon/posts", function (result) {
+    $.get("/" + userObject.userName + "/posts", function (result) {
         // if (err) throw err;
         console.log("GOTMYPOST!");
     });

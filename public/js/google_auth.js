@@ -13,13 +13,14 @@ function onSignIn(googleUser) {
     var username = parseEmail(profile.getEmail());
     
     // Changing href for My Posts page and My Favorites page
-    $("#my-favs").attr("href", "/" + username + "/favorited/true");
-    $("#my-posts").attr("href", "/" + username + "/posts/true");
-    $("#home").attr("href", "/true");
-    $("#brand").attr("href", "/true");
+    // $("#my-favs").attr("href", "/" + username + "/favorited/true");
+    // $("#my-posts").attr("href", "/" + username + "/posts/true");
+    // $("#home").attr("href", "/true");
+    // $("#brand").attr("href", "/true");
     // Changing text in account dropdown for posts and favorites
-
+    $("#account").attr("data-name", username)
     var userObj = new User(username);
+    addUser();
 
     // Create new row for new users when they sign in
     // userObj is the User class Object constructed when logged in via Google
@@ -29,21 +30,8 @@ function onSignIn(googleUser) {
             console.log(result);
         }); 
     }
-
-    // display all favorited images by logged-in user
-    function viewFav() {
-        $.get("/" + username + "/favorited/true", function (err, result) {
-            console.log("favorited images", result);
-        });
-    }
-    
-
-    // display all user's posted images
-    function viewPost() {
-        $.get("/" + username + "/posts/true", function (err, result) {
-            console.log("user posts", result);
-        });
-    }
+    $("#my-posts").attr("href", "/signed/" + username + "/posts");
+    $("#my-favs").attr("href", "/signed/" + username + "/favorited");
 }
 
 function signOut() {
@@ -51,10 +39,6 @@ function signOut() {
     auth2.signOut().then(function () {
         console.log('User signed out.');
     });
-    $("#my-favs").attr("href", "/" + username + "/favorited/");
-    $("#my-posts").attr("href", "/" + username + "/posts/");
-    $("#home").attr("href", "/");
-    $("#brand").attr("href", "/");
 }
 
 
