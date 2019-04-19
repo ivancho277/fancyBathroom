@@ -44,7 +44,7 @@ module.exports = function (app) {
   });
 
   // insert into images when they submit a new post
-  app.post("signed/:id/api/images", function (req, res) {
+  app.post("/api/images", function (req, res) {
     db.Image.create(req.body).then(function (result) {
      // Image.addUser(req.params.id);
       res.json(result);
