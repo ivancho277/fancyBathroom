@@ -18,15 +18,16 @@
 
     {{!-- CSS Stylesheet --}}
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Shadows+Into+Light" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+    {{!-- Google Fonts --}}
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Neucha|Yanone+Kaffeesatz" rel="stylesheet">
+
 
     {{!-- Cloudinary JS --}}
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript">
     </script>
+
     {{!-- googleAuth --}}
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id"
@@ -42,7 +43,8 @@
         <a class="navbar-brand" href="/" id="brand">Instapotty</a>
         <div>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control mr-sm-2" id="searchBtn" type="search" placeholder="Search bathrooms"
+                    aria-label="Search">
                 <button class="btn btn-outline my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
@@ -55,25 +57,26 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
 
-                    {{!-- HOMEPAGE/FEED --}}
-                    <a class="nav-link" href="/" id="home">Home<span class="sr-only">(current)</span></a>
                 </li>
                 {{!-- When logged in this should appear with links to all user posts, etc. --}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="account" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false" data-id="">
+                        aria-haspopup="true" aria-expanded="false" data-id="">Gotta Go
                         {{!-- Username --}}
+                        joe
+                    </a>
+
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/sailorMoon/posts" id="my-posts">My Posts</a>
-                        <a class="dropdown-item" href="/sailorMoon/favorited" id="my-favs">My Favorited Posts</a>
+                        <a class="dropdown-item" href="/signed/joe/posts" id="my-posts">My Posts</a>
+                        <a class="dropdown-item" href="/signed/joe/favorites" id="my-favs">My Favorited Posts</a>
                         <a class="dropdown-item" href="/" onclick="signOut();">Sign out</a>
                     </div>
                 </li>
                 {{!-- This should be replaced by the accounts when user is logged in --}}
                 <li class="nav-item">
                 <li>
-                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                    <div class="g-signin2 mr-auto" data-onsuccess="onSignIn"></div>
                 </li>
             </ul>
 
@@ -88,42 +91,41 @@
         {{{body}}}
 
     </div>
+
+
+    {{!-- Upload Image Form --}}
     <div class="flex-container" id="upload-form">
-        <button id="upload_widget" type="button" class="cloudinary-button">Upload Image</button>
+        <form>
+            <button id="upload_widget" type="button" class="cloudinary-button btn">Upload Image</button>
 
-        <div id="thumbnail">
-        </div>
-        <hr>
+            <div id="thumbnail">
+            </div>
+            <hr>
 
-        <label>Location:</label>
-        <input type="text" name="location" id="userInput"> <br>
-        <button class="btn" type="button" id="autoComplete">Search Location</button>
-        <br>
-        <label>Public or Private Location?</label>
-        <br>
-        <input id="public" type="radio" name="public" value="public"> Public<br>
-        {{!-- <input type="radio" name="public" value="private"> Private<br> --}}
-        <br>
+            <label>Location:</label>
+            <input type="text" name="location" id="userInput" placeholder="Press Enter to Confirm"> <br>
 
-        <label>Category</label>
-        <select id="category" required>
-            <option value=" Default" selected disabled>Potty Tags</option>
-            <option value="humor">Humor</option>
-            <option value="luxurious">Luxurious</option>
-            <option value="artistic">Artistic</option>
-            <option value="wisdom">Wisdom</option>
-        </select>
-        <br>
+            <input id="public" type="checkbox" name="public" value="public">
+            <label>Public Bathroom?</label>
 
-        <label>Description</label>
-        <input type="text" id="description"><br>
+            <br>
+
+            <label>Category</label>
+            <select name="category" id="category" required>
+                <option value=" Default" selected disabled>Potty Tags</option>
+                <option value="humor">Humor</option>
+                <option value="luxurious">Luxurious</option>
+                <option value="artistic">Artistic</option>
+                <option value="wisdom">Wisdom</option>
+            </select>
+            <br>
+
+            <label>Description</label>
+            <textarea class="form-control" id="description" rows="3"></textarea>
 
         </form>
         <button type="button" class="btn" id="uploadSubmit">Upload Post</button>
     </div>
-
-    {{!-- test add-favs Button --}}
-    <button class=".add-favs" data-id="1">Add To Fav</button>
 
     {{!-- GOOGLE MAP AND INFO-WINDOW PIN THAT WILL GO INSIDE MODAL  --}}
     <!-- Map div -->
@@ -140,7 +142,7 @@
     <script src="/js/ajax_calls.js" type="text/javascript"></script>
     <script src="/js/google_api.js" type="text/javascript"></script>
     <script src="/js/google_auth.js" type="text/javascript"></script>
-    
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

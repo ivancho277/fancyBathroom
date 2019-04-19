@@ -12,17 +12,12 @@ class Picture {
         this.public = isPublic;
     }
 }
-class User {
-    constructor(userName) {
-        this.userName = userName;
-    }
-}
 
-let user1 = new User("sailorMoon")
-let user2 = new User("sailorMercury")
-let user3 = new User("sailorVenus")
-let user4 = new User("sailorMars")
-let user5 = new User("sailorJupiter")
+// let user1 = new User("sailorMoon")
+// let user2 = new User("sailorMercury")
+// let user3 = new User("sailorVenus")
+// let user4 = new User("sailorMars")
+// let user5 = new User("sailorJupiter")
 
 let picture1 = new Picture("could-tst", "www.funPIC.super", "luxury", "the mall", "a cool mall bathroom", true)
 let picture2 = new Picture("Cloud-444-id", "www.funPIC.duper", "luxury", "the mall", "a cool mall bathroom", true)
@@ -39,6 +34,13 @@ let imageObj = {};
 var widget = cloudinary.createUploadWidget({
     cloudName: "instapotty", uploadPreset: "wveqgdsr",
     thumbnailTransformation: { width: 200, height: 200, crop: 'fit' },
+    multiple: false,
+    clientAllowedFormats: ["png", "gif", "jpeg"],
+    maxFileSize: 1500000,
+    maxImageWidth: 5000,
+    maxImageHeight: 5000,
+    minImageWidth: 400,
+    minImageHeight: 400,
     styles: {
         palette: {
             window: "#17A7AD",
@@ -85,19 +87,15 @@ var widget = cloudinary.createUploadWidget({
         }
     });
 
-// document.getElementById("upload_widget").addEventListener("click", function () {
-//     widget.open();
-// }, false);
-// =================================
+document.getElementById("upload_widget").addEventListener("click", function () {
+    widget.open();
+}, false);
 
-// CRUD OPERATIONS
-// ===============
-
-// Create/Insert Values to DB
-// ==========================
+// ====================================
 // Creating new posts for logged in users (cloudinary API update) and adding the posts to database
 // postInfo is the Picture class Object contructed from user's input
-$(document).on("click", "#uploadSubmit", function (event) {
+$("#uploadSubmit").on("click", function (event) {
+
     // This turns falsy values to Boolean False, and vice versa
     var public = !!$('#public:checked').length;
 
@@ -110,64 +108,37 @@ $(document).on("click", "#uploadSubmit", function (event) {
         public
     )
     console.log(postInfo);
-    $.post("/api/images", picture1, function (err, result) {
-        if(err) throw err;
+    $.post("/api/images", postInfo, function (result) {
         console.log(result);
     });
 })
 
-// creating post instances
-// console.log(picture1);
-// $.post("/api/images", picture1, function (err, result) {
-//     console.log(result);
-// });
-// $.post("/api/images", picture2, function (err, result) {
-//     console.log(result);
-// });
-// $.post("/api/images", picture3, function (err, result) {
-//     console.log(result);
-// });
-// $.post("/api/images", picture4, function (err, result) {
-//     console.log(result);
-// });
-// $.post("/api/images", picture5, function (err, result) {
-//     console.log(result);
-// });
-
-// creating user instances
-// $.post("/api/users", user1, (err, result) => {
-//     console.log(result);
-// }); 
+let userObject = {};
+getUserId();
+function getUserId() {
+    $.get("/signed/" + $("#account").data("name"), function(result){
+        userObject.id = result.id;
+        userObject.userName = result.userName;
+    });
+}
 
 // button on image that allows user to add an image to their favorites collection
 $(".add-favs").on("click", function() {
-    console.log("addfav");
-    $.get("/api/likes", function() {
-        console.log("getting userId")
-        // grabs the user_id using userName
-        db.User.findOne({
-            where: {
-                userName: "sailorMoon"
-            }
-        }).then(function (result) {
-            // construct obj to add to db.Likes
-            var likesObj = {
-                // grab from ajax call
-                user_id: 1,
-                image_id: 1
-            }
-            // adds the user fav img relationship to the likes table
-            $.post("/api/likes", likesObj, (result) => {
-                console.log(result);
-            });
-        });
+    // construct obj to add to db.Likes
+    var likesObj = {
+        // grab from ajax call
+        user_id: userObject.id,
+        image_id: $(this).data("id")
+    }
+    // adds the user fav img relationship to the likes table
+    $.post("/api/likes", likesObj, (result) => {
+        console.log(result);
     });
 });
 
-// Read/Display images
-// ===================
+// Load Feed Page on start
 // display all images in feed default order by most recent
-$.get("/", function (err, result) {
+$.get("/", function (result) {
     console.log(result);
 });
 
@@ -187,31 +158,6 @@ $("#searchBtn").on("click", function (event) {
         console.log("clicked Search Button", $("#searchTerm").val())
     });
 })
-
-
-// display all favorited images by logged-in user
-// route: "/" + username + "/favorited/true"
-console.log("beforeFavorited");
-function getFavs() {
-    $.get("/sailorMoon/favorited", function (err, result) {
-        if (err) throw err;
-        console.log("favorited images");
-    });
-}
-
-
-// display all user's posted images
-console.log("before posts");
-function getPosts() {
-    $.get("/sailorMoon/posts", function (result) {
-        // if (err) throw err;
-        console.log("GOTMYPOST!");
-    });
-}
-
-
-
-
 // Update values
 // ====================
 // Make changes to description and tags

@@ -2,7 +2,11 @@
   "development": {
     "username": "root",
     "password": "password",
+<<<<<<< HEAD
     "database": "instapotty",
+=======
+    "database": "Instapotty",
+>>>>>>> c52256792c4aeddd3316c2aff338ab2343ff3866
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
