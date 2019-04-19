@@ -167,7 +167,7 @@ span {
     }    
     
 
-.location{
+#location-link{
   text-decoration: underline;
   cursor: pointer; 
     }
@@ -205,6 +205,7 @@ span {
   border: 1px solid pink;
   border-radius: 25px;
   background-color: rgba(0, 143, 149, 0.4);
+  bottom: 10px;
    
 }        
 

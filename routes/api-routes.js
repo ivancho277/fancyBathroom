@@ -62,49 +62,7 @@ module.exports = function (app) {
           images: data
         }
         res.render("index", hbsObject);
-        // feed, post and favorites will be determined by parameters passed in but now I'll hard code only rendering feed.
-        // data is the entire images table
 
-
-
-        // var hbsObject = {
-        //   images: [{
-        //     id: "12345",
-        //     url: "https://res.cloudinary.com/instapotty/image/upload/v1555606210/tinHat.jpg"
-        //   },
-        //   {
-        //     id: "54667",
-        //     url: "https://res.cloudinary.com/instapotty/image/upload/v1555604048/hulaHula.jpg"
-        //   },
-        //   {
-        //     id: "99816",
-        //     url: "https://res.cloudinary.com/instapotty/image/upload/v1555604040/columbiaTower.png"
-        //   },
-        //   {
-        //     id: "441",
-        //     url: "https://res.cloudinary.com/instapotty/image/upload/v1555604029/bizarro2.jpg"
-        //   },
-        //   {
-        //     id: "998",
-        //     url: "https://res.cloudinary.com/instapotty/image/upload/v1555604003/2bitSaloon.jpg"
-        //   },
-        //   {
-        //     id: "234",
-        //     url: "https://res.cloudinary.com/instapotty/image/upload/v1555606215/seattleGlassBlowing.jpg"
-        //   },
-        //   {
-        //     id: "42",
-        //     url: "https://res.cloudinary.com/instapotty/image/upload/v1555606198/hollowEarthRadio.jpg"
-        //   },
-        //   {
-        //     id: "11113",
-        //     url: "https://res.cloudinary.com/instapotty/image/upload/v1555606143/lindas.jpg"
-        //   }],
-        //   post: false,
-        //   favorites: false
-        // };
-        // // since feed is true page renders feed.
-        // res.render("index", hbsObject);
       });
   });
 
