@@ -20,7 +20,7 @@ module.exports = function (app) {
     })
   })
 
-  
+
   app.post("/api/users", function (req, res) {
     // check if they're already user, if exists get the user, if not add new row
     db.User.findOrCreate({
@@ -178,83 +178,83 @@ module.exports = function (app) {
           res.render("index", hbsObject);
         });
       });
-    });
+  });
 
-    // display all user's favorited images
-    app.get("/:username/favorited", function (req, res) {
-      console.log("Server Post");
-      db.User.findOne({
-        // using association of two tables to grab all images where userId = user_id, includes all images in the likes association table
-        where: {
-          userName: req.params.username,
-        }
-      })
-        .then(function (data) {
-          db.User.findAll({
-            include: [{
-              model: db.Image
-            }],
-            where: {
-              user_id: data.id
-            }
-          })
-            // data below will be filtered join table between Likes and Image by user_id
-            .then(function (data) {
-              var hbsObject = {
-                images: data,
-                loggedIn: req.params.login,
-              };
-              // since feed is true page renders feed.
-              res.render("index", hbsObject);
-            });
-        });
-      });
-
-      // search & display by tag/username
-      app.get("/search/:term", function (req, res) {
-        db.Image.findAll({
+  // display all user's favorited images
+  app.get("/:username/favorited", function (req, res) {
+    console.log("Server Post");
+    db.User.findOne({
+      // using association of two tables to grab all images where userId = user_id, includes all images in the likes association table
+      where: {
+        userName: req.params.username,
+      }
+    })
+      .then(function (data) {
+        db.User.findAll({
           include: [{
-            model: db.User
+            model: db.Image
           }],
           where: {
-            $or: [{
-              tag: req.params.term
-            }, {
-              username: req.params.term
-            }]
+            user_id: data.id
           }
-        }).then(function (result) {
-          // render page with only posts with specifed tags or by specified user
-          var hbsObject = {
-            images: result,
-            loggedIn: true
-          };
-          res.render("index", hbsObject);
-        });
+        })
+          // data below will be filtered join table between Likes and Image by user_id
+          .then(function (data) {
+            var hbsObject = {
+              images: data,
+              loggedIn: req.params.login,
+            };
+            // since feed is true page renders feed.
+            res.render("index", hbsObject);
+          });
       });
+  });
+
+  // search & display by tag/username
+  app.get("/search/:term", function (req, res) {
+    db.Image.findAll({
+      include: [{
+        model: db.User
+      }],
+      where: {
+        $or: [{
+          tag: req.params.term
+        }, {
+          username: req.params.term
+        }]
+      }
+    }).then(function (result) {
+      // render page with only posts with specifed tags or by specified user
+      var hbsObject = {
+        images: result,
+        loggedIn: true
+      };
+      res.render("index", hbsObject);
+    });
+  });
 
 
 
-      app.get("/api/users", function (req, res) {
-        db.User.findaAll().then(function (result) {
-          res.json(result);
-        });
-      });
-      // UPDATE DATA FROM DATABASE
-      // =========================
-      // PUT route for updating post's tags and descriptions
-      // app.put("/:id", function (req, res) {
-      //   db.Image.put().then(function (err, result){
+  app.get("/api/users", function (req, res) {
+    db.User.findaAll().then(function (result) {
+      res.json(result);
+    });
+  });
+  // UPDATE DATA FROM DATABASE
+  // =========================
+  // PUT route for updating post's tags and descriptions
+  // app.put("/:id", function (req, res) {
+  //   db.Image.put().then(function (err, result){
 
-      //   });
-      // });
+  //   });
+  // });
 
-      // DELETE DATA FROM DATABASE
-      // =========================
-      // DELETE route for removing previous posts
-      // app.delete("/:id", function (req, res) {
-      //   db.Image.destroy().then(function(err, result){
+  // DELETE DATA FROM DATABASE
+  // =========================
+  // DELETE route for removing previous posts
+  // app.delete("/:id", function (req, res) {
+  //   db.Image.destroy().then(function(err, result){
 
-      //   });
-      // });
+  //   });
+  // });
 }

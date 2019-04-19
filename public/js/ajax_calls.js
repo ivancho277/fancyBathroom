@@ -40,6 +40,13 @@ let imageObj = {};
 var widget = cloudinary.createUploadWidget({
     cloudName: "instapotty", uploadPreset: "wveqgdsr",
     thumbnailTransformation: { width: 200, height: 200, crop: 'fit' },
+    multiple: false,
+    clientAllowedFormats: ["png", "gif", "jpeg"],
+    maxFileSize: 1500000,
+    maxImageWidth: 5000,
+    maxImageHeight: 5000,
+    minImageWidth: 400,
+    minImageHeight: 400,
     styles: {
         palette: {
             window: "#17A7AD",
@@ -113,7 +120,7 @@ $(document).on("click", "#uploadSubmit", function (event) {
     )
     console.log(postInfo);
     $.post("/api/images", picture1, function (err, result) {
-        if(err) throw err;
+        if (err) throw err;
         console.log(result);
     });
 })
@@ -139,12 +146,12 @@ $.post("/api/images", picture5, function (err, result) {
 // creating user instances
 $.post("/api/users", user1, (err, result) => {
     console.log(result);
-}); 
+});
 
 // button on image that allows user to add an image to their favorites collection
-$(".add-favs").on("click", function() {
+$(".add-favs").on("click", function () {
     console.log("addfav");
-    $.get("/api/likes", function() {
+    $.get("/api/likes", function () {
         console.log("getting userId")
         // grabs the user_id using userName
         db.User.findOne({
