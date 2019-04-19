@@ -5,7 +5,7 @@ function onSignIn(googleUser) {
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
     var username = parseEmail(profile.getEmail());
-    
+
     // Changing href for My Posts page and My Favorites page
     $("#my-favs").attr("href", "/" + username + "/favorited/true");
     $("#my-posts").attr("href", "/" + username + "/posts/true");
@@ -13,6 +13,10 @@ function onSignIn(googleUser) {
     $("#brand").attr("href", "/true");
     // Changing text in account dropdown for posts and favorites
     $("#account").text(username);
+    //Hiding the sign in button and showing the submit form
+    $(".g-signin2").hide();
+    $("#upload-form").show();
+    $(".dropdown-toggle").show();
 
     var userObj = new User(username);
     addUser();
@@ -21,10 +25,10 @@ function onSignIn(googleUser) {
     // userObj is the User class Object constructed when logged in via Google
     // ajax call to store user info.
     function addUser() {
-    $.post("/api/users", userObj, (err, result) => {
-        console.log(result);
-    }); 
-}
+        $.post("/api/users", userObj, (err, result) => {
+            console.log(result);
+        });
+    }
 
     // display all favorited images by logged-in user
     function viewFav() {
@@ -32,7 +36,7 @@ function onSignIn(googleUser) {
             console.log("favorited images", result);
         });
     }
-    
+
 
     // display all user's posted images
     function viewPost() {
@@ -45,7 +49,11 @@ function onSignIn(googleUser) {
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-        console.log('User signed out.');
+        console.log('User signed out.')
+        //show the sign in button again and hiding the submit form
+        $(".g-signin2").show();
+        $("#upload-form").hide();
+        $(".dropdown-toggle").hide();
     });
     $("#my-favs").attr("href", "/" + username + "/favorited/");
     $("#my-posts").attr("href", "/" + username + "/posts/");
@@ -55,7 +63,7 @@ function signOut() {
 
 
 // parse email function to grab the unique bit before @ to use as username
-function parseEmail(email){
+function parseEmail(email) {
     var endOfString = email.indexOf('@');
     return email.substring(0, endOfString);
 }

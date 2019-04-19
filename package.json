@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "animate.css": "^3.7.0",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",

@@ -39,6 +39,13 @@ let imageObj = {};
 var widget = cloudinary.createUploadWidget({
     cloudName: "instapotty", uploadPreset: "wveqgdsr",
     thumbnailTransformation: { width: 200, height: 200, crop: 'fit' },
+    multiple: false,
+    clientAllowedFormats: ["png", "gif", "jpeg"],
+    maxFileSize: 1500000,
+    maxImageWidth: 5000,
+    maxImageHeight: 5000,
+    minImageWidth: 400,
+    minImageHeight: 400,
     styles: {
         palette: {
             window: "#17A7AD",
@@ -85,9 +92,9 @@ var widget = cloudinary.createUploadWidget({
         }
     });
 
-// document.getElementById("upload_widget").addEventListener("click", function () {
-//     widget.open();
-// }, false);
+document.getElementById("upload_widget").addEventListener("click", function () {
+    widget.open();
+}, false);
 // =================================
 
 // CRUD OPERATIONS
@@ -97,7 +104,8 @@ var widget = cloudinary.createUploadWidget({
 // ==========================
 // Creating new posts for logged in users (cloudinary API update) and adding the posts to database
 // postInfo is the Picture class Object contructed from user's input
-$(document).on("click", "#uploadSubmit", function (event) {
+$("#uploadSubmit").on("click", function (event) {
+
     // This turns falsy values to Boolean False, and vice versa
     var public = !!$('#public:checked').length;
 
@@ -111,10 +119,11 @@ $(document).on("click", "#uploadSubmit", function (event) {
     )
     console.log(postInfo);
     $.post("/api/images", picture1, function (err, result) {
-        if(err) throw err;
+        if (err) throw err;
         console.log(result);
     });
 })
+
 
 // creating post instances
 // console.log(picture1);
@@ -140,9 +149,9 @@ $(document).on("click", "#uploadSubmit", function (event) {
 // }); 
 
 // button on image that allows user to add an image to their favorites collection
-$(".add-favs").on("click", function() {
+$(".add-favs").on("click", function () {
     console.log("addfav");
-    $.get("/api/likes", function() {
+    $.get("/api/likes", function () {
         console.log("getting userId")
         // grabs the user_id using userName
         db.User.findOne({
@@ -193,7 +202,7 @@ $("#searchBtn").on("click", function (event) {
 // route: "/" + username + "/favorited/true"
 console.log("beforeFavorited");
 function getFavs() {
-    $.get("/sailorMoon/favorited", function (err, result) {
+    $.get("/:username/favorited", function (err, result) {
         if (err) throw err;
         console.log("favorited images");
     });
@@ -203,7 +212,7 @@ function getFavs() {
 // display all user's posted images
 console.log("before posts");
 function getPosts() {
-    $.get("/sailorMoon/posts", function (result) {
+    $.get("/:username/posts", function (result) {
         // if (err) throw err;
         console.log("GOTMYPOST!");
     });
