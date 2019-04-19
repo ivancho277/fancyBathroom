@@ -109,7 +109,7 @@ $("#uploadSubmit").on("click", function (event) {
         public
     )
     console.log(postInfo);
-    $.post("/api/images", postInfo, function (result) {
+    $.post("signed/" + userObject.id + "/api/images", postInfo, function (result) {
         console.log(result);
     });
 })
