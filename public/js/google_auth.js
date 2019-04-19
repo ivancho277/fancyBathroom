@@ -24,6 +24,7 @@ function onSignIn(googleUser) {
     $(".g-signin2").hide();
     $("#upload-form").show();
     $(".dropdown-toggle").show();
+    $(".add-favs").show();
 
     var userObj = new User(username);
     addUser();
@@ -34,7 +35,7 @@ function onSignIn(googleUser) {
     function addUser() {
         $.post("/api/users", userObj, (err, result) => {
             console.log(result);
-        }); 
+        });
     }
     $("#my-posts").attr("href", "/signed/" + username + "/posts");
     $("#my-favs").attr("href", "/signed/" + username + "/favorited");
@@ -48,6 +49,7 @@ function signOut() {
         $(".g-signin2").show();
         $("#upload-form").hide();
         $(".dropdown-toggle").hide();
+        $(".add-favs").hide();
     });
 }
 

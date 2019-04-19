@@ -6,12 +6,20 @@
   <img src="{{url}}" class="card-img-top" alt="#">
 
   <div class="card-body">
+    <div class="row">
+      <div class="col md-4">
+        <span class="float-left" id="location-link">{{location_name}}</span>
+      </div>
+      <div class="col md-4">
+        <img class="add-favs align-center animated heartBeat delay-1s" Title="fav this bathroom!"
+          src="images/favIcon.png" style="width: 50px;">
+      </div>
+      <div class="col md-4">
+        <span id="tags-link" class="tags float-right">{{tag}}</span>
+      </div>
+      <br>
 
-    <span class="float-left" id="location-link">{{location_name}}</span>
-
-    <span id="tags-link" class="tags float-right">{{tag}}</span>
-
-    <br>
+    </div>
 
     <div class="description-box">
       <span>{{description}}</span>
