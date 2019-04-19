@@ -24,6 +24,7 @@ function onSignIn(googleUser) {
     $(".g-signin2").hide();
     $("#upload-form").show();
     $(".dropdown-toggle").show();
+    $(".add-favs").show();
 
     var userObj = new User(username);
     addUser();
@@ -48,6 +49,7 @@ function signOut() {
         $(".g-signin2").show();
         $("#upload-form").hide();
         $(".dropdown-toggle").hide();
+        $(".add-favs").hide();
     });
 }
 

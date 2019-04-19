@@ -197,6 +197,7 @@ span {
     }
 
 .add-favs {
+  display: none;
   position: absolute;  
   z-index: 3;
   border: 1px solid pink;
