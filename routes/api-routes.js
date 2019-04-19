@@ -51,7 +51,8 @@ module.exports = function (app) {
   app.get("/", function (req, res) {
     db.Image.findAll().then(function (data) {
       var hbsObject = {
-        images: data
+        images: data,
+        loggedIn: true
       }
       res.render("index", hbsObject);
 
