@@ -16,6 +16,7 @@ function onSignIn(googleUser) {
     //Hiding the sign in button and showing the submit form
     $(".g-signin2").hide();
     $("#upload-form").show();
+    $(".dropdown-toggle").show();
 
     var userObj = new User(username);
     addUser();
@@ -51,7 +52,8 @@ function signOut() {
         console.log('User signed out.')
         //show the sign in button again and hiding the submit form
         $(".g-signin2").show();
-        $("#upload-form").show();
+        $("#upload-form").hide();
+        $(".dropdown-toggle").hide();
     });
     $("#my-favs").attr("href", "/" + username + "/favorited/");
     $("#my-posts").attr("href", "/" + username + "/posts/");

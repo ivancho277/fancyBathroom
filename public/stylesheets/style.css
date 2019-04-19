@@ -78,6 +78,10 @@ nav {
   color: #4d0032;
     }
 
+.dropdown-toggle {
+display: none;
+}
+
 .form-control {
   font-family: 'Gloria Hallelujah', cursive;
   font-size: 20px;      
@@ -92,6 +96,8 @@ nav {
   color: #4d0032;
     }
 
+
+
 .btn-outline {
   color: #4d0032;
   border-color: #4d0032;
@@ -101,8 +107,11 @@ nav {
 .abcRioButton.abcRioButtonLightBlue {
   color: white;
   border-radius: 20px;
-  background-color: #4d0032;         
+  background-color: #4d0032; 
+  margin: 10px;
+          
     }
+
 
 h1 {
   color: #4d0032;

@@ -13,7 +13,7 @@
     <div class="card-columns ">
         {{#each images}}
 
-        {{> feed/feed-block url=this.url}}
+        {{> feed/feed-block url=this.url, location=this.location_name, tag=this.tag, description=this.description}}
 
         {{/each}}
     </div>
