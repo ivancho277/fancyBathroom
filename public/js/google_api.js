@@ -66,8 +66,9 @@ function initMap() {
             console.log("location name: ", location_name)
         };  
     });
-
+     
     $(".location").click(function () {
+        var location = $("#location-link").text()
         console.log("hello!")
         //grab locatinn from current img object in db
         map = new google.maps.Map(document.getElementById("map"), {
@@ -79,7 +80,7 @@ function initMap() {
             let request = {
                 location: seattle,
                 radius: 999999,
-                keyword: location_name,
+                keyword: location,
                 fields: ["name", "geometry"]
             };
             console.log("request ", request);
@@ -99,14 +100,17 @@ function initMap() {
                         if (status === google.maps.places.PlacesServiceStatus.OK) {
                             placeLink = results.url;
                             console.log(placeLink);
+                            window.open(placeLink);
                             addPlaceMarker(firstResults);
                         }
+
                     })
                 }
             })
         }
         queryPlace();
     })
+ 
 
     function addPlaceMarker(place) {
         var infowindow = new google.maps.InfoWindow();

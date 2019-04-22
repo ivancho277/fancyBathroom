@@ -1,3 +1,4 @@
+    
 class User {
     constructor(userName) {
         this.userName = userName;
@@ -38,7 +39,7 @@ function onSignIn(googleUser) {
         });
     }
     $("#my-posts").attr("href", "/signed/" + username + "/posts");
-    $("#my-favs").attr("href", "/signed/" + username + "/favorited");
+    $("#my-favs").attr("href", "/signed/" + username + "/favorites");
 }
 
 function signOut() {
