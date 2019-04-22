@@ -112,6 +112,8 @@ $("#uploadSubmit").on("click", function (event) {
     $.post("/api/images", postInfo, function (result) {
         console.log(result);
     });
+
+    location.reload();
 })
 
 let userObject = {};
@@ -212,8 +214,8 @@ $("#searchBtn").on("click", function (event) {
 //     console.log("location name: ", location_name);
 // });
 
-$("#test").on("click", function() {
-    $.post("signed/" + userObject.id + "/api/images", function(result) {
+$("#test").on("click", function () {
+    $.post("signed/" + userObject.id + "/api/images", function (result) {
         console.log(result);
     });
 });
