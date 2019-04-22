@@ -66,7 +66,7 @@ function initMap() {
             console.log("location name: ", location_name)
         };  
     });
-
+     
     $(".location").click(function () {
         var location = $("#location-link").text()
         console.log("hello!")
@@ -110,6 +110,7 @@ function initMap() {
         }
         queryPlace();
     })
+ 
 
     function addPlaceMarker(place) {
         var infowindow = new google.maps.InfoWindow();
