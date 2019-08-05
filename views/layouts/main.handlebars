@@ -31,7 +31,7 @@
     {{!-- googleAuth --}}
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id"
-        content="484870132317-gq2fckv518bsnd8ckojmdfua82fas0ba.apps.googleusercontent.com">
+        content="868739975173-dtu9g9t2eqr45njov8cio51mionkscib.apps.googleusercontent.com">
 
     <title>Instapotty</title>
 
@@ -42,11 +42,43 @@
     <nav class="justify-content-between navbar navbar-expand-lg">
         <a class="navbar-brand" href="/" id="brand">Instapotty</a>
         <div>
-            <form class="form-inline my-2 my-lg-0">
+            {{!-- <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" id="searchTerm" type="search" placeholder="Search bathrooms"
                     aria-label="Search">
                 <button class="btn btn-outline my-2 my-sm-0" id="searchBtn" type="submit">Search</button>
+            </form> --}}
+
+            {{!-- <li id="options">
+                <a href="#">Options</a>
+                <ul class="subnav">
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Application</a></li>
+                    <li><a href="#">Board</a></li>
+                    <li><a href="#">Options</a></li>
+                </ul>
+            </li> --}}
+
+            {{!-- <div id="topic-question"> --}}
+            <form class="form-inline my-2 my-lg-0">
+                <div class="form-group">
+                    <span class="bathroomTag" style="white-space: nowrap">
+                        <label for="topicQuestion">Bathroom Types</label>
+                        <select class="form-control w-75" id="bathroomTag">
+                            <option value="artistic">Artistic</option>
+                            <option value="creepy">Creepy</option>
+                            <option value="cultClassic">Cult Classic</option>
+                            <option value="dirty">Dirty</option>
+                            <option value="inclusive">Inclusive</option>
+                            <option value="humorous">Humorous</option>
+                            <option value="luxurious">Luxurious</option>
+                            <option value="witty">Witty</option>
+                        </select>
+                    </span>
+
+                    <button class="btn btn-outline my-2 my-sm-0" id="searchBtn" type="submit">Search</button>
+                </div>
             </form>
+            {{!-- </div> --}}
         </div>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -74,6 +106,7 @@
                     </div>
                 </li>
                 {{!-- This should be replaced by the accounts when user is logged in --}}
+                {{!-- THIS IS GOOGLE AUTH BUTTON G-SIGNIN2 --}}
                 <li class="nav-item mr-auto">
                 <li>
                     <div class="g-signin2 " data-onsuccess="onSignIn"></div>

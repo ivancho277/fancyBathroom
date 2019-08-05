@@ -8,8 +8,8 @@
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "instapotty",
+    "password": " ",
+    "database": "testdb",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

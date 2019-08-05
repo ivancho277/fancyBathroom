@@ -173,12 +173,35 @@ $("#sort-by-fav").on("click", function (event) {
 
 
 // display images with certain tags or by certain users by certain users (specified in search)
-$("#searchBtn").on("click", function (event) {
+$("#searchBtn").on("click", function () { // submit button on survey modal
+    // grabs user input, prevents being able to click outside of modal, and hides modal one
     event.preventDefault();
-    $.get("/search/" + $("#searchTerm").val(), function (err, result) {
-        console.log("clicked Search Button", $("#searchTerm").val())
-    });
-})
+
+    // grabs user input and converts to corresponding variable
+    var bathroomTag = $("#bathroomTag").val();
+    alert("this was clicked" + bathroomTag);
+  
+    // CHANGE TO GET, FIX API ROUTE
+    $.get("/").then(function (data) {
+      console.log(data);
+      if (data != 200) {
+        // log/show error
+        console.log("this is the conlog", $(this))
+      }
+  
+    //   window.location.href = "/";
+    })
+  
+  });
+
+// EVERYTHING BELOW THIS is old search, before dropdown
+// $("#searchBtn").on("click", function (event) {
+//     event.preventDefault();
+//     $.get("/search/" + $("#searchTerm").val(), function (err, result) {
+//         console.log("clicked Search Button", $("#searchTerm").val())
+//     });
+// })
+
 // Update values
 // ====================
 // Make changes to description and tags

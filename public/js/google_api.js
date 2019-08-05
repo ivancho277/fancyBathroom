@@ -1,34 +1,3 @@
-// //  const User = require("./user_class");
-// //  const Image = require("./image_class");
-// class Picture {
-//     constructor(id_cloudinary, url, userId, tag, locationName, description, isPublic) {
-//         this.id_cloudinary = id_cloudinary;
-//         this.url = url;
-//         this.user_id = userId;
-//         this.tag = tag;
-//         this.location_name = locationName;
-//         this.description = description;
-//         this.public = isPublic;
-//     }
-// }
-// class User {
-//     constructor(userName) {
-//         this.userName = userName;
-//     }
-// }
-
-// let user1 = new User("sailorMoon")
-// let user2 = new User("sailorMercury")
-// let user3 = new User("sailorVenus")
-// let user4 = new User("sailorMars")
-// let user5 = new User("sailorJupiter")
-
-// let image1 = new Image("could-tst", "www.funPIC.super", "qq01pp", "luxury", "the mall", "a cool mall bathroom", true)
-// let image2 = new Image("Cloud-444-id", "www.funPIC.duper", "ww02oo", "luxury", "the mall", "a cool mall bathroom", true)
-// let image3 = new Image("luxury", "the mall", "a cool mall bathroom", true)
-// let image4 = new Image("Cloud-143-id", "www.funPIC.heynow", "rr04uu", "luxury", "the mall", "a cool mall bathroom", true)
-// let image5 = new Image("Cloud-555-id", "www.funPIC.yolo", "tt05yy", "luxury", "the mall", "a cool mall bathroom", true)
-
 
 $("#fun").on("click", function () {
     console.log("button pressed");
@@ -64,9 +33,9 @@ function initMap() {
             event.preventDefault();
             location_name = $("input").val().trim();
             console.log("location name: ", location_name)
-        };  
+        };
     });
-     
+
     $(".location").click(function () {
         var location = $("#location-link").text()
         console.log("hello!")
@@ -110,7 +79,7 @@ function initMap() {
         }
         queryPlace();
     })
- 
+
 
     function addPlaceMarker(place) {
         var infowindow = new google.maps.InfoWindow();
@@ -136,7 +105,7 @@ function initMap() {
         infowindowContent.children['place-name'].textContent = place.name;
         infowindowContent.children['place-url'].innerHTML = `<a href=${placeLink}>Find me!</a>`;
     };
-        infowindow.open(map, marker);
-        return marker;
-    
+    infowindow.open(map, marker);
+    return marker;
+
 }  
