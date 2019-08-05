@@ -42,11 +42,39 @@
     <nav class="justify-content-between navbar navbar-expand-lg">
         <a class="navbar-brand" href="/" id="brand">Instapotty</a>
         <div>
-            <form class="form-inline my-2 my-lg-0">
+            {{!-- <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" id="searchTerm" type="search" placeholder="Search bathrooms"
                     aria-label="Search">
                 <button class="btn btn-outline my-2 my-sm-0" id="searchBtn" type="submit">Search</button>
-            </form>
+            </form> --}}
+
+            {{!-- <li id="options">
+                <a href="#">Options</a>
+                <ul class="subnav">
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Application</a></li>
+                    <li><a href="#">Board</a></li>
+                    <li><a href="#">Options</a></li>
+                </ul>
+            </li> --}}
+
+            <div id="topic-question">
+            <div class="form-group">
+              <span class="topicQuestion" style="white-space: nowrap">
+                <label for="topicQuestion">Search Bathrooms</label>
+                <select class="form-control w-75" id="topicQuestion">
+                  <option value="Math">Artistic</option>
+                  <option value="Science">Creepy</option>
+                  <option value="Law">Cult Classic</option>
+                  <option value="Coding">Dirty</option>
+                  <option value="English">Inclusive</option>
+                  <option value="Exercise Sciences">Humorous</option>
+                  <option value="Engineering">Luxurious</option>
+                  <option value="Business">Witty</option>
+                </select>
+              </span>
+            </div>
+          </div>
         </div>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
