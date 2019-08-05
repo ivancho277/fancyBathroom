@@ -170,12 +170,44 @@ $("#sort-by-fav").on("click", function (event) {
 
 
 // display images with certain tags or by certain users by certain users (specified in search)
-$("#searchBtn").on("click", function (event) {
-    event.preventDefault();
-    $.get("/search/" + $("#searchTerm").val(), function (err, result) {
-        console.log("clicked Search Button", $("#searchTerm").val())
-    });
-})
+// $("#searchBtn").on("click", function () { // submit button on survey modal
+//     // grabs user input, prevents being able to click outside of modal, and hides modal one
+//     event.preventDefault();
+//     // grabs user input and converts to corresponding variable
+//     var topicQuestion1 = $("#topicQuestion").val();
+//     var subQuestion1 = $("#subQuestion").val();
+
+  
+//     // store captured values into newSurvey object to send to DB
+//     var newSurvey = {
+//       studytopic: topicQuestion1.toLowerCase(),
+//       subtopic: subQuestion1.toLowerCase(),
+//       createdAt: new Date(),
+//       updatedAt: new Date(),
+//       UserId: newUserId
+//     }
+  
+//     // CHANGE TO GET, FIX API ROUTE
+//     $.post("/api/submitSurvey", newSurvey).then(function (data) {
+//       console.log(data);
+//       if (data != 200) {
+//         // log/show error
+//         console.log("this is the conlog", $(this))
+//       }
+  
+//       window.location.href = "/user/matches";
+//     })
+  
+//   });
+
+// EVERYTHING BELOW THIS is old search, before dropdown
+// $("#searchBtn").on("click", function (event) {
+//     event.preventDefault();
+//     $.get("/search/" + $("#searchTerm").val(), function (err, result) {
+//         console.log("clicked Search Button", $("#searchTerm").val())
+//     });
+// })
+
 // Update values
 // ====================
 // Make changes to description and tags
