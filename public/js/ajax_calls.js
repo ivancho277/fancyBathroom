@@ -114,7 +114,7 @@ $("#uploadSubmit").on("click", function (event) {
         location.reload();
     });
 
-   // location.reload();
+    // location.reload();
 })
 
 let userObject = {};
@@ -125,6 +125,13 @@ function getUserId() {
         userObject.userName = result.userName;
     });
 }
+
+
+//////////////////////////////////////////////////////////////
+//                                                         //
+// THIS IS A PROBLEM SPOT - TRYING TO FAVORITE A POTTY     //
+/////////////////////////////////////////////////////////////
+
 
 // button on image that allows user to add an image to their favorites collection
 $(".add-favs").on("click", function () {
@@ -141,6 +148,13 @@ $(".add-favs").on("click", function () {
 });
 
 // Load Feed Page on start
+
+//////////////////////////////////////////////////////////////
+//                                                         //
+// THIS IS A PROBLEM SPOT - TRYING TO FAVORITE A POTTY     //
+/////////////////////////////////////////////////////////////n
+
+
 // display all images in feed default order by most recent
 $.get("/", function (result) {
     console.log(result);
