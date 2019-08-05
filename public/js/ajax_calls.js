@@ -1,7 +1,7 @@
-// Page Interactions
-
-// below section is copied from interactions.js and the code in interactions is commented out
-// =================================
+////////////////////////////////////////////
+//                                      ////
+//      PICTURE CLASS CONSTRUCTOR       ////
+////////////////////////////////////////////
 class Picture {
     constructor(id_cloudinary, url, tag, locationName, description, isPublic) {
         this.id_cloudinary = id_cloudinary;
@@ -13,11 +13,11 @@ class Picture {
     }
 }
 
-// let user1 = new User("sailorMoon")
-// let user2 = new User("sailorMercury")
-// let user3 = new User("sailorVenus")
-// let user4 = new User("sailorMars")
-// let user5 = new User("sailorJupiter")
+//////////////////////////////////////////
+//                                      //
+//              TEST DATA               //
+//                                      //
+//////////////////////////////////////////
 
 let picture1 = new Picture("could-tst", "www.funPIC.super", "luxury", "the mall", "a cool mall bathroom", true)
 let picture2 = new Picture("Cloud-444-id", "www.funPIC.duper", "luxury", "the mall", "a cool mall bathroom", true)
@@ -26,7 +26,10 @@ let picture4 = new Picture("Cloud-143-id", "www.funPIC.heynow", "luxury", "the m
 let picture5 = new Picture("Cloud-555-id", "www.funPIC.yolo", "luxury", "the mall", "a cool mall bathroom", true)
 // New post submit form
 
-//Onclick for cloudinary upload
+// /////////////////////////////////////
+//          CLOUDINARY               ///
+// ================================= ///
+
 let submitAllow = false;
 let imageInfo = {};
 let imageObj = {};
