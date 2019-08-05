@@ -18,23 +18,10 @@ app.set("view engine", "handlebars");
 
 require("./routes/api-routes.js")(app);
 
-const syncOptions = { force: false };
+app.listen(PORT, function () {
+  console.log("App now listening at localhost:" + PORT)
 
-if (process.env.NODE_ENV === "test") {
-  syncOptions.force = true;
-}
-
-db.sequelize.sync(syncOptions)
-  .then(function () {
-    console.log("seeding...", Seeds)
-    Seeds();
-  })
-  .then(function () {
-    app.listen(PORT, function () {
-      console.log("App now listening at localhost:" + PORT)
-
-    })
-  });
+});
 
 module.exports = app;
 
