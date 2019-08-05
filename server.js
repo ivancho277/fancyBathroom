@@ -2,8 +2,10 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 
-const app = express();
+const db = require("./models");
+const Seeds = require("./seeds");
 
+const app = express();
 const PORT = process.env.PORT || 8008;
 
 app.use(express.urlencoded({ extended: true }));
@@ -16,10 +18,25 @@ app.set("view engine", "handlebars");
 
 require("./routes/api-routes.js")(app);
 
-app.listen(PORT, function () {
-  console.log("App now listening at localhost:" + PORT)
-});
+const syncOptions = { force: false };
 
+if (process.env.NODE_ENV === "test") {
+  syncOptions.force = true;
+}
+
+db.sequelize.sync(syncOptions)
+  .then(function () {
+    console.log("seeding...", Seeds)
+    Seeds();
+  })
+  .then(function () {
+    app.listen(PORT, function () {
+      console.log("App now listening at localhost:" + PORT)
+
+    })
+  });
+
+module.exports = app;
 
 // // Requiring necessary npm packages
 
