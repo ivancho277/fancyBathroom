@@ -58,23 +58,27 @@
                 </ul>
             </li> --}}
 
-            <div id="topic-question">
-            <div class="form-group">
-              <span class="topicQuestion" style="white-space: nowrap">
-                <label for="topicQuestion">Search Bathrooms</label>
-                <select class="form-control w-75" id="topicQuestion">
-                  <option value="Math">Artistic</option>
-                  <option value="Science">Creepy</option>
-                  <option value="Law">Cult Classic</option>
-                  <option value="Coding">Dirty</option>
-                  <option value="English">Inclusive</option>
-                  <option value="Exercise Sciences">Humorous</option>
-                  <option value="Engineering">Luxurious</option>
-                  <option value="Business">Witty</option>
-                </select>
-              </span>
-            </div>
-          </div>
+            {{!-- <div id="topic-question"> --}}
+            <form class="form-inline my-2 my-lg-0">
+                <div class="form-group">
+                    <span class="topicQuestion" style="white-space: nowrap">
+                        <label for="topicQuestion">Bathroom Types</label>
+                        <select class="form-control w-75" id="topicQuestion">
+                            <option value="Artistic">Artistic</option>
+                            <option value="Creepy">Creepy</option>
+                            <option value="Cult Classic">Cult Classic</option>
+                            <option value="Dirty">Dirty</option>
+                            <option value="Inclusive">Inclusive</option>
+                            <option value="Humorous">Humorous</option>
+                            <option value="Luxurious">Luxurious</option>
+                            <option value="Witty">Witty</option>
+                        </select>
+                    </span>
+
+                    <button class="btn btn-outline my-2 my-sm-0" id="searchBtn" type="submit">Search</button>
+                </div>
+            </form>
+            {{!-- </div> --}}
         </div>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
