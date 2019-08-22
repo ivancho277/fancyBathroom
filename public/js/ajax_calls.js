@@ -167,7 +167,7 @@ $.get("/", function (result) {
 $("#sort-by-fav").on("click", function (event) {
     event.preventDefault();
     $.get("/feed/orderbymostfavorited", function (err, result) {
-        console.log(result);
+        console.log("hello from ordered by most favorite" + result);
     });
 });
 //Comment here
