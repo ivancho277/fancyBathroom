@@ -28,7 +28,7 @@ Instapotty is a place to share pictures of bathrooms made you chuckle, gave you 
 
 ## Authors
 
-<b<Forked from Instapotty created by:</b>
+<b>Forked from Instapotty created by:</b>
 Katie Haster 
 Ivan Rouskov 
 Bill Lee
