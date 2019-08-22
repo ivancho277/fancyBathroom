@@ -5,7 +5,7 @@ var userSeeds = [
     id: 1,
     id_cloudinary: 'Cloud-123-id',
     url: 'https://res.cloudinary.com/instapotty/image/upload/v1555714153/sgrvbbvg6npzuh6ayavx.jpg',
-    tag: 'luxury',
+    tag: 'luxurious',
     location_name: 'the mall',
     description: 'a cool mall bathroom',
     public: true
@@ -14,7 +14,7 @@ var userSeeds = [
     id: 2,
     id_cloudinary: 'Cloud-456-id',
     url: 'https://res.cloudinary.com/instapotty/image/upload/v1563304749/gzecpwhqd87wpvstmqeg.jpg',
-    tag: 'cute',
+    tag: 'witty',
     location_name: 'SLU',
     description: 'bananas everywhere',
     public: true

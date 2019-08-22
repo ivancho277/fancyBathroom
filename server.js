@@ -1,6 +1,7 @@
 // SERVER TAKE TWO 
 const express = require("express");
 const exphbs = require("express-handlebars");
+const cors = require('cors');
 
 const db = require("./models");
 const Seeds = require("./seeds");
