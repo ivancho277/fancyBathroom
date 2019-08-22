@@ -29,14 +29,14 @@ Instapotty is a place to share pictures of bathrooms made you chuckle, gave you 
 ## Authors
 
 <b>Forked from Instapotty created by:</b>
-Katie Haster 
-Ivan Rouskov 
-Bill Lee
-Carrie Plank
+* Katie Haster 
+* Ivan Rouskov 
+* Bill Lee
+* Carrie Plank
 
 <b>Instapotty V2 modified by:</b>
-Carrie Plank
-Aprille Perez  
+* Carrie Plank
+* Aprille Perez  
 
 ## Sitemap
 
