@@ -30,7 +30,7 @@ let picture5 = new Picture("Cloud-555-id", "www.funPIC.yolo", "luxury", "the mal
 //          CLOUDINARY               ///
 // ================================= ///
 
-let submitAllow = false;
+let submitAllow = true;
 let imageInfo = {};
 let imageObj = {};
 
@@ -71,7 +71,7 @@ var widget = cloudinary.createUploadWidget({
 },
     function (error, result) {
         //Get image info
-        console.log(result);
+        // console.log(result);
         if (result.event === "success") {
             submitAllow = true;
             console.log("allow", submitAllow);
@@ -121,13 +121,13 @@ $("#uploadSubmit").on("click", function (event) {
 })
 
 let userObject = {};
-getUserId();
-function getUserId() {
-    $.get("/signed/" + $("#account").data("name"), function (result) {
-        userObject.id = result.id;
-        userObject.userName = result.userName;
-    });
-}
+// getUserId();
+// function getUserId() {
+//     $.get("/signed/" + $("#account").data("name"), function (result) {
+//         userObject.id = result.id;
+//         userObject.userName = result.userName;
+//     });
+// }
 
 
 //////////////////////////////////////////////////////////////
@@ -160,7 +160,7 @@ $(".add-favs").on("click", function () {
 
 // display all images in feed default order by most recent
 $.get("/", function (result) {
-    console.log(result);
+    // console.log(result); //this had console logged the whole HTML
 });
 
 // display all images in feed ordered by most favorited
@@ -180,17 +180,25 @@ $("#searchBtn").on("click", function () { // submit button on survey modal
     // grabs user input and converts to corresponding variable
     var bathroomTag = $("#bathroomTag").val();
     alert("this was clicked" + bathroomTag);
+    console.log(bathroomTag);
+
+    window.location.href = `/search/${bathroomTag}`;
 
     // CHANGE TO GET, FIX API ROUTE
-    $.get("/").then(function (data) {
-        console.log(data);
-        if (data != 200) {
-            // log/show error
-            console.log("this is the conlog", $(this))
-        }
-
-        //   window.location.href = "/";
+    $.get({
+        URL: "/search/:term",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
     })
+        .then(function (data) {
+            console.log("search went thru", data);
+            if (data != 200) {
+                // log/show error
+                console.log("this is the conlog")
+            }
+
+            //   window.location.href = "/";
+        })
 
 });
 
