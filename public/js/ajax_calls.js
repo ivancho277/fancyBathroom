@@ -170,7 +170,7 @@ $("#sort-by-fav").on("click", function (event) {
         console.log(result);
     });
 });
-
+//Comment here
 
 // display images with certain tags or by certain users by certain users (specified in search)
 $("#searchBtn").on("click", function () { // submit button on survey modal
@@ -180,19 +180,19 @@ $("#searchBtn").on("click", function () { // submit button on survey modal
     // grabs user input and converts to corresponding variable
     var bathroomTag = $("#bathroomTag").val();
     alert("this was clicked" + bathroomTag);
-  
+
     // CHANGE TO GET, FIX API ROUTE
     $.get("/").then(function (data) {
-      console.log(data);
-      if (data != 200) {
-        // log/show error
-        console.log("this is the conlog", $(this))
-      }
-  
-    //   window.location.href = "/";
+        console.log(data);
+        if (data != 200) {
+            // log/show error
+            console.log("this is the conlog", $(this))
+        }
+
+        //   window.location.href = "/";
     })
-  
-  });
+
+});
 
 // EVERYTHING BELOW THIS is old search, before dropdown
 // $("#searchBtn").on("click", function (event) {
