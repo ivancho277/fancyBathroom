@@ -21,6 +21,13 @@ var userSeeds = [
 }
 ];
 
+var realUserSeeds = [
+    {
+        id: 001,
+        username: "firstperson"
+    }
+];
+
 
 //this code checks the DB to see if there is already content (seeds)
 //if no content, add seeds. 

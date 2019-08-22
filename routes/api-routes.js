@@ -26,7 +26,7 @@ module.exports = function (app) {
   // query call to get username and user.id
   app.get("/signed/:user", function (req, res) {
     db.User.findOne({
-      where: {userName: req.params.user}
+      where: { userName: req.params.user }
     }).then(function (result) {
       res.json(result);
     });
@@ -46,7 +46,7 @@ module.exports = function (app) {
   // insert into images when they submit a new post
   app.post("/api/images", function (req, res) {
     db.Image.create(req.body).then(function (result) {
-     // Image.addUser(req.params.id);
+      // Image.addUser(req.params.id);
       res.json(result);
     });
   });
@@ -54,22 +54,33 @@ module.exports = function (app) {
   // This will run on page load to generate the feed
   app.get("/", function (req, res) {
     db.Image.findAll().then(function (data) {
-        res.render("index", { images: data });
+      res.render("index", { images: data });
     });
   });
 
+  // function getLikedUsers (data) {
+
+  // }
 
   // JOE's HELP CODE
   // grab data from image data ordered by most favorited
   app.get("/feed/orderbymostfavorited", function (req, res) {
+    console.log("hello from liked users");
     db.Image.findAll({
-      include: { model: db.User },
-    }).then(data => {
-      console.log(data);
-      data.getLikedUser().then(mostFav => {
-        res.json(mostFav);
+      include: { model: db.User, as: "likedUsers" },
+    })
+      .then(data => {
+        console.log("getlikeduserdata" + data);
+        // res.json(data[0].likedUsers);
+        for (let i = 0; i < data.length; i++){
+          res.json(data[i].likedUsers);
+        }
+        // THIS NEEDS ATTENTION
+        // data.getLikedUsers().then(mostFav => {
+        //   res.json(mostFav);
+        // });
+        // (res.json);
       });
-    });
   });
 
   // display all user's posted images
@@ -100,11 +111,11 @@ module.exports = function (app) {
   // search & display by tag/username
   app.get("/search/:term", function (req, res) {
     db.Image.findAll({
-      where: { tag: req.params.term}, 
-          // { userName: req.params.term }
+      where: { tag: req.params.term },
+      // { userName: req.params.term }
     }).then(function (result) {
       // render page with only posts with specifed tags or by specified user
-      res.render("index", {images: result});
+      res.render("index", { images: result });
       // res.render("index", result);
     });
   });
