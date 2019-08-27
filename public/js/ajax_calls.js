@@ -103,7 +103,8 @@ $("#uploadSubmit").on("click", function (event) {
     // This turns falsy values to Boolean False, and vice versa
     var public = !!$('#public:checked').length;
     let username = $("#account").data()
-    console.log("what is username", username)
+    username = username.name
+    console.log("what is username", username.name)
 
     var postInfo = new Picture(
         imageInfo.cloudinary,
