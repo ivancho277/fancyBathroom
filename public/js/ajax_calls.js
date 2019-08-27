@@ -268,3 +268,7 @@ $("#test").on("click", function () {
         console.log(result);
     });
 });
+
+// Progress made 08/22:
+
+// Carrie's workbench still doesn't work :( But we made progress on the search (done!) and order my favorites.)
