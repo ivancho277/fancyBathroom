@@ -72,16 +72,31 @@ module.exports = function (app) {
       .then(data => {
         console.log("getlikeduserdata" + data);
         // res.json(data[0].likedUsers);
-        for (let i = 0; i < data.length; i++){
-          res.json(data[i].likedUsers);
+        let favoritedImageIds = [];
+        console.log("empty" + favoritedImageIds);
+
+        for (let i = 0; i < data.length; i++) {
+          favoritedImageIds.push(JSON.stringify(data[i].likedUsers));
+
+          // res.json(favoritedImageIds);
         }
-        // THIS NEEDS ATTENTION
-        // data.getLikedUsers().then(mostFav => {
-        //   res.json(mostFav);
-        // });
-        // (res.json);
-      });
+        console.log("this is not empty now", favoritedImageIds);
+        res.json(favoritedImageIds)
+      })
+      // .then(
+        app.get(function (favoritedImageIds, res) {
+          db.Image.findAll({
+            where: { id: favoritedImageIds.Likes[image_id] }
+          }).then(function (result) {
+            res.render("index", { images: favoritedImageIds });
+            console.log("end fave users pls", favoritedImageIds);
+            console.log("we are consoling result", result);
+          })
+        })
+
+      // )
   });
+  // });
 
   // display all user's posted images
   app.get("/signed/:name/posts", function (req, res) {
