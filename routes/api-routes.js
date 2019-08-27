@@ -62,25 +62,27 @@ module.exports = function (app) {
 
   // }
 
+
+
   // JOE's HELP CODE
   // grab data from image data ordered by most favorited
   app.get("/feed/orderbymostfavorited", function (req, res) {
-    console.log("hello from liked users");
+    console.log("1. hello from liked users");
     db.Image.findAll({
       include: { model: db.User, as: "likedUsers" },
     })
       .then(data => {
-        console.log("getlikeduserdata" + data);
+        console.log("2. getlikeduserdata" + data);
         // res.json(data[0].likedUsers);
         let favoritedImageIds = [];
-        console.log("empty" + favoritedImageIds);
+        console.log("3. empty" + favoritedImageIds);
 
         for (let i = 0; i < data.length; i++) {
           favoritedImageIds.push(JSON.stringify(data[i].likedUsers));
 
           // res.json(favoritedImageIds);
         }
-        console.log("this is not empty now", favoritedImageIds);
+        console.log("4. this is not empty now", favoritedImageIds);
         res.json(favoritedImageIds)
       })
       // .then(
@@ -89,14 +91,19 @@ module.exports = function (app) {
             where: { id: favoritedImageIds.Likes[image_id] }
           }).then(function (result) {
             res.render("index", { images: favoritedImageIds });
-            console.log("end fave users pls", favoritedImageIds);
-            console.log("we are consoling result", result);
+            console.log("5. end fave users pls", favoritedImageIds);
+            console.log("6. we are consoling result", result);
           })
         })
 
       // )
-  });
+  }); //app.get ending tag
   // });
+  
+
+
+
+
 
   // display all user's posted images
   app.get("/signed/:name/posts", function (req, res) {
