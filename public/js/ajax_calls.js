@@ -112,7 +112,8 @@ $("#uploadSubmit").on("click", function (event) {
         public
     )
     console.log(postInfo);
-    console.log("what is username", parseEmail(profile.getEmail()))
+    let username = $("#account").data()
+    console.log("what is username", username)
     $.post("/api/images", postInfo, function (result) {
         console.log(result);
         location.reload();
