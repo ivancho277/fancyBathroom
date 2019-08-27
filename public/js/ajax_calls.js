@@ -104,7 +104,7 @@ $("#uploadSubmit").on("click", function (event) {
     var public = !!$('#public:checked').length;
     let username = $("#account").data()
     username = username.name
-    console.log("what is username", username.name)
+    console.log("what is username", username)
 
     var postInfo = new Picture(
         imageInfo.cloudinary,
