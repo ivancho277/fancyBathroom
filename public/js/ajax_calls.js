@@ -112,6 +112,7 @@ $("#uploadSubmit").on("click", function (event) {
         public
     )
     console.log(postInfo);
+    console.log("what is username", parseEmail(profile.getEmail()))
     $.post("/api/images", postInfo, function (result) {
         console.log(result);
         location.reload();
