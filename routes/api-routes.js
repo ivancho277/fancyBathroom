@@ -69,7 +69,7 @@ module.exports = function (app) {
   // grab data from image data ordered by most favorited
   app.get("/feed/orderbymostfavorited", function (req, res) {
     console.log("1. hello from liked users");
-    db.User.findAll({
+    db.User.findAndCountAll({
       include: { model: db.Image, as: "likedImages" },
     })
       .then(data => {
