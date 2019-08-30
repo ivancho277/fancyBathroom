@@ -1,4 +1,5 @@
 var db = require("../models");
+var Sequelize = require("sequelize");
 
 // Routes
 //============
@@ -70,35 +71,16 @@ module.exports = function (app) {
     console.log("1. hello from liked users");
     db.User.findAll({
       include: { model: db.Image, as: "likedImages" },
+      attributes: [
+        [Sequelize.literal("(SELECT COUNT(image_id) FROM Likes)"), "ImageCount"]],
+      order: [[Sequelize.literal("ImageCount"), "DESC"]]
     })
       .then(data => {
         console.log("2. getlikeduserdata" + data);
         res.json(data);
-        // let favoritedImageIds = [];
-        // console.log("3. empty" + favoritedImageIds);
-
-        // for (let i = 0; i < data.length; i++) {
-        //   favoritedImageIds.push((data[i].likedUsers));
-
-
-        // }
-        // console.log("4. this is not empty now", favoritedImageIds);
-        // res.json(favoritedImageIds)
       })
-    // .then(
-    // app.get(function (favoritedImageIds, res) {
-    //   db.Image.findAll({
-    //     where: { id: favoritedImageIds.Likes[image_id] }
-    //   }).then(function (result) {
-    //     res.render("index", { images: favoritedImageIds });
-    //     console.log("5. end fave users pls", favoritedImageIds);
-    //     console.log("6. we are consoling result", result);
-    //   })
-    // })
 
-    // )
   }); //app.get ending tag
-  // });
 
 
 
