@@ -64,7 +64,7 @@ module.exports = function (app) {
 
 
 
-  // JOE's HELP CODE
+
   // grab data from image data ordered by most favorited
   app.get("/feed/orderbymostfavorited", function (req, res) {
     console.log("1. hello from liked users");
@@ -78,28 +78,28 @@ module.exports = function (app) {
         console.log("3. empty" + favoritedImageIds);
 
         for (let i = 0; i < data.length; i++) {
-          favoritedImageIds.push(JSON.stringify(data[i].likedUsers));
+          favoritedImageIds.push((data[i].likedUsers));
 
           // res.json(favoritedImageIds);
         }
         console.log("4. this is not empty now", favoritedImageIds);
         res.json(favoritedImageIds)
       })
-      // .then(
-        app.get(function (favoritedImageIds, res) {
-          db.Image.findAll({
-            where: { id: favoritedImageIds.Likes[image_id] }
-          }).then(function (result) {
-            res.render("index", { images: favoritedImageIds });
-            console.log("5. end fave users pls", favoritedImageIds);
-            console.log("6. we are consoling result", result);
-          })
-        })
+    // .then(
+    app.get(function (favoritedImageIds, res) {
+      db.Image.findAll({
+        where: { id: favoritedImageIds.Likes[image_id] }
+      }).then(function (result) {
+        res.render("index", { images: favoritedImageIds });
+        console.log("5. end fave users pls", favoritedImageIds);
+        console.log("6. we are consoling result", result);
+      })
+    })
 
-      // )
+    // )
   }); //app.get ending tag
   // });
-  
+
 
 
 
