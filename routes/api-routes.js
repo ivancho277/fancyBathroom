@@ -4,15 +4,8 @@ var Sequelize = require("sequelize");
 // Routes
 //============
 module.exports = function (app) {
-  // Create all our routes and set up logic within those routes where required.
 
-  // CREATE/INSERT DATA TO DATABASE
-  // ==============================
-  // POST route for logging a new user into Users table
-  // server side check
-
-
-  // ALL USER'S LIKED IMAGES
+  // ALL USER'S LIKED IMAGES -- THIS DOESN'T WORK
   app.get('/signed/:name/favorites', (req, res) => {
     db.User.findOne({
       where: { userName: req.params.name },
@@ -23,8 +16,9 @@ module.exports = function (app) {
       });
     });
   });
+  // //////////////////////////////////////////////////
 
-  // query call to get username and user.id
+  // GET USERNAME AND USER ID - NOT SURE IF THIS WORKS
   app.get("/signed/:user", function (req, res) {
     db.User.findOne({
       where: { userName: req.params.user }
@@ -32,8 +26,9 @@ module.exports = function (app) {
       res.json(result);
     });
   });
+  ////////////////////////////////////////////////////
 
-  // Adding new Users
+  // ADDING NEW USERS - THIS WORKS!
   app.post("/api/users", function (req, res) {
     // check if they're already user, if exists get the user, if not add new row
     db.User.findOrCreate({
@@ -43,33 +38,34 @@ module.exports = function (app) {
       res.json(result);
     });
   });
+  ///////////////////////////////////////////////////
 
+
+  // THIS IS MISSING ADDING THE USER ID TO THE POST
   // insert into images when they submit a new post
   app.post("/api/images", function (req, res) {
+    // const newImg = {...req.body, userId: whatever}
     db.Image.create(req.body).then(function (result) {
       // Image.addUser(req.params.id);
       res.json(result);
     });
   });
+  ////////////////////////////////////////////////////////
 
-  // This will run on page load to generate the feed
+  // GENERATE FEED ON PAGE LOAD - THIS WORKS
   app.get("/", function (req, res) {
     db.Image.findAll().then(function (data) {
       res.render("index", { images: data });
     });
   });
-
-  // function getLikedUsers (data) {
-
-  // }
+  ///////////////////////////////////////////////////////////
 
 
 
-
-  // grab data from image data ordered by most favorited
+  // NOT LOGGED IN - SORT BY IMAGES WITH MOST FAVS - HALFWAY WORKS
   app.get("/feed/orderbymostfavorited", function (req, res) {
     console.log("1. hello from liked users");
-    db.User.findAll({
+    db.User.findAndCountAll({
       include: { model: db.Image, as: "likedImages" },
       attributes: [
         [Sequelize.literal("(SELECT COUNT(image_id) FROM Likes)"), "ImageCount"]],
@@ -81,13 +77,10 @@ module.exports = function (app) {
       })
 
   }); //app.get ending tag
+  ///////////////////////////////////////////////
 
 
-
-
-
-
-  // display all user's posted images
+  // DISPLAY ALL USERS UPLOADED IMAGES - THIS DOES NOT WORK
   app.get("/signed/:name/posts", function (req, res) {
     db.User.findOne({
       where: { userName: req.params.name },
@@ -97,9 +90,10 @@ module.exports = function (app) {
       // res.json(user);
     });
   });
+  //////////////////////////////////////////////
 
-  // JOE's HELP CODE
-  // LIKING AN ADD IMAGE AND ADDING RELATIONSHIP TO LIKES TABLE
+
+  // LIKING AN ADD IMAGE AND ADDING RELATIONSHIP TO LIKES TABLE - THIS DOES NOT WORK
   app.post("/api/likes", function (req, res) {
     // req.body should be in form { user_id: something, image_id: something }
     db.User.findOne({
@@ -111,8 +105,9 @@ module.exports = function (app) {
       res.json(user);
     });
   });
+  //////////////////////////////////////
 
-  // search & display by tag/username
+  // SEARCH AND DISPLAY BY TAGS - THIS WORKS
   app.get("/search/:term", function (req, res) {
     db.Image.findAll({
       where: { tag: req.params.term },
@@ -123,32 +118,6 @@ module.exports = function (app) {
       // res.render("index", result);
     });
   });
-
-
-
-  // // find all user
-  // app.get("/api/users", function (req, res) {
-  //   db.User.findAll().then(function (result) {
-  //     res.json(result);
-  //   });
-  // });
-
-  // UPDATE DATA FROM DATABASE
-  // =========================
-  // PUT route for updating post's tags and descriptions
-  // app.put("/:id", function (req, res) {
-  //   db.Image.put().then(function (err, result){
-
-  //   });
-  // });
-
-  // DELETE DATA FROM DATABASE
-  // =========================
-  // DELETE route for removing previous posts
-  // app.delete("/:id", function (req, res) {
-  //   db.Image.destroy().then(function(err, result){
-
-  //   });
-  // });
+  ///////////////////////////  
 
 } // end of export module bracket
