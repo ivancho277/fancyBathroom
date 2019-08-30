@@ -50,7 +50,7 @@ module.exports = function (app) {
         userName: req.body.username
       }
     }).then(function (result) {
-      res.json(result)
+      console.log(result)
     })
     // db.Image.create(req.body).then(function (result) {
     //   // Image.addUser(req.params.id);

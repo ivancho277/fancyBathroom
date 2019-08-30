@@ -10,6 +10,7 @@ class Picture {
         this.location_name = locationName;
         this.description = description;
         this.public = isPublic;
+        this.username = username;
     }
 }
 
