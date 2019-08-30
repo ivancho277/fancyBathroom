@@ -73,28 +73,28 @@ module.exports = function (app) {
     })
       .then(data => {
         console.log("2. getlikeduserdata" + data);
-        // res.json(data[0].likedUsers);
-        let favoritedImageIds = [];
-        console.log("3. empty" + favoritedImageIds);
+        res.json(data);
+        // let favoritedImageIds = [];
+        // console.log("3. empty" + favoritedImageIds);
 
-        for (let i = 0; i < data.length; i++) {
-          favoritedImageIds.push((data[i].likedUsers));
+        // for (let i = 0; i < data.length; i++) {
+        //   favoritedImageIds.push((data[i].likedUsers));
 
-          // res.json(favoritedImageIds);
-        }
-        console.log("4. this is not empty now", favoritedImageIds);
-        res.json(favoritedImageIds)
+
+        // }
+        // console.log("4. this is not empty now", favoritedImageIds);
+        // res.json(favoritedImageIds)
       })
     // .then(
-    app.get(function (favoritedImageIds, res) {
-      db.Image.findAll({
-        where: { id: favoritedImageIds.Likes[image_id] }
-      }).then(function (result) {
-        res.render("index", { images: favoritedImageIds });
-        console.log("5. end fave users pls", favoritedImageIds);
-        console.log("6. we are consoling result", result);
-      })
-    })
+    // app.get(function (favoritedImageIds, res) {
+    //   db.Image.findAll({
+    //     where: { id: favoritedImageIds.Likes[image_id] }
+    //   }).then(function (result) {
+    //     res.render("index", { images: favoritedImageIds });
+    //     console.log("5. end fave users pls", favoritedImageIds);
+    //     console.log("6. we are consoling result", result);
+    //   })
+    // })
 
     // )
   }); //app.get ending tag
