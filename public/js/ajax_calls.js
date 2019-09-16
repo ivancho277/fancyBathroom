@@ -116,9 +116,9 @@ $("#uploadSubmit").on("click", function (event) {
         public,
         username
     )
-    console.log(postInfo);
+    console.log("From AJAX calls", postInfo);
     $.post("/api/images", postInfo, function (result) {
-        console.log(result);
+        console.log("IS this result??", result);
         location.reload();
     });
 

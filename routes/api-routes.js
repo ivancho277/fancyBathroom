@@ -45,13 +45,13 @@ module.exports = function (app) {
   // insert into images when they submit a new post
   app.post("/api/images", function (req, res) {
     // const newImg = {...req.body, userId: whatever}
-    console.log(req.body.username)
+    console.log("Req and usernmae", req.body.username)
     db.User.findOne({
       where: {
         userName: req.body.username
       }
     }).then(function (result) {
-      console.log(result)
+      console.log("AFTER PROMISE", result)
     })
     // db.Image.create(req.body).then(function (result) {
     //   // Image.addUser(req.params.id);
