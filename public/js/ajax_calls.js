@@ -3,13 +3,14 @@
 //      PICTURE CLASS CONSTRUCTOR       ////
 ////////////////////////////////////////////
 class Picture {
-    constructor(id_cloudinary, url, tag, locationName, description, isPublic) {
+    constructor(id_cloudinary, url, tag, locationName, description, isPublic, username) {
         this.id_cloudinary = id_cloudinary;
         this.url = url;
         this.tag = tag;
         this.location_name = locationName;
         this.description = description;
         this.public = isPublic;
+        this.username = username;
     }
 }
 
