@@ -68,7 +68,7 @@ module.exports = function (app) {
     db.User.findAndCountAll({
       include: { model: db.Image, as: "likedImages" },
       attributes: [
-        [Sequelize.literal("(SELECT COUNT(image_id) FROM Likes)"), "ImageCount"]],
+        [Sequelize.literal("(SELECT COUNT(distinct image_id) FROM Likes WHERE image_id > 0)"), "ImageCount"]],
       order: [[Sequelize.literal("ImageCount"), "DESC"]]
     })
       .then(data => {
