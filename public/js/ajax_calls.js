@@ -117,7 +117,7 @@ $("#uploadSubmit").on("click", function (event) {
         username
     )
     console.log(postInfo);
-    $.get("/api/images", postInfo, function (result) {
+    $.post("/api/images", postInfo, function (result) {
         console.log(result);
         location.reload();
     });

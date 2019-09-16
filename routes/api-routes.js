@@ -43,7 +43,7 @@ module.exports = function (app) {
 
   // THIS IS MISSING ADDING THE USER ID TO THE POST
   // insert into images when they submit a new post
-  app.get("/api/images", function (req, res) {
+  app.post("/api/images", function (req, res) {
     // const newImg = {...req.body, userId: whatever}
     db.User.findOne({
       where: {
