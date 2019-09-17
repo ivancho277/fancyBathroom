@@ -46,13 +46,13 @@ module.exports = function (app) {
   app.post("/api/images", function (req, res) {
     // const newImg = {...req.body, userId: whatever}
     console.log("Req and usernmae", req.body.username)
-    // db.User.findOne({
-    //   where: {
-    //     userName: req.body.username
-    //   }
-    // }).then(function (result) {
-    //   console.log("AFTER PROMISE", result)
-    // })
+    db.User.findOne({
+      where: {
+        userName: req.body.username
+      }
+    }).then(function (result) {
+      console.log("AFTER PROMISE", result)
+    }).catch(err => console.log("ERRRRRRRRROR", err))
     // db.Image.create(req.body).then(function (result) {
     //   // Image.addUser(req.params.id);
     //   res.json(result);
