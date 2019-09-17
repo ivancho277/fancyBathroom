@@ -52,11 +52,14 @@ module.exports = function (app) {
       }
     }).then(function (result) {
       console.log("AFTER PROMISE", result)
+      const newImg = { ...req.body, UserId: result.dataValues.id }
+      delete newImg['username'];
+      console.log('newImg', newImg);
+      db.Image.create(newImg).then(function (result) {
+        res.json(result);
+      });
     }).catch(err => console.log("ERRRRRRRRROR", err))
-    // db.Image.create(req.body).then(function (result) {
-    //   // Image.addUser(req.params.id);
-    //   res.json(result);
-    // });
+
   });
   ////////////////////////////////////////////////////////
 

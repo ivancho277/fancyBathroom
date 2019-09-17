@@ -15,10 +15,10 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    // user_id: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false
-    // },
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
     tag: {
       type: DataTypes.STRING,
       allowNull: false
