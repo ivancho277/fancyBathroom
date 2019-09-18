@@ -41,7 +41,7 @@ module.exports = function (app) {
   ///////////////////////////////////////////////////
 
 
-  // THIS IS MISSING ADDING THE USER ID TO THE POST
+  // UPLOAD IMAGE AND ADD THE USER ID SO WE KNOW WHICH USER UPLOADED WHICH PICTURES - WORKS!!
   // insert into images when they submit a new post
   app.post("/api/images", function (req, res) {
     // const newImg = {...req.body, userId: whatever}
