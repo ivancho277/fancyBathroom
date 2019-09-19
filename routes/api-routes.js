@@ -44,7 +44,6 @@ module.exports = function (app) {
   // UPLOAD IMAGE AND ADD THE USER ID SO WE KNOW WHICH USER UPLOADED WHICH PICTURES - WORKS!!
   // insert into images when they submit a new post
   app.post("/api/images", function (req, res) {
-    // const newImg = {...req.body, userId: whatever}
     console.log("Req and usernmae", req.body.username)
     db.User.findOne({
       where: {
@@ -91,7 +90,7 @@ module.exports = function (app) {
   ///////////////////////////////////////////////
 
 
-  // DISPLAY ALL USERS UPLOADED IMAGES - THIS DOES NOT WORK
+  // DISPLAY ALL USERS UPLOADED IMAGES - THIS WORKS!!!
   app.get("/signed/:name/posts", function (req, res) {
     db.User.findOne({
       where: { userName: req.params.name },
