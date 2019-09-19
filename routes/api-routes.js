@@ -72,15 +72,18 @@ module.exports = function (app) {
   ///////////////////////////////////////////////////////////
 
 
-
+///////////////////////////////////////////////////////////
+/// PLEASE HOLD, WAITING FOR STACKOVERFLOW            /////
+///      vvvvvvvvv                                    /////
+///////////////////////////////////////////////////////////
   // NOT LOGGED IN - SORT BY IMAGES WITH MOST FAVS - HALFWAY WORKS
   app.get("/feed/orderbymostfavorited", function (req, res) {
     console.log("1. hello from liked users");
-    db.User.findAndCountAll({
-      include: { model: db.Image, as: "likedImages" },
+    db.Image.findAndCountAll({ // put db.User back if not work???
+      include: { model: db.User, as: "likedUsers" },
       attributes: [
-        [Sequelize.literal("(SELECT COUNT(image_id) FROM Likes)"), "ImageCount"]],
-      order: [[Sequelize.literal("ImageCount"), "DESC"]]
+        [Sequelize.literal("(SELECT id, url, COUNT(id) FROM (SELECT * FROM Images, Likes WHERE Images.id = Likes.image_id) AS a)"), "a"]] //,
+      //order: [[Sequelize.literal("ImageCount"), "DESC"]]
     })
       .then(data => {
         console.log("2. getlikeduserdata" + data);
