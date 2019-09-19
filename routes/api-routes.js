@@ -45,11 +45,7 @@ module.exports = function (app) {
   // insert into images when they submit a new post
   app.post("/api/images", function (req, res) {
     // const newImg = {...req.body, userId: whatever}
-<<<<<<< HEAD
-    console.log(req.body.username);
-=======
     console.log("Req and usernmae", req.body.username)
->>>>>>> 1a068bc5c79b7120f3b5625ca4bf2bcba3c0582f
     db.User.findOne({
       where: {
         userName: req.body.username
@@ -80,10 +76,10 @@ module.exports = function (app) {
   // NOT LOGGED IN - SORT BY IMAGES WITH MOST FAVS - HALFWAY WORKS
   app.get("/feed/orderbymostfavorited", function (req, res) {
     console.log("1. hello from liked users");
-    db.User.findAndCountAll({
+    db.Images.findAndCountAll({ // put db.User back if not work???
       include: { model: db.Image, as: "likedImages" },
       attributes: [
-        [Sequelize.literal("(SELECT COUNT(distinct image_id) FROM Likes WHERE image_id > 0)"), "ImageCount"]],
+        [Sequelize.literal("(SELECT id, url, COUNT(id) FROM (SELECT * FROM Images, Likes WHERE Images.id = Likes.image_id) AS a)"), "ImageCount"]],
       order: [[Sequelize.literal("ImageCount"), "DESC"]]
     })
       .then(data => {
