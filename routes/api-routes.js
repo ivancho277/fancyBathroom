@@ -41,21 +41,25 @@ module.exports = function (app) {
   ///////////////////////////////////////////////////
 
 
-  // THIS IS MISSING ADDING THE USER ID TO THE POST
+  // UPLOAD IMAGE AND ADD THE USER ID SO WE KNOW WHICH USER UPLOADED WHICH PICTURES - WORKS!!
   // insert into images when they submit a new post
   app.post("/api/images", function (req, res) {
     // const newImg = {...req.body, userId: whatever}
+    console.log("Req and usernmae", req.body.username)
     db.User.findOne({
       where: {
         userName: req.body.username
       }
     }).then(function (result) {
-      console.log(result)
-    })
-    // db.Image.create(req.body).then(function (result) {
-    //   // Image.addUser(req.params.id);
-    //   res.json(result);
-    // });
+      console.log("AFTER PROMISE", result)
+      const newImg = { ...req.body, UserId: result.dataValues.id }
+      delete newImg['username'];
+      console.log('newImg', newImg);
+      db.Image.create(newImg).then(function (result) {
+        res.json(result);
+      });
+    }).catch(err => console.log("ERRRRRRRRROR", err))
+
   });
   ////////////////////////////////////////////////////////
 

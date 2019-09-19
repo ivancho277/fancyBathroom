@@ -14,8 +14,8 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false
     }
   }, {
-      timestamps: false
-    });
+    timestamps: false
+  });
 
   User.associate = function (models) {
     User.belongsToMany(models.Image, { as: 'likedImages', through: "Likes", foreignKey: "user_id" });

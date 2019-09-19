@@ -15,9 +15,9 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    user_id: {
+    UserId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     tag: {
       type: DataTypes.STRING,
