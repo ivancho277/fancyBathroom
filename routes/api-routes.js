@@ -64,17 +64,24 @@ module.exports = function (app) {
 
   // GENERATE FEED ON PAGE LOAD - THIS WORKS
   app.get("/", function (req, res) {
-    db.Image.findAll().then(function (data) {
-      res.render("index", { images: data });
-    });
+    db.Image.findAll()
+      .then(function (data) {
+        console.log("ORIGINAL DATA", data)
+        for (let i = 0; i < data.length; i++) {
+          let shortLocationName = data[i].dataValues.location_name.substr(0, data[i].dataValues.location_name.indexOf(","));
+          data = { ...data, location_name: shortLocationName }
+        }
+        console.log("HOLY BUTTS DID IT WORK", data)
+        res.render("index", { images: data });
+      });
   });
   ///////////////////////////////////////////////////////////
 
 
-///////////////////////////////////////////////////////////
-/// PLEASE HOLD, WAITING FOR STACKOVERFLOW            /////
-///      vvvvvvvvv                                    /////
-///////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////
+  /// PLEASE HOLD, WAITING FOR STACKOVERFLOW            /////
+  ///      vvvvvvvvv                                    /////
+  ///////////////////////////////////////////////////////////
   // NOT LOGGED IN - SORT BY IMAGES WITH MOST FAVS - HALFWAY WORKS
   app.get("/feed/orderbymostfavorited", function (req, res) {
     console.log("1. hello from liked users");
