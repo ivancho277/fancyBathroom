@@ -69,7 +69,7 @@ module.exports = function (app) {
         console.log("ORIGINAL DATA", data)
         for (let i = 0; i < data.length; i++) {
           let shortLocationName = data[i].dataValues.location_name.substr(0, data[i].dataValues.location_name.indexOf(","));
-          data = { ...data, location_name: shortLocationName }
+          data[i].dataValues.location_name = shortLocationName
         }
         console.log("HOLY BUTTS DID IT WORK", data)
         res.render("index", { images: data });
