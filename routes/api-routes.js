@@ -62,7 +62,7 @@ module.exports = function (app) {
   });
   ////////////////////////////////////////////////////////
 
-  // GENERATE FEED ON PAGE LOAD - THIS WORKS
+  // GENERATE FEED ON PAGE LOAD - THIS WORKS - THIS WORKS WITH SHORT LOCATION!
   app.get("/", function (req, res) {
     db.Image.findAll()
       .then(function (data) {
